@@ -1,11 +1,13 @@
 package com.gymguru.domain;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+import java.time.LocalDate;
 
 import java.util.List;
 

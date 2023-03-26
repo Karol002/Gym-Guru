@@ -1,11 +1,12 @@
 package com.gymguru.domain;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -21,12 +22,12 @@ public class User {
     private Long id;
 
     @NotNull
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "PERSON_ID")
     private Person person;
 
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "PLAN_ID")
     private Plan plan;
 
