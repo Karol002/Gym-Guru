@@ -34,4 +34,9 @@ public class User {
     public User(Person person) {
         this.person = person;
     }
+
+    public User(Person person, Plan plan) {
+        this.person = person;
+        this.plan = plan;
+    }
 }

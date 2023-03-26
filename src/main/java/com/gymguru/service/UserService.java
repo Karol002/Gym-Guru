@@ -17,7 +17,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getSingUser(Long id) throws UserNotFoundException {
+    public User getUser(Long id) throws UserNotFoundException {
         return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 
