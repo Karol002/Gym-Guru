@@ -45,7 +45,7 @@ public class TrainerMapper {
         );
     }
 
-    public List<ExistTrainerDto> mapToTrainerDtoList(final List<Trainer> trainers) {
+    public List<ExistTrainerDto> mapToExistTrainerDtoList(final List<Trainer> trainers) {
         return trainers.stream()
                 .map(this::mapToExistTrainerDto)
                 .toList();

@@ -1,5 +1,6 @@
 package com.v1.gymguru.controller.internal;
 
+import com.v1.gymguru.controller.exception.single.TrainerNotFoundException;
 import com.v1.gymguru.domain.Trainer;
 import com.v1.gymguru.domain.dto.internal.exist.ExistTrainerDto;
 import com.v1.gymguru.domain.dto.internal.insert.InsertTrainerDto;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/gymguru/trainer")
+@RequestMapping("/v1/gymguru/trainers")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class TrainerController {
@@ -23,11 +24,17 @@ public class TrainerController {
     @GetMapping
     public ResponseEntity<List<ExistTrainerDto>> getAllTrainers() {
         List<Trainer> trainers = trainerService.getAllTrainers();
-        return ResponseEntity.ok(trainerMapper.mapToTrainerDtoList(trainers));
+        return ResponseEntity.ok(trainerMapper.mapToExistTrainerDtoList(trainers));
+    }
+
+    @GetMapping(value = "{id}")
+    public ResponseEntity<ExistTrainerDto> getTrainer(@PathVariable Long id) throws TrainerNotFoundException {
+        Trainer trainer = trainerService.getTrainer(id);
+        return ResponseEntity.ok(trainerMapper.mapToExistTrainerDto(trainer));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addTrainer(@RequestBody InsertTrainerDto insertTrainerDto) {
+    public ResponseEntity<Void> createTrainer(@RequestBody InsertTrainerDto insertTrainerDto) {
         Trainer trainer = trainerMapper.mapToTrainer(insertTrainerDto);
         trainerService.saveTrainer(trainer);
         return ResponseEntity.ok().build();

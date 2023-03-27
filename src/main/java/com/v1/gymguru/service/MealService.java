@@ -13,16 +13,8 @@ import java.util.List;
 public class MealService {
     private final MealRepository mealRepository;
 
-    public List<Meal> getAllMeals() {
-        return mealRepository.findAll();
-    }
-
-    public Meal getMeal(Long id) throws MealNotFoundException {
-        return mealRepository.findById(id).orElseThrow(MealNotFoundException::new);
-    }
-
-    public void deleteMeal(Long id) {
-        mealRepository.deleteById(id);
+    public List<Meal> getMealsByPlanId(Long planId) {
+        return mealRepository.findAllByPlanId(planId);
     }
 
     public Meal saveMeal(final Meal meal) {

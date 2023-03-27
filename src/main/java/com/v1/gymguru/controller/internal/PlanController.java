@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/gymguru/plan")
+@RequestMapping("/v1/gymguru/plans")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class PlanController {
@@ -21,13 +21,13 @@ public class PlanController {
     private final PlanMapper planMapper;
 
     @GetMapping(value = "{id}")
-    public ResponseEntity<ExistPlanDto> getPlan(@PathVariable Long id) throws PlanNotFoundException {
-        Plan plan = planService.getPlan(id);
+    public ResponseEntity<ExistPlanDto> getPlanByUserId(@PathVariable Long id) throws PlanNotFoundException {
+        Plan plan = planService.getPlanByUserId(id);
         return ResponseEntity.ok(planMapper.mapToExistPlanDto(plan));
-    }//Get Plan By user Id
+    }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addPlan(@RequestBody InsertPlanDto insertPlanDtoDto) throws UserNotFoundException {
+    public ResponseEntity<Void> createPlan(@RequestBody InsertPlanDto insertPlanDtoDto) throws UserNotFoundException {
         Plan plan = planMapper.mapToPlan(insertPlanDtoDto);
         planService.savePlan(plan);
         return ResponseEntity.ok().build();

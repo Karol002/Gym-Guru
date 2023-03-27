@@ -6,12 +6,13 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Repository
 public interface PlanRepository extends CrudRepository<Plan, Long> {
 
-    List<Plan> findAll();
+    Optional<Plan> findByUserId(Long userId);
 
     Plan save(Plan plan);
 }

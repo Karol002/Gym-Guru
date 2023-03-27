@@ -10,16 +10,23 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/v1/gymguru/user")
+@RequestMapping("/v1/gymguru/users")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class UserController {
     private final UserService userService;
     private final UserMapper userMapper;
 
+    @GetMapping
+    public ResponseEntity<List<ExistUserDto>> getAllUsers() {
+        return ResponseEntity.ok(userMapper.mapToExistUserDtoList(userService.getAllUsers()));
+    }
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addTrainer(@RequestBody InsertUserDto insertUserDto) {
+    public ResponseEntity<Void> createUser(@RequestBody InsertUserDto insertUserDto) {
         User user = userMapper.mapToUser(insertUserDto);
         userService.saveUser(user);
         return ResponseEntity.ok().build();

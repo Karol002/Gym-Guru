@@ -13,5 +13,6 @@ public interface ExerciseRepository extends CrudRepository<Exercise, Long> {
 
     List<Exercise> findAll();
 
+    List<Exercise> findAllByPlanId(Long planId);
     Exercise save(Exercise exercise);
 }

@@ -13,12 +13,12 @@ import java.util.List;
 public class SubscriptionService {
     private final SubscriptionRepository subscriptionRepository;
 
-    public List<Subscription> getAllSubscriptions() {
-        return subscriptionRepository.findAll();
+    public List<Subscription> getSubscriptionsByTrainerId(Long trainerId) {
+        return subscriptionRepository.findAllByTrainerId(trainerId);
     }
 
-    public Subscription getSubscription(Long id) throws SubscriptionNotFoundException {
-        return subscriptionRepository.findById(id).orElseThrow(SubscriptionNotFoundException::new);
+    public Subscription getSubscriptionByUserId(Long userId) throws SubscriptionNotFoundException {
+        return subscriptionRepository.findByUserId(userId).orElseThrow(SubscriptionNotFoundException::new);
     }
 
     public void deleteSubscription(Long id) {

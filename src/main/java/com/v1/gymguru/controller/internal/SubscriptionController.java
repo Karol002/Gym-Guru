@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/gymguru/subscription")
+@RequestMapping("/v1/gymguru/subscriptions")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class SubscriptionController {
@@ -25,18 +25,18 @@ public class SubscriptionController {
 
     @GetMapping(value = "trainer/{trainerId}")
     public ResponseEntity<List<ExistSubscriptionDto>> getSubscriptions(@PathVariable Long trainerId) {
-        List<Subscription> subscriptions = subscriptionService.getAllSubscriptions();//To DO
-        return ResponseEntity.ok(subscriptionMapper.mapToSubscriptionDtoList(subscriptions));
+        List<Subscription> subscriptions = subscriptionService.getSubscriptionsByTrainerId(trainerId);
+        return ResponseEntity.ok(subscriptionMapper.mapToExistSubscriptionDtoList(subscriptions));
     }
 
     @GetMapping(value = "user/{userId}")
     public ResponseEntity<ExistSubscriptionDto> getSubscription(@PathVariable Long userId) throws SubscriptionNotFoundException {
-        Subscription subscription = subscriptionService.getSubscription(userId);//To DO pobierz subskrypcje po id usera
+        Subscription subscription = subscriptionService.getSubscriptionByUserId(userId);
         return ResponseEntity.ok(subscriptionMapper.mapToExistSubscriptionDto(subscription));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addPlan(@RequestBody InsertSubscriptionDto insertSubscriptionDto) throws UserNotFoundException, TrainerNotFoundException {
+    public ResponseEntity<Void> createSubscription(@RequestBody InsertSubscriptionDto insertSubscriptionDto) throws UserNotFoundException, TrainerNotFoundException {
         Subscription subscription = subscriptionMapper.mapToSubscription(insertSubscriptionDto);
         subscriptionService.saveSubscription(subscription);
         return ResponseEntity.ok().build();

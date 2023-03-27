@@ -21,10 +21,6 @@ public class TrainerService {
         return trainerRepository.findById(id).orElseThrow(TrainerNotFoundException::new);
     }
 
-    public void deleteTrainer(Long id) {
-        trainerRepository.deleteById(id);
-    }
-
     public Trainer saveTrainer(final Trainer trainer) {
         return trainerRepository.save(trainer);
     }

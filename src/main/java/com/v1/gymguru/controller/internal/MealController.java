@@ -14,16 +14,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/gymguru/meal")
+@RequestMapping("/v1/gymguru/meals")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class MealController {
     private final MealService mealService;
     private final MealMapper mealMapper;
 
-    @GetMapping
-    public ResponseEntity<List<ExistMealDto>> getAllMeals() {
-        List<Meal> exercises = mealService.getAllMeals();
+    @GetMapping(value = "plan/{planId}")
+    public ResponseEntity<List<ExistMealDto>> getMealsByPlanId(@PathVariable Long planId) {
+        List<Meal> exercises = mealService.getMealsByPlanId(planId);
         return ResponseEntity.ok(mealMapper.mapToExistMealDtoList(exercises));
     }
 

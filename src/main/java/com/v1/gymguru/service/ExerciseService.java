@@ -13,16 +13,8 @@ import java.util.List;
 public class ExerciseService {
     private final ExerciseRepository exerciseRepository;
 
-    public List<Exercise> getAllExercises() {
-        return exerciseRepository.findAll();
-    }
-
-    public Exercise getExercise(Long id) throws ExerciseNotFoundException {
-        return exerciseRepository.findById(id).orElseThrow(ExerciseNotFoundException::new);
-    }
-
-    public void deleteExercise(Long id) {
-        exerciseRepository.deleteById(id);
+    public List<Exercise> getExercisesByPlanId(Long planId) {
+        return exerciseRepository.findAllByPlanId(planId);
     }
 
     public Exercise saveExercise(final Exercise exercise) {

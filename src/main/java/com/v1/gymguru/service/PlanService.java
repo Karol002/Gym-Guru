@@ -13,11 +13,11 @@ import java.util.List;
 public class PlanService {
     private final PlanRepository planRepository;
 
-    public List<Plan> getAllPlans() {
-        return planRepository.findAll();
+    public Plan getPlanByUserId(Long userId) throws PlanNotFoundException {
+        return planRepository.findByUserId(userId).orElseThrow(PlanNotFoundException::new);
     }
 
-    public  Plan getPlan(Long id) throws PlanNotFoundException {
+    public Plan getPlan(Long id) throws PlanNotFoundException {
         return planRepository.findById(id).orElseThrow(PlanNotFoundException::new);
     }
 

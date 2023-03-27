@@ -13,8 +13,4 @@ public class EdamamMealDto {
     private String label;
     @JsonProperty("ingredientLines")
     private List<String> ingredientLines;
-    @JsonProperty("calories")
-    private double calories;
-    @JsonProperty("totalWeight")
-    private double totalWeight;
 }

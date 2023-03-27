@@ -25,7 +25,7 @@ public class Plan {
     @Column(name = "PLAN_DESCRIPTION")
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;
 

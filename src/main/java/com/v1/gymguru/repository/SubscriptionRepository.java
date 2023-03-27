@@ -6,12 +6,15 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Repository
 public interface SubscriptionRepository extends CrudRepository<Subscription, Long> {
 
-    List<Subscription> findAll();
+    List<Subscription> findAllByTrainerId(Long trainerId);
+
+    Optional<Subscription> findByUserId(Long userId);
 
     Subscription save(Subscription subscription);
 }

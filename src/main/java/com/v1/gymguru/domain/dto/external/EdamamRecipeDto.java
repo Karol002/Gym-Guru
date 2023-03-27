@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EdamamRecipeDto {
-
     @JsonProperty("recipe")
     private EdamamMealDto edamamMealDto;
 }

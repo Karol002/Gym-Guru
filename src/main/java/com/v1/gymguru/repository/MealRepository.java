@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface MealRepository extends CrudRepository<Meal, Long> {
 
-    List<Meal> findAll();
+    List<Meal> findAllByPlanId(Long planId);
 
     Meal save(Meal meal);
 }

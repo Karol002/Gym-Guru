@@ -50,7 +50,7 @@ public class SubscriptionMapper {
         );
     }
 
-    public List<ExistSubscriptionDto> mapToSubscriptionDtoList(List<Subscription> subscriptions) {
+    public List<ExistSubscriptionDto> mapToExistSubscriptionDtoList(List<Subscription> subscriptions) {
         return subscriptions.stream()
                 .map(this::mapToExistSubscriptionDto)
                 .toList();
