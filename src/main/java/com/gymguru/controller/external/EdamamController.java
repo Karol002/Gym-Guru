@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/edamam")
+@RequestMapping("v1/gymguru/edamam")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class EdamamController {

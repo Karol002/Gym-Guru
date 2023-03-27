@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/wger")
+@RequestMapping("v1/gymguru/wger")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class WgerController {

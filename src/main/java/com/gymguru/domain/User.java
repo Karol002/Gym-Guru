@@ -39,12 +39,4 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
     }
-
-    public User(Long id, String email, String password, String firstName, String lastName) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
 }
