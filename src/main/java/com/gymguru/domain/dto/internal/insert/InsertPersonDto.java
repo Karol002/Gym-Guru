@@ -1,14 +1,11 @@
-package com.gymguru.domain.dto.exist;
+package com.gymguru.domain.dto.internal.insert;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import javax.persistence.Column;
-
 @Getter
 @AllArgsConstructor
-public class ExistPersonDto {
-    private Long id;
+public class InsertPersonDto {
     private String email;
     private String password;
     private String firstName;

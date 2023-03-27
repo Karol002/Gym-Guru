@@ -1,12 +1,11 @@
-package com.gymguru.domain.dto.exist;
+package com.gymguru.domain.dto.internal.insert;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ExistUserDto {
-    private Long id;
+public class InsertUserDto {
     private Long personId;
     private Long planId;
 }

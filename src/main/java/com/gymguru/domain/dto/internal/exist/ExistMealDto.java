@@ -1,4 +1,4 @@
-package com.gymguru.domain.dto.exist;
+package com.gymguru.domain.dto.internal.exist;
 
 import com.gymguru.domain.Plan;
 import lombok.AllArgsConstructor;

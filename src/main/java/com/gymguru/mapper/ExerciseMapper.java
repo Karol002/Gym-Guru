@@ -2,9 +2,8 @@ package com.gymguru.mapper;
 
 import com.gymguru.controller.exception.single.PlanNotFoundException;
 import com.gymguru.domain.Exercise;
-import com.gymguru.domain.dto.exist.ExistExerciseDto;
-import com.gymguru.domain.dto.insert.InsertExerciseDto;
-import com.gymguru.service.ExerciseService;
+import com.gymguru.domain.dto.internal.exist.ExistExerciseDto;
+import com.gymguru.domain.dto.internal.insert.InsertExerciseDto;
 import com.gymguru.service.PlanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

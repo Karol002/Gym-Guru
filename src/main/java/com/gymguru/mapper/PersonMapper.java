@@ -1,8 +1,8 @@
 package com.gymguru.mapper;
 
 import com.gymguru.domain.Person;
-import com.gymguru.domain.dto.exist.ExistPersonDto;
-import com.gymguru.domain.dto.insert.InsertPersonDto;
+import com.gymguru.domain.dto.internal.exist.ExistPersonDto;
+import com.gymguru.domain.dto.internal.insert.InsertPersonDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

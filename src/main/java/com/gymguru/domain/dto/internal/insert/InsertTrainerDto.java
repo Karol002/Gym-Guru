@@ -1,4 +1,4 @@
-package com.gymguru.domain.dto.insert;
+package com.gymguru.domain.dto.internal.insert;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

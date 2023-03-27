@@ -1,9 +1,8 @@
 package com.gymguru.mapper;
 
 import com.gymguru.domain.Plan;
-import com.gymguru.domain.dto.exist.ExistPlanDto;
-import com.gymguru.domain.dto.insert.InsertPlanDto;
-import lombok.RequiredArgsConstructor;
+import com.gymguru.domain.dto.internal.exist.ExistPlanDto;
+import com.gymguru.domain.dto.internal.insert.InsertPlanDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
