@@ -1,11 +1,7 @@
 package com.gymguru.domain.dto.internal.exist;
 
-import com.gymguru.domain.Person;
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import javax.persistence.*;
 
 @Getter
 @AllArgsConstructor

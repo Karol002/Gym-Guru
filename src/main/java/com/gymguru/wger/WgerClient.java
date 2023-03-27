@@ -1,15 +1,20 @@
 package com.gymguru.wger;
 
-import com.gymguru.domain.dto.external.*;
+import com.gymguru.domain.dto.external.WgerCategoryBoardDto;
+import com.gymguru.domain.dto.external.WgerCategoryDto;
+import com.gymguru.domain.dto.external.WgerExerciseBoardDto;
+import com.gymguru.domain.dto.external.WgerExerciseDto;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-
 import java.net.URI;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

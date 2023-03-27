@@ -1,6 +1,5 @@
 package com.gymguru.controller.external;
 
-import com.gymguru.domain.dto.external.EdamamMealDto;
 import com.gymguru.domain.dto.external.WgerCategoryDto;
 import com.gymguru.domain.dto.external.WgerExerciseDto;
 import com.gymguru.wger.WgerClient;

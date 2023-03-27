@@ -2,11 +2,8 @@ package com.gymguru.controller.internal;
 
 import com.gymguru.controller.exception.single.PlanNotFoundException;
 import com.gymguru.controller.exception.single.UserNotFoundException;
-import com.gymguru.domain.Meal;
 import com.gymguru.domain.Plan;
-import com.gymguru.domain.dto.internal.exist.ExistMealDto;
 import com.gymguru.domain.dto.internal.exist.ExistPlanDto;
-import com.gymguru.domain.dto.internal.insert.InsertMealDto;
 import com.gymguru.domain.dto.internal.insert.InsertPlanDto;
 import com.gymguru.mapper.PlanMapper;
 import com.gymguru.service.PlanService;
@@ -14,8 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/v1/gymguru/plan")

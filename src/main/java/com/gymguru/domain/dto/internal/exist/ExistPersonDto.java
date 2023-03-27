@@ -3,8 +3,6 @@ package com.gymguru.domain.dto.internal.exist;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import javax.persistence.Column;
-
 @Getter
 @AllArgsConstructor
 public class ExistPersonDto {

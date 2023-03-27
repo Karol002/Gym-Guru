@@ -1,10 +1,7 @@
 package com.gymguru.controller.internal;
 
-import com.gymguru.domain.Trainer;
 import com.gymguru.domain.User;
-import com.gymguru.domain.dto.internal.exist.ExistTrainerDto;
 import com.gymguru.domain.dto.internal.exist.ExistUserDto;
-import com.gymguru.domain.dto.internal.insert.InsertTrainerDto;
 import com.gymguru.domain.dto.internal.insert.InsertUserDto;
 import com.gymguru.mapper.UserMapper;
 import com.gymguru.service.UserService;
@@ -12,8 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/v1/gymguru/user")

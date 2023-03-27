@@ -1,12 +1,8 @@
 package com.gymguru.mapper;
 
-import com.gymguru.controller.exception.single.PersonNotFoundException;
 import com.gymguru.domain.Trainer;
 import com.gymguru.domain.dto.internal.exist.ExistTrainerDto;
 import com.gymguru.domain.dto.internal.insert.InsertTrainerDto;
-import com.gymguru.service.PersonService;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

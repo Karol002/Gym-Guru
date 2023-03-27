@@ -1,11 +1,8 @@
 package com.gymguru.controller.internal;
 
 import com.gymguru.controller.exception.single.PlanNotFoundException;
-import com.gymguru.domain.Exercise;
 import com.gymguru.domain.Meal;
-import com.gymguru.domain.dto.internal.exist.ExistExerciseDto;
 import com.gymguru.domain.dto.internal.exist.ExistMealDto;
-import com.gymguru.domain.dto.internal.insert.InsertExerciseDto;
 import com.gymguru.domain.dto.internal.insert.InsertMealDto;
 import com.gymguru.mapper.MealMapper;
 import com.gymguru.service.MealService;

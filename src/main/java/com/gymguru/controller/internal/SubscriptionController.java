@@ -1,14 +1,10 @@
 package com.gymguru.controller.internal;
 
-import com.gymguru.controller.exception.single.PlanNotFoundException;
 import com.gymguru.controller.exception.single.SubscriptionNotFoundException;
 import com.gymguru.controller.exception.single.TrainerNotFoundException;
 import com.gymguru.controller.exception.single.UserNotFoundException;
-import com.gymguru.domain.Plan;
 import com.gymguru.domain.Subscription;
-import com.gymguru.domain.dto.internal.exist.ExistPlanDto;
 import com.gymguru.domain.dto.internal.exist.ExistSubscriptionDto;
-import com.gymguru.domain.dto.internal.insert.InsertPlanDto;
 import com.gymguru.domain.dto.internal.insert.InsertSubscriptionDto;
 import com.gymguru.mapper.SubscriptionMapper;
 import com.gymguru.service.SubscriptionService;

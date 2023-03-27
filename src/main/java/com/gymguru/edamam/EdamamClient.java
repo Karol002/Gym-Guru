@@ -1,15 +1,16 @@
 package com.gymguru.edamam;
 
-import com.gymguru.domain.dto.external.EdamamRecipeDto;
 import com.gymguru.domain.dto.external.EdamamHitDto;
-import org.springframework.web.util.UriComponentsBuilder;
 import com.gymguru.domain.dto.external.EdamamMealDto;
+import com.gymguru.domain.dto.external.EdamamRecipeDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Configuration
