@@ -21,22 +21,30 @@ public class User {
     @Column(name = "ID", unique = true)
     private Long id;
 
-    @NotNull
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "PERSON_ID")
-    private Person person;
+    @Column(name = "EMAIL_ADDRESS")
+    private String email;
 
+    @Column(name = "PASSWORD")
+    private String password;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "PLAN_ID")
-    private Plan plan;
+    @Column(name = "FIRST_NAME")
+    private String firstName;
 
-    public User(Person person) {
-        this.person = person;
+    @Column(name = "LAST_NAME")
+    private String lastName;
+
+    public User(String email, String password, String firstName, String lastName) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public User(Person person, Plan plan) {
-        this.person = person;
-        this.plan = plan;
+    public User(Long id, String email, String password, String firstName, String lastName) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 }

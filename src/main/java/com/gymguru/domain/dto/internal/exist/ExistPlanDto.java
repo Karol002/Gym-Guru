@@ -8,4 +8,5 @@ import lombok.Getter;
 public class ExistPlanDto {
     private Long id;
     private String description;
+    private Long userId;
 }

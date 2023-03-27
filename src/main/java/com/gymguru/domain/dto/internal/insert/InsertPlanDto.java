@@ -7,4 +7,5 @@ import lombok.Getter;
 @AllArgsConstructor
 public class InsertPlanDto {
     private String description;
+    private Long userId;
 }

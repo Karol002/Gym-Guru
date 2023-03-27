@@ -7,6 +7,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ExistUserDto {
     private Long id;
-    private Long personId;
-    private Long planId;
+    private String email;
+    private String password;
+    private String firstName;
+    private String lastName;
 }

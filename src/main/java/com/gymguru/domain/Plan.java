@@ -27,6 +27,10 @@ public class Plan {
     @Column(name = "PLAN_DESCRIPTION")
     private String description;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
+    private User user;
+
     @OneToMany(targetEntity = Exercise.class,
                mappedBy = "plan",
                cascade = CascadeType.REMOVE,
@@ -41,12 +45,14 @@ public class Plan {
     )
     private List<Meal> meals;
 
-    public Plan(String description) {
+    public Plan(String description, User user) {
         this.description = description;
+        this.user = user;
     }
 
-    public Plan(Long id, String description) {
+    public Plan(Long id, String description, User user) {
         this.id = id;
         this.description = description;
+        this.user = user;
     }
 }

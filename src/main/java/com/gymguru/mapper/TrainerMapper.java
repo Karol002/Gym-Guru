@@ -7,37 +7,45 @@ import com.gymguru.domain.dto.internal.insert.InsertTrainerDto;
 import com.gymguru.service.PersonService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RequiredArgsConstructor
-@Getter
+@Service
 public class TrainerMapper {
-    private final PersonService personService;
 
-    public Trainer mapToTrainer(final InsertTrainerDto insertTrainerDto) throws PersonNotFoundException {
+    public Trainer mapToTrainer(final InsertTrainerDto insertTrainerDto)  {
         return new Trainer(
+                insertTrainerDto.getEmail(),
+                insertTrainerDto.getPassword(),
+                insertTrainerDto.getFirstName(),
+                insertTrainerDto.getLastName(),
                 insertTrainerDto.getDescription(),
-                insertTrainerDto.getEducation(),
-                personService.getPerson(insertTrainerDto.getPersonId())
+                insertTrainerDto.getEducation()
         );
     }
 
-    public Trainer mapToTrainer(final ExistTrainerDto existTrainerDto) throws PersonNotFoundException {
+    public Trainer mapToTrainer(final ExistTrainerDto existTrainerDto) {
         return new Trainer(
                 existTrainerDto.getId(),
+                existTrainerDto.getEmail(),
+                existTrainerDto.getPassword(),
+                existTrainerDto.getFirstName(),
+                existTrainerDto.getLastName(),
                 existTrainerDto.getDescription(),
-                existTrainerDto.getEducation(),
-                personService.getPerson(existTrainerDto.getPersonId())
+                existTrainerDto.getEducation()
         );
     }
 
     public ExistTrainerDto mapToExistTrainerDto(final Trainer trainer) {
         return new ExistTrainerDto(
                 trainer.getId(),
+                trainer.getEmail(),
+                trainer.getPassword(),
+                trainer.getFirstName(),
+                trainer.getLastName(),
                 trainer.getDescription(),
-                trainer.getEducation(),
-                trainer.getPerson().getId()
+                trainer.getEducation()
         );
     }
 

@@ -9,35 +9,39 @@ import com.gymguru.service.PersonService;
 import com.gymguru.service.PlanService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Getter
-@RequiredArgsConstructor
+@Service
 public class UserMapper {
-    private final PersonService personService;
-    private final PlanService planService;
 
-    public User mapToUser(final InsertUserDto insertUserDto) throws PersonNotFoundException, PlanNotFoundException {
+    public User mapToUser(final InsertUserDto insertUserDto) {
         return new User(
-                personService.getPerson(insertUserDto.getPersonId()),
-                planService.getPlan(insertUserDto.getPlanId())
+                insertUserDto.getEmail(),
+                insertUserDto.getPassword(),
+                insertUserDto.getFirstName(),
+                insertUserDto.getLastName()
         );
     }
 
-    public User mapToUser(final ExistUserDto existUserDto) throws PersonNotFoundException, PlanNotFoundException {
+    public User mapToUser(final ExistUserDto existUserDto) {
         return new User(
                 existUserDto.getId(),
-                personService.getPerson(existUserDto.getPersonId()),
-                planService.getPlan(existUserDto.getPlanId())
+                existUserDto.getEmail(),
+                existUserDto.getPassword(),
+                existUserDto.getFirstName(),
+                existUserDto.getLastName()
         );
     }
 
     public ExistUserDto mapToExistUseDto(final User user) {
         return new ExistUserDto(
                 user.getId(),
-                user.getPerson().getId(),
-                user.getPlan().getId()
+                user.getEmail(),
+                user.getPassword(),
+                user.getFirstName(),
+                user.getLastName()
         );
     }
 

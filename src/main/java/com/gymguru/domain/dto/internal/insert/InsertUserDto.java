@@ -6,6 +6,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class InsertUserDto {
-    private Long personId;
-    private Long planId;
+    private String email;
+    private String password;
+    private String firstName;
+    private String lastName;
 }
