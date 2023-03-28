@@ -33,7 +33,6 @@ public class UserMapper {
         return new ExistUserDto(
                 user.getId(),
                 user.getEmail(),
-                user.getPassword(),
                 user.getFirstName(),
                 user.getLastName()
         );

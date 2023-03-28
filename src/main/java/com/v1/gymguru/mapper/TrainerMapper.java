@@ -37,7 +37,6 @@ public class TrainerMapper {
         return new ExistTrainerDto(
                 trainer.getId(),
                 trainer.getEmail(),
-                trainer.getPassword(),
                 trainer.getFirstName(),
                 trainer.getLastName(),
                 trainer.getDescription(),
