@@ -29,7 +29,7 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(PlanNotFoundException.class)
     public ResponseEntity<Object> handlePlanNotFoundException(PlanNotFoundException exception) {
-        return new ResponseEntity<>("Plan with given id doesn't exist", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Plan for given user id doesn't exist", HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(SubscriptionNotFoundException.class)

@@ -23,8 +23,8 @@ public class SubscriptionMapper {
                 insertSubscriptionDto.getPrice(),
                 insertSubscriptionDto.getStartDate(),
                 insertSubscriptionDto.getEndDate(),
-                userService.getUser(insertSubscriptionDto.getUserId()),
-                trainerService.getTrainer(insertSubscriptionDto.getTrainerId())
+                userService.getUserById(insertSubscriptionDto.getUserId()),
+                trainerService.getTrainerById(insertSubscriptionDto.getTrainerId())
         );
     }
 
@@ -34,8 +34,8 @@ public class SubscriptionMapper {
                 existSubscriptionDto.getPrice(),
                 existSubscriptionDto.getStartDate(),
                 existSubscriptionDto.getEndDate(),
-                userService.getUser(existSubscriptionDto.getUserId()),
-                trainerService.getTrainer(existSubscriptionDto.getTrainerId())
+                userService.getUserById(existSubscriptionDto.getUserId()),
+                trainerService.getTrainerById(existSubscriptionDto.getTrainerId())
         );
     }
 

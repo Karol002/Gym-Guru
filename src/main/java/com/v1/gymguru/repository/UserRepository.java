@@ -7,12 +7,15 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
     List<User> findAll();
+
+    Optional<User> findByEmail(String email);
 
     User save(User user);
 }

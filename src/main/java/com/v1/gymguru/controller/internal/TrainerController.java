@@ -29,7 +29,7 @@ public class TrainerController {
 
     @GetMapping(value = "{id}")
     public ResponseEntity<ExistTrainerDto> getTrainer(@PathVariable Long id) throws TrainerNotFoundException {
-        Trainer trainer = trainerService.getTrainer(id);
+        Trainer trainer = trainerService.getTrainerById(id);
         return ResponseEntity.ok(trainerMapper.mapToExistTrainerDto(trainer));
     }
 

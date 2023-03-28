@@ -18,7 +18,7 @@ public class PlanMapper {
     public Plan mapToPlan(final InsertPlanDto insertPlanDto) throws UserNotFoundException {
         return new Plan(
                 insertPlanDto.getDescription(),
-                userService.getUser(insertPlanDto.getUserId())
+                userService.getUserById(insertPlanDto.getUserId())
         );
     }
 
@@ -26,7 +26,7 @@ public class PlanMapper {
         return new Plan(
                 existPlanDto.getId(),
                 existPlanDto.getDescription(),
-                userService.getUser(existPlanDto.getId())
+                userService.getUserById(existPlanDto.getId())
         );
     }
 

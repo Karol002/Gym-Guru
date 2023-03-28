@@ -20,9 +20,9 @@ public class PlanController {
     private final PlanService planService;
     private final PlanMapper planMapper;
 
-    @GetMapping(value = "{id}")
-    public ResponseEntity<ExistPlanDto> getPlanByUserId(@PathVariable Long id) throws PlanNotFoundException {
-        Plan plan = planService.getPlanByUserId(id);
+    @GetMapping(value = "{userId}")
+    public ResponseEntity<ExistPlanDto> getPlanByUserId(@PathVariable Long userId) throws PlanNotFoundException {
+        Plan plan = planService.getPlanByUserId(userId);
         return ResponseEntity.ok(planMapper.mapToExistPlanDto(plan));
     }
 
