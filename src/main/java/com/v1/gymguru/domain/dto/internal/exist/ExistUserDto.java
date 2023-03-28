@@ -11,11 +11,4 @@ public class ExistUserDto {
     private String password;
     private String firstName;
     private String lastName;
-
-    public ExistUserDto(Long id, String email, String firstName, String lastName) {
-        this.id = id;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
 }

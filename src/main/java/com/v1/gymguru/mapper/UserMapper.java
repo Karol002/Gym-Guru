@@ -33,6 +33,7 @@ public class UserMapper {
         return new ExistUserDto(
                 user.getId(),
                 user.getEmail(),
+                "PASSWORD IS HIDDEN",
                 user.getFirstName(),
                 user.getLastName()
         );

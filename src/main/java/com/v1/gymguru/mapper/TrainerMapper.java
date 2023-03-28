@@ -37,6 +37,7 @@ public class TrainerMapper {
         return new ExistTrainerDto(
                 trainer.getId(),
                 trainer.getEmail(),
+                "PASSWORD IS HIDDEN",
                 trainer.getFirstName(),
                 trainer.getLastName(),
                 trainer.getDescription(),

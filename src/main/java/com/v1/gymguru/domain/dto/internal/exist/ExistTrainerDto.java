@@ -13,13 +13,4 @@ public class ExistTrainerDto {
     private String lastName;
     private String description;
     private String education;
-
-    public ExistTrainerDto(Long id, String email, String firstName, String lastName, String description, String education) {
-        this.id = id;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.description = description;
-        this.education = education;
-    }
 }

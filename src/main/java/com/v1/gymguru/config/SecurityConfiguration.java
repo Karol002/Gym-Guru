@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @RequiredArgsConstructor
 @EnableWebSecurity
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -33,7 +33,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT,"/v1/gymguru/plans").hasRole("TRAINER")
                 .antMatchers(HttpMethod.PUT,"/v1/gymguru/trainers").hasRole("TRAINER")
                 .antMatchers(HttpMethod.GET,"/v1/gymguru/subscriptions/trainer/{trainerId}").hasRole("TRAINER")
-
                 .antMatchers(HttpMethod.GET,"/v1/gymguru/subscriptions/trainer/{trainerId}").hasRole("TRAINER")
                 .antMatchers(HttpMethod.GET,"v1/gymguru/edamam/meals/{mealName}").hasRole("TRAINER")
                 .antMatchers(HttpMethod.GET,"v1/gymguru/edamam/meals/{mealName}").hasRole("TRAINER")
@@ -42,8 +41,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers(HttpMethod.POST,"/v1/gymguru/trainers/{id}").permitAll()
                 .antMatchers(HttpMethod.POST,"/v1/gymguru/users").permitAll()
-
-
                 .and()
                 .formLogin().permitAll()
                 .and()
