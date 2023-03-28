@@ -17,8 +17,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic()
                 .and()
                 .authorizeRequests()
+                .antMatchers(HttpMethod.GET,"/v1/gymguru/exercises/plan/{planId}").hasRole("USER")
+                .antMatchers(HttpMethod.GET,"/v1/gymguru/meals/plan/{planId}").hasRole("USER")
                 .antMatchers(HttpMethod.GET,"/v1/gymguru/plans/{userId}").hasRole("USER")
+                .antMatchers(HttpMethod.GET,"/v1/gymguru/trainers").hasRole("USER")
+                .antMatchers(HttpMethod.GET,"/v1/gymguru/trainers/{id}").hasRole("USER")
+                .antMatchers(HttpMethod.PUT,"/v1/gymguru/users").hasRole("USER")
+                .antMatchers(HttpMethod.GET,"/v1/gymguru/subscriptions/user/{userId}").hasRole("USER")
+                .antMatchers(HttpMethod.POST,"/v1/gymguru/subscriptions/user").hasRole("USER")
+                .antMatchers(HttpMethod.PUT,"/v1/gymguru/subscriptions/user").hasRole("USER")
+
+                .antMatchers(HttpMethod.POST,"/v1/gymguru/exercises").hasRole("TRAINER")
+                .antMatchers(HttpMethod.POST,"/v1/gymguru/meals").hasRole("TRAINER")
+                .antMatchers(HttpMethod.POST,"/v1/gymguru/plans").hasRole("TRAINER")
+                .antMatchers(HttpMethod.PUT,"/v1/gymguru/plans").hasRole("TRAINER")
+                .antMatchers(HttpMethod.PUT,"/v1/gymguru/trainers").hasRole("TRAINER")
                 .antMatchers(HttpMethod.GET,"/v1/gymguru/subscriptions/trainer/{trainerId}").hasRole("TRAINER")
+
+                .antMatchers(HttpMethod.GET,"/v1/gymguru/subscriptions/trainer/{trainerId}").hasRole("TRAINER")
+                .antMatchers(HttpMethod.GET,"v1/gymguru/edamam/meals/{mealName}").hasRole("TRAINER")
+                .antMatchers(HttpMethod.GET,"v1/gymguru/edamam/meals/{mealName}").hasRole("TRAINER")
+                .antMatchers(HttpMethod.GET,"v1/gymguru/wger/exercises/{categoryId}").hasRole("TRAINER")
+                .antMatchers(HttpMethod.GET,"v1/gymguru/wger/categories").hasRole("TRAINER")
+
+                .antMatchers(HttpMethod.POST,"/v1/gymguru/trainers/{id}").permitAll()
+                .antMatchers(HttpMethod.POST,"/v1/gymguru/users").permitAll()
+
+
                 .and()
                 .formLogin().permitAll()
                 .and()

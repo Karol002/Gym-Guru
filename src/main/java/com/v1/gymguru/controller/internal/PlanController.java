@@ -33,9 +33,16 @@ public class PlanController {
         return ResponseEntity.ok().build();
     }
 
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updatePlan(@RequestBody ExistPlanDto existPlanDtoDto) throws UserNotFoundException {
+        Plan plan = planMapper.mapToPlan(existPlanDtoDto);
+        planService.savePlan(plan);
+        return ResponseEntity.ok().build();
+    }
+
     @DeleteMapping(value = "{id}")
     public ResponseEntity<Void> deletePlan(@PathVariable Long id) {
         planService.deletePlan(id);
         return ResponseEntity.ok().build();
-    }
+    }//Should be auto delete
 }

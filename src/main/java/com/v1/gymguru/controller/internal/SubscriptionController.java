@@ -42,9 +42,9 @@ public class SubscriptionController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping(value = "{id}")
-    public ResponseEntity<Void> deleteSubscription(@PathVariable Long id) {
-        subscriptionService.deleteSubscription(id);
-        return ResponseEntity.ok().build();
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Subscription> extendSubscription(@RequestBody ExistSubscriptionDto existSubscriptionDto) throws UserNotFoundException, TrainerNotFoundException {
+        Subscription subscription = subscriptionMapper.mapToSubscription(existSubscriptionDto);
+        return ResponseEntity.ok(subscriptionService.saveSubscription(subscription));
     }
 }

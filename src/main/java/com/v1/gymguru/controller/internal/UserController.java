@@ -20,11 +20,6 @@ public class UserController {
     private final UserService userService;
     private final UserMapper userMapper;
 
-    @GetMapping
-    public ResponseEntity<List<ExistUserDto>> getAllUsers() {
-        return ResponseEntity.ok(userMapper.mapToExistUserDtoList(userService.getAllUsers()));
-    }
-
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createUser(@RequestBody InsertUserDto insertUserDto) {
         User user = userMapper.mapToUser(insertUserDto);
