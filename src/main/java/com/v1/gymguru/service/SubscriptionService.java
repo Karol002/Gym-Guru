@@ -6,6 +6,7 @@ import com.v1.gymguru.repository.SubscriptionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -21,11 +22,18 @@ public class SubscriptionService {
         return subscriptionRepository.findByUserId(userId).orElseThrow(SubscriptionNotFoundException::new);
     }
 
-    public void deleteSubscription(Long id) {
-        subscriptionRepository.deleteById(id);
-    }
-
     public Subscription saveSubscription(final Subscription subscription) {
         return subscriptionRepository.save(subscription);
+    }
+
+    public Subscription updateSubscription(final Subscription subscription) throws SubscriptionNotFoundException {
+        if (subscriptionRepository.existsById(subscription.getId())) {
+            return subscriptionRepository.save(subscription);
+        } else throw new SubscriptionNotFoundException();
+    }
+
+    public boolean isSubscriptionActive(Long userId) throws SubscriptionNotFoundException {
+        Subscription subscription = getSubscriptionByUserId(userId);
+        return subscription.getEndDate().isBefore(LocalDate.now());
     }
 }

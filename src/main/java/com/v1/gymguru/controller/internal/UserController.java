@@ -1,5 +1,6 @@
 package com.v1.gymguru.controller.internal;
 
+import com.v1.gymguru.controller.exception.single.UserNotFoundException;
 import com.v1.gymguru.domain.User;
 import com.v1.gymguru.domain.dto.internal.exist.ExistUserDto;
 import com.v1.gymguru.domain.dto.internal.insert.InsertUserDto;
@@ -20,6 +21,11 @@ public class UserController {
     private final UserService userService;
     private final UserMapper userMapper;
 
+    @GetMapping(value = "{id}")
+    public ResponseEntity<ExistUserDto> createUser(@PathVariable Long id) throws UserNotFoundException {
+        return ResponseEntity.ok(userMapper.mapToExistUseDto(userService.getUserById(id)));
+    }
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createUser(@RequestBody InsertUserDto insertUserDto) {
         User user = userMapper.mapToUser(insertUserDto);
@@ -28,8 +34,8 @@ public class UserController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> updateUser(@RequestBody ExistUserDto existUserDto) {
+    public ResponseEntity<User> updateUser(@RequestBody ExistUserDto existUserDto) throws UserNotFoundException {
         User user = userMapper.mapToUser(existUserDto);
-        return ResponseEntity.ok(userService.saveUser(user));
+        return ResponseEntity.ok(userService.updateUser(user));
     }
 }

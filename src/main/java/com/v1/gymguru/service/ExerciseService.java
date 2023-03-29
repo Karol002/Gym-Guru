@@ -12,11 +12,9 @@ import java.util.List;
 @Service
 public class ExerciseService {
     private final ExerciseRepository exerciseRepository;
-
     public List<Exercise> getExercisesByPlanId(Long planId) {
         return exerciseRepository.findAllByPlanId(planId);
     }
-
     public Exercise saveExercise(final Exercise exercise) {
         return exerciseRepository.save(exercise);
     }

@@ -43,8 +43,8 @@ public class SubscriptionController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Subscription> extendSubscription(@RequestBody ExistSubscriptionDto existSubscriptionDto) throws UserNotFoundException, TrainerNotFoundException {
+    public ResponseEntity<Subscription> extendSubscription(@RequestBody ExistSubscriptionDto existSubscriptionDto) throws UserNotFoundException, TrainerNotFoundException, SubscriptionNotFoundException {
         Subscription subscription = subscriptionMapper.mapToSubscription(existSubscriptionDto);
-        return ResponseEntity.ok(subscriptionService.saveSubscription(subscription));
-    }
+        return ResponseEntity.ok(subscriptionService.updateSubscription(subscription));
+    }//Should be ReNew
 }

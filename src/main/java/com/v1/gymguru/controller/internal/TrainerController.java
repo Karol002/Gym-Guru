@@ -41,8 +41,8 @@ public class TrainerController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Trainer> updateTrainer(@RequestBody ExistTrainerDto existTrainerDto) {
+    public ResponseEntity<Trainer> updateTrainer(@RequestBody ExistTrainerDto existTrainerDto) throws TrainerNotFoundException {
         Trainer trainer = trainerMapper.mapToTrainer(existTrainerDto);
-        return ResponseEntity.ok(trainerService.saveTrainer(trainer));
+        return ResponseEntity.ok(trainerService.updateTrainer(trainer));
     }
 }

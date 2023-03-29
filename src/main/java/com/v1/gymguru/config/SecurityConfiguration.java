@@ -23,6 +23,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/v1/gymguru/trainers").hasRole("USER")
                 .antMatchers(HttpMethod.GET,"/v1/gymguru/trainers/{id}").hasRole("USER")
                 .antMatchers(HttpMethod.PUT,"/v1/gymguru/users").hasRole("USER")
+                .antMatchers(HttpMethod.GET,"/v1/gymguru/users/{id}").hasRole("USER")
                 .antMatchers(HttpMethod.GET,"/v1/gymguru/subscriptions/user/{userId}").hasRole("USER")
                 .antMatchers(HttpMethod.POST,"/v1/gymguru/subscriptions/user").hasRole("USER")
                 .antMatchers(HttpMethod.PUT,"/v1/gymguru/subscriptions/user").hasRole("USER")

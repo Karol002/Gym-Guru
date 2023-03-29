@@ -1,7 +1,6 @@
 package com.v1.gymguru.controller.internal;
 
-import com.v1.gymguru.controller.exception.single.PlanNotFoundException;
-import com.v1.gymguru.controller.exception.single.UserNotFoundException;
+import com.v1.gymguru.controller.exception.single.*;
 import com.v1.gymguru.domain.Plan;
 import com.v1.gymguru.domain.dto.internal.exist.ExistPlanDto;
 import com.v1.gymguru.domain.dto.internal.insert.InsertPlanDto;
@@ -21,7 +20,7 @@ public class PlanController {
     private final PlanMapper planMapper;
 
     @GetMapping(value = "{userId}")
-    public ResponseEntity<ExistPlanDto> getPlanByUserId(@PathVariable Long userId) throws PlanNotFoundException {
+    public ResponseEntity<ExistPlanDto> getPlanByUserId(@PathVariable Long userId) throws SubscriptionNotFoundException, SubscriptionExpiredException, PlanForUserIdNotFoundException {
         Plan plan = planService.getPlanByUserId(userId);
         return ResponseEntity.ok(planMapper.mapToExistPlanDto(plan));
     }
@@ -34,15 +33,15 @@ public class PlanController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> updatePlan(@RequestBody ExistPlanDto existPlanDtoDto) throws UserNotFoundException {
+    public ResponseEntity<Void> updatePlan(@RequestBody ExistPlanDto existPlanDtoDto) throws UserNotFoundException, PlanNotFoundException {
         Plan plan = planMapper.mapToPlan(existPlanDtoDto);
-        planService.savePlan(plan);
+        planService.updatePlan(plan);
         return ResponseEntity.ok().build();
-    }
+    }// Do usunięcia
 
     @DeleteMapping(value = "{id}")
-    public ResponseEntity<Void> deletePlan(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePlan(@PathVariable Long id) throws PlanNotFoundException {
         planService.deletePlan(id);
         return ResponseEntity.ok().build();
-    }//Should be auto delete
+    }
 }

@@ -29,4 +29,10 @@ public class TrainerService {
     public Trainer saveTrainer(final Trainer trainer) {
         return trainerRepository.save(trainer);
     }
+
+    public Trainer updateTrainer(final Trainer trainer) throws TrainerNotFoundException {
+        if (trainerRepository.existsById(trainer.getId())) {
+            return trainerRepository.save(trainer);
+        } else throw new TrainerNotFoundException();
+    }
 }
