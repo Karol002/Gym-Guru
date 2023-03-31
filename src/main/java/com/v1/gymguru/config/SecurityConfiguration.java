@@ -1,3 +1,4 @@
+/*
 package com.v1.gymguru.config;
 
 import lombok.RequiredArgsConstructor;
@@ -50,3 +51,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf().disable();
     }
 }
+*/

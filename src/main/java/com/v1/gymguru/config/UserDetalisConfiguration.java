@@ -1,3 +1,4 @@
+/*
 package com.v1.gymguru.config;
 
 import com.v1.gymguru.domain.Trainer;
@@ -44,3 +45,4 @@ public class UserDetalisConfiguration implements UserDetailsService {
         }
     }
 }
+*/
