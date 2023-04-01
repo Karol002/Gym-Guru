@@ -15,7 +15,6 @@ public class OpenAiController {
     private final OpenAiClient openAiClient;
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OpenAiResponseDto> generateResponse(@RequestBody OpenAiResponseDto openAiResponseDto) {
-        System.out.println("Odebralem cos");
         return ResponseEntity.ok(openAiClient.getOpenAiRequest(openAiResponseDto));
     }
 }

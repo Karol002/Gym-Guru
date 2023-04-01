@@ -26,7 +26,7 @@ public class OpenAiClient {
 
         String url = openAiConfiguration.getOpenAiEndpoint();
 
-        OpenAIRequestDto requestBody = new OpenAIRequestDto(openAiConfiguration.getOpenAiModel(), ask.getResponse(), 0.5, 3000L);
+        OpenAIRequestDto requestBody = new OpenAIRequestDto(openAiConfiguration.getOpenAiModel(), ask.getResponse(), 0.5, 300L);
 
         HttpEntity<OpenAIRequestDto> requestEntity = new HttpEntity<>(requestBody, headers);
         OpenAiObjectDto response = restTemplate.postForObject(url, requestEntity, OpenAiObjectDto.class);
