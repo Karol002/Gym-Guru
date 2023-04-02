@@ -2,8 +2,8 @@ package com.v1.gymguru.controller.internal;
 
 import com.v1.gymguru.controller.exception.single.PlanNotFoundException;
 import com.v1.gymguru.domain.Exercise;
-import com.v1.gymguru.domain.dto.internal.exist.ExistExerciseDto;
-import com.v1.gymguru.domain.dto.internal.insert.InsertExerciseDto;
+import com.v1.gymguru.domain.dto.ExerciseDto;
+import com.v1.gymguru.domain.dto.save.SaveExerciseDto;
 import com.v1.gymguru.mapper.ExerciseMapper;
 import com.v1.gymguru.service.ExerciseService;
 import lombok.RequiredArgsConstructor;
@@ -22,14 +22,14 @@ public class ExerciseController {
     private final ExerciseMapper exerciseMapper;
 
     @GetMapping(value = "/plan/{planId}")
-    public ResponseEntity<List<ExistExerciseDto>> getExercisesByPlanId(@PathVariable Long planId) {
+    public ResponseEntity<List<ExerciseDto>> getExercisesByPlanId(@PathVariable Long planId) {
         List<Exercise> exercises = exerciseService.getExercisesByPlanId(planId);
         return ResponseEntity.ok(exerciseMapper.mapToExistExerciseDtoList(exercises));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addExercise(@RequestBody InsertExerciseDto insertExerciseDto) throws PlanNotFoundException {
-        Exercise exercise = exerciseMapper.mapToExercise(insertExerciseDto);
+    public ResponseEntity<Void> addExercise(@RequestBody SaveExerciseDto saveExerciseDto) throws PlanNotFoundException {
+        Exercise exercise = exerciseMapper.mapToExercise(saveExerciseDto);
         exerciseService.saveExercise(exercise);
         return ResponseEntity.ok().build();
     }

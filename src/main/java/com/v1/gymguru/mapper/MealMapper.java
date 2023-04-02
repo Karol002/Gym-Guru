@@ -2,8 +2,8 @@ package com.v1.gymguru.mapper;
 
 import com.v1.gymguru.controller.exception.single.PlanNotFoundException;
 import com.v1.gymguru.domain.Meal;
-import com.v1.gymguru.domain.dto.internal.exist.ExistMealDto;
-import com.v1.gymguru.domain.dto.internal.insert.InsertMealDto;
+import com.v1.gymguru.domain.dto.MealDto;
+import com.v1.gymguru.domain.dto.save.SaveMealDto;
 import com.v1.gymguru.service.PlanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,25 +16,25 @@ public class MealMapper {
     private final PlanService planService;
 
 
-    public Meal mapToMeal(final InsertMealDto insertMealDto) throws PlanNotFoundException {
+    public Meal mapToMeal(final SaveMealDto saveMealDto) throws PlanNotFoundException {
         return new Meal(
-                insertMealDto.getName(),
-                insertMealDto.getCookInstruction(),
-                planService.getPlan(insertMealDto.getPlanId())
+                saveMealDto.getName(),
+                saveMealDto.getCookInstruction(),
+                planService.getPlan(saveMealDto.getPlanId())
         );
     }
 
-    public Meal mapToMeal(final ExistMealDto existMealDto) throws PlanNotFoundException {
+    public Meal mapToMeal(final MealDto mealDto) throws PlanNotFoundException {
         return new Meal(
-                existMealDto.getId(),
-                existMealDto.getName(),
-                existMealDto.getCookInstruction(),
-                planService.getPlan(existMealDto.getPlanId())
+                mealDto.getId(),
+                mealDto.getName(),
+                mealDto.getCookInstruction(),
+                planService.getPlan(mealDto.getPlanId())
         );
     }
 
-    public ExistMealDto mapToExistMealDto(final Meal meal) {
-        return new ExistMealDto(
+    public MealDto mapToExistMealDto(final Meal meal) {
+        return new MealDto(
                 meal.getId(),
                 meal.getName(),
                 meal.getCookInstruction(),
@@ -42,7 +42,7 @@ public class MealMapper {
         );
     }
 
-    public List<ExistMealDto> mapToExistMealDtoList(List<Meal> meals) {
+    public List<MealDto> mapToExistMealDtoList(List<Meal> meals) {
         return meals.stream()
                 .map(this::mapToExistMealDto)
                 .toList();

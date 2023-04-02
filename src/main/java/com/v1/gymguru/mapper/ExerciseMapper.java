@@ -2,8 +2,8 @@ package com.v1.gymguru.mapper;
 
 import com.v1.gymguru.controller.exception.single.PlanNotFoundException;
 import com.v1.gymguru.domain.Exercise;
-import com.v1.gymguru.domain.dto.internal.exist.ExistExerciseDto;
-import com.v1.gymguru.domain.dto.internal.insert.InsertExerciseDto;
+import com.v1.gymguru.domain.dto.ExerciseDto;
+import com.v1.gymguru.domain.dto.save.SaveExerciseDto;
 import com.v1.gymguru.service.PlanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,29 +15,29 @@ import java.util.List;
 public class ExerciseMapper {
     private final PlanService planService;
 
-    public Exercise mapToExercise(final InsertExerciseDto insertExerciseDto) throws PlanNotFoundException {
+    public Exercise mapToExercise(final SaveExerciseDto saveExerciseDto) throws PlanNotFoundException {
         return new Exercise(
-                insertExerciseDto.getName(),
-                insertExerciseDto.getDescription(),
-                insertExerciseDto.getSeriesQuantity(),
-                insertExerciseDto.getRepetitionsQuantity(),
-                planService.getPlan(insertExerciseDto.getPlanId())
+                saveExerciseDto.getName(),
+                saveExerciseDto.getDescription(),
+                saveExerciseDto.getSeriesQuantity(),
+                saveExerciseDto.getRepetitionsQuantity(),
+                planService.getPlan(saveExerciseDto.getPlanId())
         );
     }
 
-    public  Exercise mapToExercise(final ExistExerciseDto existExerciseDto) throws PlanNotFoundException {
+    public  Exercise mapToExercise(final ExerciseDto exerciseDto) throws PlanNotFoundException {
         return  new Exercise(
-                existExerciseDto.getId(),
-                existExerciseDto.getName(),
-                existExerciseDto.getDescription(),
-                existExerciseDto.getSeriesQuantity(),
-                existExerciseDto.getRepetitionsQuantity(),
-                planService.getPlan(existExerciseDto.getPlanId())
+                exerciseDto.getId(),
+                exerciseDto.getName(),
+                exerciseDto.getDescription(),
+                exerciseDto.getSeriesQuantity(),
+                exerciseDto.getRepetitionsQuantity(),
+                planService.getPlan(exerciseDto.getPlanId())
         );
     }
 
-    public ExistExerciseDto mapToExistExerciseDto(final Exercise exercise) {
-        return new ExistExerciseDto(
+    public ExerciseDto mapToExistExerciseDto(final Exercise exercise) {
+        return new ExerciseDto(
                 exercise.getId(),
                 exercise.getName(),
                 exercise.getDescription(),
@@ -47,7 +47,7 @@ public class ExerciseMapper {
         );
     }
 
-    public List<ExistExerciseDto> mapToExistExerciseDtoList(List<Exercise> exercises) {
+    public List<ExerciseDto> mapToExistExerciseDtoList(List<Exercise> exercises) {
         return exercises.stream()
                 .map(this::mapToExistExerciseDto)
                 .toList();

@@ -4,8 +4,8 @@ import com.v1.gymguru.controller.exception.single.SubscriptionNotFoundException;
 import com.v1.gymguru.controller.exception.single.TrainerNotFoundException;
 import com.v1.gymguru.controller.exception.single.UserNotFoundException;
 import com.v1.gymguru.domain.Subscription;
-import com.v1.gymguru.domain.dto.internal.exist.ExistSubscriptionDto;
-import com.v1.gymguru.domain.dto.internal.insert.InsertSubscriptionDto;
+import com.v1.gymguru.domain.dto.SubscriptionDto;
+import com.v1.gymguru.domain.dto.save.SaveSubscriptionDto;
 import com.v1.gymguru.mapper.SubscriptionMapper;
 import com.v1.gymguru.service.SubscriptionService;
 import lombok.RequiredArgsConstructor;
@@ -24,27 +24,27 @@ public class SubscriptionController {
     private final SubscriptionMapper subscriptionMapper;
 
     @GetMapping(value = "trainer/{trainerId}")
-    public ResponseEntity<List<ExistSubscriptionDto>> getSubscriptions(@PathVariable Long trainerId) {
+    public ResponseEntity<List<SubscriptionDto>> getSubscriptions(@PathVariable Long trainerId) {
         List<Subscription> subscriptions = subscriptionService.getSubscriptionsByTrainerId(trainerId);
         return ResponseEntity.ok(subscriptionMapper.mapToExistSubscriptionDtoList(subscriptions));
     }
 
     @GetMapping(value = "user/{userId}")
-    public ResponseEntity<ExistSubscriptionDto> getSubscription(@PathVariable Long userId) throws SubscriptionNotFoundException {
+    public ResponseEntity<SubscriptionDto> getSubscription(@PathVariable Long userId) throws SubscriptionNotFoundException {
         Subscription subscription = subscriptionService.getSubscriptionByUserId(userId);
         return ResponseEntity.ok(subscriptionMapper.mapToExistSubscriptionDto(subscription));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createSubscription(@RequestBody InsertSubscriptionDto insertSubscriptionDto) throws UserNotFoundException, TrainerNotFoundException {
-        Subscription subscription = subscriptionMapper.mapToSubscription(insertSubscriptionDto);
+    public ResponseEntity<Void> createSubscription(@RequestBody SaveSubscriptionDto saveSubscriptionDto) throws UserNotFoundException, TrainerNotFoundException {
+        Subscription subscription = subscriptionMapper.mapToSubscription(saveSubscriptionDto);
         subscriptionService.saveSubscription(subscription);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Subscription> extendSubscription(@RequestBody ExistSubscriptionDto existSubscriptionDto) throws UserNotFoundException, TrainerNotFoundException, SubscriptionNotFoundException {
-        Subscription subscription = subscriptionMapper.mapToSubscription(existSubscriptionDto);
+    public ResponseEntity<Subscription> extendSubscription(@RequestBody SubscriptionDto subscriptionDto) throws UserNotFoundException, TrainerNotFoundException, SubscriptionNotFoundException {
+        Subscription subscription = subscriptionMapper.mapToSubscription(subscriptionDto);
         return ResponseEntity.ok(subscriptionService.updateSubscription(subscription));
     }//Should be ReNew
 }

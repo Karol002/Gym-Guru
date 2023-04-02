@@ -1,4 +1,4 @@
-package com.v1.gymguru.domain.dto.internal.exist;
+package com.v1.gymguru.domain.dto;
 
 
 import lombok.AllArgsConstructor;
@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ExistExerciseDto {
+public class ExerciseDto {
     private Long id;
     private String name;
     private String description;

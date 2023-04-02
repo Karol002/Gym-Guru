@@ -1,12 +1,11 @@
-package com.v1.gymguru.domain.dto.internal.exist;
+package com.v1.gymguru.domain.dto.save;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ExistMealDto {
-    private Long id;
+public class SaveMealDto {
     private String name;
     private String cookInstruction;
     private Long planId;

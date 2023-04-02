@@ -2,8 +2,8 @@ package com.v1.gymguru.controller.internal;
 
 import com.v1.gymguru.controller.exception.single.*;
 import com.v1.gymguru.domain.Plan;
-import com.v1.gymguru.domain.dto.internal.exist.ExistPlanDto;
-import com.v1.gymguru.domain.dto.internal.insert.InsertPlanDto;
+import com.v1.gymguru.domain.dto.PlanDto;
+import com.v1.gymguru.domain.dto.save.SavePlanDto;
 import com.v1.gymguru.mapper.PlanMapper;
 import com.v1.gymguru.service.PlanService;
 import lombok.RequiredArgsConstructor;
@@ -20,21 +20,21 @@ public class PlanController {
     private final PlanMapper planMapper;
 
     @GetMapping(value = "{userId}")
-    public ResponseEntity<ExistPlanDto> getPlanByUserId(@PathVariable Long userId) throws SubscriptionNotFoundException, SubscriptionExpiredException, PlanForUserIdNotFoundException {
+    public ResponseEntity<PlanDto> getPlanByUserId(@PathVariable Long userId) throws SubscriptionNotFoundException, SubscriptionExpiredException, PlanForUserIdNotFoundException {
         Plan plan = planService.getPlanByUserId(userId);
         return ResponseEntity.ok(planMapper.mapToExistPlanDto(plan));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createPlan(@RequestBody InsertPlanDto insertPlanDtoDto) throws UserNotFoundException {
-        Plan plan = planMapper.mapToPlan(insertPlanDtoDto);
+    public ResponseEntity<Void> createPlan(@RequestBody SavePlanDto savePlanDtoDto) throws UserNotFoundException {
+        Plan plan = planMapper.mapToPlan(savePlanDtoDto);
         planService.savePlan(plan);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> updatePlan(@RequestBody ExistPlanDto existPlanDtoDto) throws UserNotFoundException, PlanNotFoundException {
-        Plan plan = planMapper.mapToPlan(existPlanDtoDto);
+    public ResponseEntity<Void> updatePlan(@RequestBody PlanDto planDtoDto) throws UserNotFoundException, PlanNotFoundException {
+        Plan plan = planMapper.mapToPlan(planDtoDto);
         planService.updatePlan(plan);
         return ResponseEntity.ok().build();
     }// Do usunięcia

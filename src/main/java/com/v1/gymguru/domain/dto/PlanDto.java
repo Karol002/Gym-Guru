@@ -1,11 +1,12 @@
-package com.v1.gymguru.domain.dto.internal.insert;
+package com.v1.gymguru.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class InsertPlanDto {
+public class PlanDto {
+    private Long id;
     private String description;
     private Long userId;
 }

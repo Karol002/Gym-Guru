@@ -1,8 +1,5 @@
 package com.v1.gymguru.edamam;
 
-import com.v1.gymguru.domain.dto.external.EdamamHitDto;
-import com.v1.gymguru.domain.dto.external.EdamamMealDto;
-import com.v1.gymguru.domain.dto.external.EdamamRecipeDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;

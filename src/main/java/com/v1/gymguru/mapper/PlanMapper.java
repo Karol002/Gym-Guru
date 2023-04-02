@@ -2,8 +2,8 @@ package com.v1.gymguru.mapper;
 
 import com.v1.gymguru.controller.exception.single.UserNotFoundException;
 import com.v1.gymguru.domain.Plan;
-import com.v1.gymguru.domain.dto.internal.exist.ExistPlanDto;
-import com.v1.gymguru.domain.dto.internal.insert.InsertPlanDto;
+import com.v1.gymguru.domain.dto.PlanDto;
+import com.v1.gymguru.domain.dto.save.SavePlanDto;
 import com.v1.gymguru.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,30 +15,30 @@ import java.util.List;
 public class PlanMapper {
     private final UserService userService;
 
-    public Plan mapToPlan(final InsertPlanDto insertPlanDto) throws UserNotFoundException {
+    public Plan mapToPlan(final SavePlanDto savePlanDto) throws UserNotFoundException {
         return new Plan(
-                insertPlanDto.getDescription(),
-                userService.getUserById(insertPlanDto.getUserId())
+                savePlanDto.getDescription(),
+                userService.getUserById(savePlanDto.getUserId())
         );
     }
 
-    public Plan mapToPlan(final ExistPlanDto existPlanDto) throws UserNotFoundException {
+    public Plan mapToPlan(final PlanDto planDto) throws UserNotFoundException {
         return new Plan(
-                existPlanDto.getId(),
-                existPlanDto.getDescription(),
-                userService.getUserById(existPlanDto.getId())
+                planDto.getId(),
+                planDto.getDescription(),
+                userService.getUserById(planDto.getId())
         );
     }
 
-    public ExistPlanDto mapToExistPlanDto(final Plan plan) {
-        return new ExistPlanDto(
+    public PlanDto mapToExistPlanDto(final Plan plan) {
+        return new PlanDto(
                 plan.getId(),
                 plan.getDescription(),
                 plan.getUser().getId()
         );
     }
 
-    public List<ExistPlanDto> mapToExistPlanDtoList(List<Plan> plans) {
+    public List<PlanDto> mapToExistPlanDtoList(List<Plan> plans) {
         return plans.stream()
                 .map(this::mapToExistPlanDto)
                 .toList();

@@ -20,7 +20,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/v1/gymguru/exercises/plan/{planId}").hasRole("USER")
                 .antMatchers(HttpMethod.GET,"/v1/gymguru/meals/plan/{planId}").hasRole("USER")
                 .antMatchers(HttpMethod.GET,"/v1/gymguru/plans/{userId}").hasRole("USER")
-                .antMatchers(HttpMethod.GET,"/v1/gymguru/trainers").hasRole("USER")
                 .antMatchers(HttpMethod.GET,"/v1/gymguru/trainers/{id}").hasRole("USER")
                 .antMatchers(HttpMethod.PUT,"/v1/gymguru/users").hasRole("USER")
                 .antMatchers(HttpMethod.GET,"/v1/gymguru/users/{id}").hasRole("USER")
@@ -42,6 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .antMatchers(HttpMethod.POST,"/v1/gymguru/trainers/{id}").permitAll()
                 .antMatchers(HttpMethod.POST,"/v1/gymguru/users").permitAll()
+                .antMatchers(HttpMethod.GET,"/v1/gymguru/trainers").permitAll()
                 .and()
                 .formLogin().permitAll()
                 .and()

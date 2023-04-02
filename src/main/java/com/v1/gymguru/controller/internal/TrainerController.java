@@ -2,8 +2,8 @@ package com.v1.gymguru.controller.internal;
 
 import com.v1.gymguru.controller.exception.single.TrainerNotFoundException;
 import com.v1.gymguru.domain.Trainer;
-import com.v1.gymguru.domain.dto.internal.exist.ExistTrainerDto;
-import com.v1.gymguru.domain.dto.internal.insert.InsertTrainerDto;
+import com.v1.gymguru.domain.dto.TrainerDto;
+import com.v1.gymguru.domain.dto.save.SaveTrainerDto;
 import com.v1.gymguru.mapper.TrainerMapper;
 import com.v1.gymguru.service.TrainerService;
 import lombok.RequiredArgsConstructor;
@@ -22,27 +22,27 @@ public class TrainerController {
     private final TrainerMapper trainerMapper;
 
     @GetMapping
-    public ResponseEntity<List<ExistTrainerDto>> getAllTrainers() {
+    public ResponseEntity<List<TrainerDto>> getAllTrainers() {
         List<Trainer> trainers = trainerService.getAllTrainers();
         return ResponseEntity.ok(trainerMapper.mapToExistTrainerDtoList(trainers));
     }
 
     @GetMapping(value = "{id}")
-    public ResponseEntity<ExistTrainerDto> getTrainer(@PathVariable Long id) throws TrainerNotFoundException {
+    public ResponseEntity<TrainerDto> getTrainer(@PathVariable Long id) throws TrainerNotFoundException {
         Trainer trainer = trainerService.getTrainerById(id);
         return ResponseEntity.ok(trainerMapper.mapToExistTrainerDto(trainer));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createTrainer(@RequestBody InsertTrainerDto insertTrainerDto) {
-        Trainer trainer = trainerMapper.mapToTrainer(insertTrainerDto);
+    public ResponseEntity<Void> createTrainer(@RequestBody SaveTrainerDto saveTrainerDto) {
+        Trainer trainer = trainerMapper.mapToTrainer(saveTrainerDto);
         trainerService.saveTrainer(trainer);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Trainer> updateTrainer(@RequestBody ExistTrainerDto existTrainerDto) throws TrainerNotFoundException {
-        Trainer trainer = trainerMapper.mapToTrainer(existTrainerDto);
+    public ResponseEntity<Trainer> updateTrainer(@RequestBody TrainerDto trainerDto) throws TrainerNotFoundException {
+        Trainer trainer = trainerMapper.mapToTrainer(trainerDto);
         return ResponseEntity.ok(trainerService.updateTrainer(trainer));
     }
 }

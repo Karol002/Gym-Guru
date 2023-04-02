@@ -1,4 +1,4 @@
-package com.v1.gymguru.domain.dto.external;
+package com.v1.gymguru.edamam;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,8 +8,9 @@ import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class EdamamHitDto {
-
-    @JsonProperty("hits")
-    private List<EdamamRecipeDto> edamamRecipeDto;
+public class EdamamMealDto {
+    @JsonProperty("label")
+    private String label;
+    @JsonProperty("ingredientLines")
+    private List<String> ingredientLines;
 }

@@ -1,8 +1,8 @@
 package com.v1.gymguru.mapper;
 
 import com.v1.gymguru.domain.User;
-import com.v1.gymguru.domain.dto.internal.exist.ExistUserDto;
-import com.v1.gymguru.domain.dto.internal.insert.InsertUserDto;
+import com.v1.gymguru.domain.dto.UserDto;
+import com.v1.gymguru.domain.dto.save.SaveUserDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,27 +10,27 @@ import java.util.List;
 @Service
 public class UserMapper {
 
-    public User mapToUser(final InsertUserDto insertUserDto) {
+    public User mapToUser(final SaveUserDto saveUserDto) {
         return new User(
-                insertUserDto.getEmail(),
-                insertUserDto.getPassword(),
-                insertUserDto.getFirstName(),
-                insertUserDto.getLastName()
+                saveUserDto.getEmail(),
+                saveUserDto.getPassword(),
+                saveUserDto.getFirstName(),
+                saveUserDto.getLastName()
         );
     }
 
-    public User mapToUser(final ExistUserDto existUserDto) {
+    public User mapToUser(final UserDto userDto) {
         return new User(
-                existUserDto.getId(),
-                existUserDto.getEmail(),
-                existUserDto.getPassword(),
-                existUserDto.getFirstName(),
-                existUserDto.getLastName()
+                userDto.getId(),
+                userDto.getEmail(),
+                userDto.getPassword(),
+                userDto.getFirstName(),
+                userDto.getLastName()
         );
     }
 
-    public ExistUserDto mapToExistUseDto(final User user) {
-        return new ExistUserDto(
+    public UserDto mapToExistUseDto(final User user) {
+        return new UserDto(
                 user.getId(),
                 user.getEmail(),
                 "PASSWORD IS HIDDEN",
@@ -39,7 +39,7 @@ public class UserMapper {
         );
     }
 
-    public List<ExistUserDto> mapToExistUserDtoList(List<User> users) {
+    public List<UserDto> mapToExistUserDtoList(List<User> users) {
         return users.stream()
                 .map(this::mapToExistUseDto)
                 .toList();

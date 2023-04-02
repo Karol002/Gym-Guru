@@ -1,6 +1,6 @@
 package com.v1.gymguru.controller.external;
 
-import com.v1.gymguru.domain.dto.external.EdamamMealDto;
+import com.v1.gymguru.edamam.EdamamMealDto;
 import com.v1.gymguru.edamam.EdamamClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

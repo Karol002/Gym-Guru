@@ -1,4 +1,4 @@
-package com.v1.gymguru.domain.dto.internal.insert;
+package com.v1.gymguru.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +8,8 @@ import java.time.LocalDate;
 
 @Getter
 @AllArgsConstructor
-public class InsertSubscriptionDto {
+public class SubscriptionDto {
+    private Long id;
     private BigDecimal price;
     private LocalDate startDate;
     private LocalDate endDate;

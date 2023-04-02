@@ -1,4 +1,4 @@
-package com.v1.gymguru.domain.dto.external;
+package com.v1.gymguru.wger;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WgerExerciseBoardDto {
+public class WgerCategoryBoardDto {
     @JsonProperty("results")
-    private List<WgerExerciseDto> wgerExerciseDtos;
+    private List<WgerCategoryDto> wgerCategoryDtos;
 }

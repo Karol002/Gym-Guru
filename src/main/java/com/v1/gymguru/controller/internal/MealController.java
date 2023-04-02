@@ -2,8 +2,8 @@ package com.v1.gymguru.controller.internal;
 
 import com.v1.gymguru.controller.exception.single.PlanNotFoundException;
 import com.v1.gymguru.domain.Meal;
-import com.v1.gymguru.domain.dto.internal.exist.ExistMealDto;
-import com.v1.gymguru.domain.dto.internal.insert.InsertMealDto;
+import com.v1.gymguru.domain.dto.MealDto;
+import com.v1.gymguru.domain.dto.save.SaveMealDto;
 import com.v1.gymguru.mapper.MealMapper;
 import com.v1.gymguru.service.MealService;
 import lombok.RequiredArgsConstructor;
@@ -22,14 +22,14 @@ public class MealController {
     private final MealMapper mealMapper;
 
     @GetMapping(value = "plan/{planId}")
-    public ResponseEntity<List<ExistMealDto>> getMealsByPlanId(@PathVariable Long planId) {
+    public ResponseEntity<List<MealDto>> getMealsByPlanId(@PathVariable Long planId) {
         List<Meal> exercises = mealService.getMealsByPlanId(planId);
         return ResponseEntity.ok(mealMapper.mapToExistMealDtoList(exercises));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addMeal(@RequestBody InsertMealDto insertMealDto) throws PlanNotFoundException {
-        Meal meal = mealMapper.mapToMeal(insertMealDto);
+    public ResponseEntity<Void> addMeal(@RequestBody SaveMealDto saveMealDto) throws PlanNotFoundException {
+        Meal meal = mealMapper.mapToMeal(saveMealDto);
         mealService.saveMeal(meal);
         return ResponseEntity.ok().build();
     }
