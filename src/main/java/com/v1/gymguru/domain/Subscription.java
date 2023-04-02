@@ -20,6 +20,7 @@ public class Subscription {
     @NotNull
     @GeneratedValue(generator="increment")
     @GenericGenerator(name="increment", strategy = "increment")
+    @Column(name = "ID", unique = true)
     private Long id;
 
     @Column(name = "PRICE")

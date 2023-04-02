@@ -18,6 +18,7 @@ public class Meal {
     @NotNull
     @GeneratedValue(generator="increment")
     @GenericGenerator(name="increment", strategy = "increment")
+    @Column(name = "ID", unique = true)
     private Long id;
 
     @Column(name = "NAME")
