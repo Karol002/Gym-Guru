@@ -12,16 +12,15 @@ import java.util.List;
 @RestController
 @RequestMapping("v1/gymguru/wger")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class WgerController {
     private final WgerClient wgerClient;
 
-    @GetMapping(value = "exercises/{categoryId}")
+    @GetMapping(value = "/exercises/{categoryId}")
     public ResponseEntity<List<WgerExerciseDto>> getWgerExercisesByCategoryId(@PathVariable Long categoryId) {
         return ResponseEntity.ok(wgerClient.getWgerExercisesByCategoy(categoryId));
     }
 
-    @GetMapping(value = "categories")
+    @GetMapping(value = "/categories")
     public ResponseEntity<List<WgerCategoryDto>> getWgerExercisesByCategoryId() {
         return ResponseEntity.ok(wgerClient.getWgerCategories());
     }

@@ -1,4 +1,4 @@
-package com.v1.gymguru.security.domain;
+package com.v1.gymguru.domain;
 
 
 import com.sun.istack.NotNull;
@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -45,6 +46,11 @@ public class Credential implements UserDetails {
         return authorities;
     }
 
+    public Credential(String email, String password, CredentialType role) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
 
     @Override
     public String getPassword() {

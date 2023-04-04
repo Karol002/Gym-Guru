@@ -1,9 +1,13 @@
 package com.v1.gymguru.controller.internal;
 
+import com.v1.gymguru.adapter.AccountAdapter;
+import com.v1.gymguru.adapter.TrainerAccountDto;
+import com.v1.gymguru.controller.exception.single.CredentialNotFoundException;
+import com.v1.gymguru.controller.exception.single.EmailAlreadyExistException;
 import com.v1.gymguru.controller.exception.single.TrainerNotFoundException;
+import com.v1.gymguru.domain.Credential;
 import com.v1.gymguru.domain.Trainer;
 import com.v1.gymguru.domain.dto.TrainerDto;
-import com.v1.gymguru.domain.dto.save.SaveTrainerDto;
 import com.v1.gymguru.mapper.TrainerMapper;
 import com.v1.gymguru.service.TrainerService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +24,7 @@ import java.util.List;
 public class TrainerController {
     private final TrainerService trainerService;
     private final TrainerMapper trainerMapper;
+    private final AccountAdapter accountAdapter;
 
     @GetMapping
     public ResponseEntity<List<TrainerDto>> getAllTrainers() {
@@ -30,18 +35,19 @@ public class TrainerController {
     @GetMapping(value = "{id}")
     public ResponseEntity<TrainerDto> getTrainer(@PathVariable Long id) throws TrainerNotFoundException {
         Trainer trainer = trainerService.getTrainerById(id);
-        return ResponseEntity.ok(trainerMapper.mapToExistTrainerDto(trainer));
+        return ResponseEntity.ok(trainerMapper.mapToTrainerDto(trainer));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createTrainer(@RequestBody SaveTrainerDto saveTrainerDto) {
-        Trainer trainer = trainerMapper.mapToTrainer(saveTrainerDto);
-        trainerService.saveTrainer(trainer);
+    public ResponseEntity<Void> createTrainer(@RequestBody TrainerAccountDto trainerAccountDto) throws CredentialNotFoundException, EmailAlreadyExistException {
+        Trainer trainer = accountAdapter.toTrainer(trainerAccountDto);
+        Credential credential = accountAdapter.toCredential(trainerAccountDto);
+        trainerService.saveTrainer(trainer, credential);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Trainer> updateTrainer(@RequestBody TrainerDto trainerDto) throws TrainerNotFoundException {
+    public ResponseEntity<Trainer> updateTrainer(@RequestBody TrainerDto trainerDto) throws TrainerNotFoundException, CredentialNotFoundException {
         Trainer trainer = trainerMapper.mapToTrainer(trainerDto);
         return ResponseEntity.ok(trainerService.updateTrainer(trainer));
     }

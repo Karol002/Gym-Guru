@@ -1,13 +1,13 @@
-package com.v1.gymguru.domain.dto;
+package com.v1.gymguru.adapter;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class UserDto {
-    private Long id;
+public class UserAccountDto {
     private String firstName;
     private String lastName;
-    private Long credentialId;
+    private String email;
+    private String password;
 }

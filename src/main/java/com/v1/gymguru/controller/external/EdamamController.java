@@ -11,11 +11,10 @@ import java.util.List;
 @RestController
 @RequestMapping("v1/gymguru/edamam")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class EdamamController {
     private final EdamamClient edamamClient;
 
-    @GetMapping(value = "meals/{mealName}")
+    @GetMapping(value = "/meals/{mealName}")
     public ResponseEntity<List<EdamamMealDto>> getEdamamMeals(@PathVariable String mealName) {
         return ResponseEntity.ok(edamamClient.getEdamamMeals(mealName));
     }

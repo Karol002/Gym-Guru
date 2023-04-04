@@ -1,6 +1,10 @@
 package com.v1.gymguru.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -14,6 +18,7 @@ import java.io.IOException;
 public class JsonObjectAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private final Logger logger = LoggerFactory.getLogger(JsonObjectAuthenticationFilter.class);
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
@@ -29,7 +34,11 @@ public class JsonObjectAuthenticationFilter extends UsernamePasswordAuthenticati
                     authRequest.getEmail(), authRequest.getPassword()
             );
             setDetails(request, token);
-            return this.getAuthenticationManager().authenticate(token);
+            try {
+                return this.getAuthenticationManager().authenticate(token);
+            } catch (InternalAuthenticationServiceException exception) {
+                throw new BadCredentialsException("Auth failed" + exception.getMessage());
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

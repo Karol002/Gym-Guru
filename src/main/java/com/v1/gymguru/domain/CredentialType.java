@@ -1,4 +1,4 @@
-package com.v1.gymguru.security.domain;
+package com.v1.gymguru.domain;
 
 public enum CredentialType {
     ROLE_USER,

@@ -1,6 +1,8 @@
 package com.v1.gymguru.controller.exception.global;
 
 import com.v1.gymguru.controller.exception.single.*;
+import com.v1.gymguru.controller.exception.single.InvalidEmailException;
+import com.v1.gymguru.controller.exception.single.InvalidTokenException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -40,6 +42,11 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>("User with given id doesn't exist", HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(CredentialNotFoundException.class)
+    public ResponseEntity<Object> handleCredentialNotFoundException(CredentialNotFoundException exception) {
+        return new ResponseEntity<>("Credential not found ", HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(SubscriptionExpiredException.class)
     public ResponseEntity<Object> handleSubscriptionExpiredException(SubscriptionExpiredException exception) {
         return new ResponseEntity<>("Subscription is expired if you want to get plan renew subscription", HttpStatus.CONFLICT);
@@ -48,5 +55,20 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(PlanForUserIdNotFoundException.class)
     public ResponseEntity<Object> handlePlanUserIdNotFoundException(PlanForUserIdNotFoundException exception) {
         return new ResponseEntity<>("Plan for given user id doesn't exist", HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(InvalidTokenException.class)
+    public ResponseEntity<Object> handleInvalidTokenException(InvalidTokenException exception) {
+        return new ResponseEntity<>("Invalid token", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidEmailException.class)
+    public ResponseEntity<Object> handleInvalidEmailException(InvalidEmailException exception) {
+        return new ResponseEntity<>("Invalid email", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EmailAlreadyExistException.class)
+    public ResponseEntity<Object> handleEmailAlreadyExistException(EmailAlreadyExistException exception) {
+        return new ResponseEntity<>("Email Already Exist ", HttpStatus.CONFLICT);
     }
 }

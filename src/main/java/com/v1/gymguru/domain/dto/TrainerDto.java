@@ -7,10 +7,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public class TrainerDto {
     private Long id;
-    private String email;
-    private String password;
     private String firstName;
     private String lastName;
     private String description;
     private String education;
+    private Long credentialId;
 }

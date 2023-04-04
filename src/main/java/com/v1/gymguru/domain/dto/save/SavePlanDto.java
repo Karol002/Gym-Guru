@@ -8,4 +8,5 @@ import lombok.Getter;
 public class SavePlanDto {
     private String description;
     private Long userId;
+    private Long trainerId;
 }

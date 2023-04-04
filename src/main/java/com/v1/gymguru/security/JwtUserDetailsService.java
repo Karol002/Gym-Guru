@@ -1,5 +1,7 @@
-package com.v1.gymguru.security.domain;
+package com.v1.gymguru.security;
 
+import com.v1.gymguru.domain.Credential;
+import com.v1.gymguru.service.CredentialService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.security.core.userdetails.User;

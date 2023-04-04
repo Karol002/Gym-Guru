@@ -14,8 +14,5 @@ import java.util.Optional;
 public interface TrainerRepository extends CrudRepository<Trainer, Long> {
 
     List<Trainer> findAll();
-
-    Optional<Trainer> findByEmail(String email);
-
     Trainer save(Trainer trainer);
 }

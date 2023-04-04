@@ -6,10 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -24,22 +21,19 @@ public class User {
     @Column(name = "ID", unique = true)
     private Long id;
 
-    @Column(name = "EMAIL_ADDRESS")
-    private String email;
-
-    @Column(name = "PASSWORD")
-    private String password;
-
     @Column(name = "FIRST_NAME")
     private String firstName;
 
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    public User(String email, String password, String firstName, String lastName) {
-        this.email = email;
-        this.password = password;
+    @JoinColumn
+    @OneToOne(cascade = CascadeType.ALL)
+    private Credential credential;
+
+    public User(String firstName, String lastName, Credential credential) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.credential = credential;
     }
 }

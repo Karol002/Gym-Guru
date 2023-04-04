@@ -1,9 +1,12 @@
 package com.v1.gymguru.mapper;
 
+import com.v1.gymguru.controller.exception.single.TrainerNotFoundException;
 import com.v1.gymguru.controller.exception.single.UserNotFoundException;
 import com.v1.gymguru.domain.Plan;
+import com.v1.gymguru.domain.Trainer;
 import com.v1.gymguru.domain.dto.PlanDto;
 import com.v1.gymguru.domain.dto.save.SavePlanDto;
+import com.v1.gymguru.service.TrainerService;
 import com.v1.gymguru.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,19 +17,22 @@ import java.util.List;
 @Service
 public class PlanMapper {
     private final UserService userService;
+    private final TrainerService trainerService;
 
-    public Plan mapToPlan(final SavePlanDto savePlanDto) throws UserNotFoundException {
+    public Plan mapToPlan(final SavePlanDto savePlanDto) throws UserNotFoundException, TrainerNotFoundException {
         return new Plan(
                 savePlanDto.getDescription(),
-                userService.getUserById(savePlanDto.getUserId())
+                userService.getUserById(savePlanDto.getUserId()),
+                trainerService.getTrainerById(savePlanDto.getTrainerId())
         );
     }
 
-    public Plan mapToPlan(final PlanDto planDto) throws UserNotFoundException {
+    public Plan mapToPlan(final PlanDto planDto) throws UserNotFoundException, TrainerNotFoundException {
         return new Plan(
                 planDto.getId(),
                 planDto.getDescription(),
-                userService.getUserById(planDto.getId())
+                userService.getUserById(planDto.getId()),
+                trainerService.getTrainerById(planDto.getTrainerId())
         );
     }
 
@@ -34,7 +40,8 @@ public class PlanMapper {
         return new PlanDto(
                 plan.getId(),
                 plan.getDescription(),
-                plan.getUser().getId()
+                plan.getUser().getId(),
+                plan.getTrainer().getId()
         );
     }
 

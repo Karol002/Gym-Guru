@@ -14,7 +14,9 @@ public class OpenAiConfiguration {
     @Value("${openai.api.model}")
     private String openAiModel;
     @Value("${openai.api.temperature}")
-    private String openAiTemperature;
-    @Value("${openai.api.max_tokens}")
-    private String openAiMaxTokens;
+    private double openAiTemperature;
+    @Value("${openai.api.max.tokens}")
+    private long maxTokens;
+    @Value("${openai.api.role}")
+    private String role;
 }
