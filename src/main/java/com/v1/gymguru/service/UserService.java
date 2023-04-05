@@ -22,8 +22,9 @@ public class UserService {
 
     @Transactional
     public void saveUser(final User user, Credential credential) throws EmailAlreadyExistException {
-        user.setCredential(credentialService.saveCredential(credential));
-        userRepository.save(user);
+        if (credentialService.isEmailAvailable(credential.getEmail())) {
+            userRepository.save(user);
+        } else  throw new EmailAlreadyExistException();
     }
 
     public User updateUser(final User user) throws UserNotFoundException {

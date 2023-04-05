@@ -29,7 +29,7 @@ public class Plan {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "TRAINER_ID")
     private Trainer trainer;
 

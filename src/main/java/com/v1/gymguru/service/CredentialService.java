@@ -28,4 +28,8 @@ public class CredentialService {
             return credentialRepository.save(new Credential(credential.getEmail(), passwordEncoder.encode(credential.getPassword()), credential.getRole()));
         } else throw new EmailAlreadyExistException();
     }
+
+    public boolean isEmailAvailable(String email) {
+        return !credentialRepository.existsByEmail(email);
+    }
 }

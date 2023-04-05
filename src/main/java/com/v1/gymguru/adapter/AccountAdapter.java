@@ -5,11 +5,13 @@ import com.v1.gymguru.domain.CredentialType;
 import com.v1.gymguru.domain.Trainer;
 import com.v1.gymguru.domain.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class AccountAdapter {
+    private final PasswordEncoder passwordEncoder;
 
     public Trainer toTrainer(final TrainerAccountDto trainerAccountDto) {
         return new Trainer(
@@ -24,7 +26,7 @@ public class AccountAdapter {
     public Credential toCredential(final TrainerAccountDto account) {
         return new Credential(
                 account.getEmail(),
-                account.getPassword(),
+                passwordEncoder.encode(account.getPassword()),
                 CredentialType.ROLE_TRAINER
         );
     }
@@ -32,7 +34,7 @@ public class AccountAdapter {
     public Credential toCredential(final UserAccountDto account) {
         return new Credential(
                 account.getEmail(),
-                account.getPassword(),
+                passwordEncoder.encode(account.getPassword()),
                 CredentialType.ROLE_USER
         );
     }

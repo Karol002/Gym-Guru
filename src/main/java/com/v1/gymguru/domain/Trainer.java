@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -28,7 +29,7 @@ public class Trainer {
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name = "TRAINER_DESCRIPTION")
+    @Column(name = "TRAINER_DESCRIPTION", length = 500)
     private String description;
 
     @Column(name = "EDUCATION")
@@ -50,7 +51,7 @@ public class Trainer {
             cascade = CascadeType.REMOVE,
             fetch = FetchType.LAZY
     )
-    private List<Plan> plans;
+    private List<Plan> plans = new ArrayList<>();
 
     public Trainer(String firstName, String lastName, String description, String education, Credential credential) {
         this.firstName = firstName;
