@@ -27,8 +27,9 @@ public class TrainerService {
 
     @Transactional
     public void saveTrainer(final Trainer trainer, Credential credential) throws EmailAlreadyExistException {
-        trainer.setCredential(credentialService.saveCredential(credential));
-        trainerRepository.save(trainer);
+        if (credentialService.isEmailAvailable(credential.getEmail())) {
+            trainerRepository.save(trainer);
+        } else  throw new EmailAlreadyExistException();
     }
 
     public Trainer updateTrainer(final Trainer trainer) throws TrainerNotFoundException {

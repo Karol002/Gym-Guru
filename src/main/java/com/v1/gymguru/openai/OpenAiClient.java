@@ -1,12 +1,10 @@
 package com.v1.gymguru.openai;
 
+import com.v1.gymguru.openai.dto.OpenAiObjectDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -14,21 +12,14 @@ public class OpenAiClient {
     private final RestTemplate restTemplate;
     private final OpenAiConfiguration openAiConfiguration;
 
-    public Object getOpenAiRequest(OpenAiMessageDto ask) {
+    public OpenAiObjectDto getOpenAiRequest(OpenAIRequest requestBody) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(openAiConfiguration.getOpenAiKey());
 
         String url = openAiConfiguration.getOpenAiEndpoint();
-        List<OpenAiDetailsDto> aiDetailsDtos = new ArrayList<>();
-        aiDetailsDtos.add(new OpenAiDetailsDto( openAiConfiguration.getRole(), ask.getContent()));
+        HttpEntity<OpenAIRequest> requestEntity = new HttpEntity<>(requestBody, headers);
 
-        OpenAIRequestDto requestBody = new OpenAIRequestDto(openAiConfiguration.getOpenAiModel(), aiDetailsDtos,  openAiConfiguration.getOpenAiTemperature(), openAiConfiguration.getMaxTokens());
-
-        HttpEntity<OpenAIRequestDto> requestEntity = new HttpEntity<>(requestBody, headers);
-        OpenAiObjectDto responseEntity = restTemplate.postForObject(url, requestEntity, OpenAiObjectDto.class);
-
-        assert responseEntity != null;
-        return responseEntity.getChoices().get(0).getMessage();
+        return restTemplate.postForObject(url, requestEntity, OpenAiObjectDto.class);
     }
 }

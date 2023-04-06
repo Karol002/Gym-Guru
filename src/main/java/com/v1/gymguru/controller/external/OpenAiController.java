@@ -1,8 +1,7 @@
 package com.v1.gymguru.controller.external;
 
-import com.v1.gymguru.openai.OpenAiClient;
-import com.v1.gymguru.openai.OpenAiMessageDto;
-import com.v1.gymguru.openai.OpenAiResponseDto;
+import com.v1.gymguru.openai.*;
+import com.v1.gymguru.openai.facade.OpenAiFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class OpenAiController {
-    private final OpenAiClient openAiClient;
+    private final OpenAiFacade openAiFacade;
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> generateResponse(@RequestBody OpenAiMessageDto openAiMessageDto) {
-        return ResponseEntity.ok(openAiClient.getOpenAiRequest(openAiMessageDto));
+    public ResponseEntity<OpenAiMessage> generateResponse(@RequestBody OpenAiMessage openAiMessage) {
+        return ResponseEntity.ok(openAiFacade.getResponse(openAiMessage));
     }
 }

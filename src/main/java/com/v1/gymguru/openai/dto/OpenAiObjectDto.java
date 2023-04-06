@@ -1,4 +1,4 @@
-package com.v1.gymguru.openai;
+package com.v1.gymguru.openai.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@JsonIgnoreProperties(ignoreUnknown = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class OpenAiResponseDto {
-    @JsonProperty("message")
-    private OpenAiMessageDto message;
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class OpenAiObjectDto {
+    @JsonProperty("choices")
+    private List<OpenAiResponseDto> choices;
 }
