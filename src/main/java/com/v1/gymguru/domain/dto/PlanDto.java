@@ -7,7 +7,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public class PlanDto {
     private Long id;
-    private String description;
+    private String dietDescription;
+    private String exerciseDescription;
     private Long userId;
     private Long trainerId;
 }

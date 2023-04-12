@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +36,12 @@ public class Trainer {
     @Column(name = "EDUCATION")
     private String education;
 
+    @Column(name = "MONTH_PRICE")
+    private BigDecimal monthPrice;
+
+    @Column(name = "SPECIALIZATION")
+    private Specialization specialization;
+
     @JoinColumn
     @OneToOne(cascade = CascadeType.ALL)
     private Credential credential;
@@ -44,7 +51,7 @@ public class Trainer {
                cascade = CascadeType.REMOVE,
                fetch = FetchType.LAZY
     )
-    private List<Subscription> subscriptions;
+    private List<Subscription> subscriptions = new ArrayList<>();
 
     @OneToMany(targetEntity = Plan.class,
             mappedBy = "trainer",
@@ -53,20 +60,24 @@ public class Trainer {
     )
     private List<Plan> plans = new ArrayList<>();
 
-    public Trainer(String firstName, String lastName, String description, String education, Credential credential) {
+    public Trainer(String firstName, String lastName, String description, String education, BigDecimal monthPrice, Specialization specialization, Credential credential) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.description = description;
         this.education = education;
+        this.monthPrice = monthPrice;
+        this.specialization = specialization;
         this.credential = credential;
     }
 
-    public Trainer(Long id, String firstName, String lastName, String description, String education, Credential credential) {
+    public Trainer(Long id, String firstName, String lastName, String description, String education, BigDecimal monthPrice, Specialization specialization, Credential credential) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.description = description;
         this.education = education;
+        this.monthPrice = monthPrice;
+        this.specialization = specialization;
         this.credential = credential;
     }
 }

@@ -21,6 +21,8 @@ public class TrainerMapper {
                 saveTrainerDto.getLastName(),
                 saveTrainerDto.getDescription(),
                 saveTrainerDto.getEducation(),
+                saveTrainerDto.getMonthPrice(),
+                saveTrainerDto.getSpecialization(),
                 credentialService.getById(saveTrainerDto.getCredentialId())
         );
     }
@@ -32,6 +34,8 @@ public class TrainerMapper {
                 trainerDto.getLastName(),
                 trainerDto.getDescription(),
                 trainerDto.getEducation(),
+                trainerDto.getMonthPrice(),
+                trainerDto.getSpecialization(),
                 credentialService.getById(trainerDto.getCredentialId())
         );
     }
@@ -43,6 +47,8 @@ public class TrainerMapper {
                 trainer.getLastName(),
                 trainer.getDescription(),
                 trainer.getEducation(),
+                trainer.getMonthPrice(),
+                trainer.getSpecialization(),
                 trainer.getCredential().getId()
         );
     }

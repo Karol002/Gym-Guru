@@ -1,18 +1,23 @@
 package com.v1.gymguru.service;
 
 import com.v1.gymguru.controller.exception.single.SubscriptionNotFoundException;
+import com.v1.gymguru.domain.Plan;
 import com.v1.gymguru.domain.Subscription;
+import com.v1.gymguru.domain.User;
 import com.v1.gymguru.repository.SubscriptionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
 public class SubscriptionService {
     private final SubscriptionRepository subscriptionRepository;
+    private final PlanService planService;
 
     public List<Subscription> getSubscriptionsByTrainerId(Long trainerId) {
         return subscriptionRepository.findAllByTrainerId(trainerId);
@@ -22,8 +27,10 @@ public class SubscriptionService {
         return subscriptionRepository.findByUserId(userId).orElseThrow(SubscriptionNotFoundException::new);
     }
 
-    public Subscription saveSubscription(final Subscription subscription) {
-        return subscriptionRepository.save(subscription);
+    public Subscription saveSubscription(final Subscription subscription) throws SubscriptionNotFoundException {
+        if (!isSubscriptionActive(subscription.getUser().getId())) {
+            return subscriptionRepository.save(subscription);
+        } else throw new RuntimeException();
     }
 
     public Subscription updateSubscription(final Subscription subscription) throws SubscriptionNotFoundException {
@@ -33,7 +40,24 @@ public class SubscriptionService {
     }
 
     public boolean isSubscriptionActive(Long userId) throws SubscriptionNotFoundException {
-        Subscription subscription = getSubscriptionByUserId(userId);
-        return subscription.getEndDate().isBefore(LocalDate.now());
+        Optional<Subscription> subscription = subscriptionRepository.findByUserId(userId);
+        return subscription.filter(value -> !value.getEndDate().isBefore(LocalDate.now())).isPresent();
+    }
+
+    public List<Subscription> getSubscriptionsWithoutPlanByTrainerId(Long trainerId) {
+        List<Subscription> subscriptions = subscriptionRepository.findAllByTrainerId(trainerId);
+        List<Plan> plans = planService.getAllPlansByTrainerId(trainerId);
+
+        List<Subscription> subscriptionsWithoutPlan = new ArrayList<>(subscriptions);
+
+        for (Plan plan : plans) {
+            for (Subscription subscription : subscriptions) {
+                if (subscription.getUser().equals(plan.getUser())) {
+                    subscriptionsWithoutPlan.remove(subscription);
+                }
+            }
+        }
+
+        return subscriptionsWithoutPlan;
     }
 }

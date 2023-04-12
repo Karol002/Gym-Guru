@@ -1,5 +1,7 @@
 package com.v1.gymguru.controller.internal;
 
+import com.v1.gymguru.adapter.plan.CompletePlanDto;
+import com.v1.gymguru.adapter.plan.PlanAdapter;
 import com.v1.gymguru.controller.exception.single.*;
 import com.v1.gymguru.domain.Plan;
 import com.v1.gymguru.domain.dto.PlanDto;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 public class PlanController {
     private final PlanService planService;
     private final PlanMapper planMapper;
+    private final PlanAdapter planAdapter;
 
     @GetMapping(value = "{userId}")
     public ResponseEntity<PlanDto> getPlanByUserId(@PathVariable Long userId) throws SubscriptionNotFoundException, SubscriptionExpiredException, PlanForUserIdNotFoundException {
@@ -26,8 +29,8 @@ public class PlanController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createPlan(@RequestBody SavePlanDto savePlanDtoDto) throws UserNotFoundException, TrainerNotFoundException {
-        Plan plan = planMapper.mapToPlan(savePlanDtoDto);
+    public ResponseEntity<Void> createPlan(@RequestBody CompletePlanDto completePlanDto) throws UserNotFoundException, TrainerNotFoundException {
+        Plan plan = planAdapter.toPlan(completePlanDto);
         planService.savePlan(plan);
         return ResponseEntity.ok().build();
     }

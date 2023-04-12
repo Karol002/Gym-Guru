@@ -22,8 +22,11 @@ public class Plan {
     @Column(name = "ID", unique = true)
     private Long id;
 
-    @Column(name = "PLAN_DESCRIPTION")
-    private String description;
+    @Column(name = "DIET_DESCRIPTION")
+    private String dietDescription;
+
+    @Column(name = "TRAINING_DESCRIPTION")
+    private String exerciseDescription;
 
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
@@ -47,15 +50,26 @@ public class Plan {
     )
     private List<Meal> meals;
 
-    public Plan(String description, User user, Trainer trainer) {
-        this.description = description;
+    public Plan(String dietDescription, String exerciseDescription, User user, Trainer trainer, List<Exercise> exercises, List<Meal> meals) {
+        this.dietDescription = dietDescription;
+        this.exerciseDescription = exerciseDescription;
+        this.user = user;
+        this.trainer = trainer;
+        this.exercises = exercises;
+        this.meals = meals;
+    }
+
+    public Plan(String dietDescription, String exerciseDescription, User user, Trainer trainer) {
+        this.dietDescription = dietDescription;
+        this.exerciseDescription = exerciseDescription;
         this.user = user;
         this.trainer = trainer;
     }
 
-    public Plan(Long id, String description, User user, Trainer trainer) {
+    public Plan(Long id, String dietDescription, String exerciseDescription, User user, Trainer trainer) {
         this.id = id;
-        this.description = description;
+        this.dietDescription = dietDescription;
+        this.exerciseDescription = exerciseDescription;
         this.user = user;
         this.trainer = trainer;
     }

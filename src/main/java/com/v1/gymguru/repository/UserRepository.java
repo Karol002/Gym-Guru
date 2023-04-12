@@ -1,6 +1,7 @@
 package com.v1.gymguru.repository;
 
 
+import com.v1.gymguru.domain.Credential;
 import com.v1.gymguru.domain.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -14,6 +15,7 @@ import java.util.Optional;
 public interface UserRepository extends CrudRepository<User, Long> {
 
     List<User> findAll();
+    Optional<User> findByCredentialId(Long credentialId);
 
     User save(User user);
 }

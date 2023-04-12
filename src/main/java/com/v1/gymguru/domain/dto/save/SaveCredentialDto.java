@@ -10,5 +10,4 @@ import lombok.Getter;
 public class SaveCredentialDto {
     private String email;
     private String password;
-    private CredentialType credentialType;
 }

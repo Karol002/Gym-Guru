@@ -15,12 +15,9 @@ import java.util.List;
 @Service
 public class PlanService {
     private final PlanRepository planRepository;
-    private final SubscriptionService subscriptionService;
 
     public Plan getPlanByUserId(Long userId) throws SubscriptionNotFoundException, SubscriptionExpiredException, PlanForUserIdNotFoundException {
-        if (subscriptionService.isSubscriptionActive(userId)) {
             return planRepository.findByUserId(userId).orElseThrow(PlanForUserIdNotFoundException::new);
-        } else throw new SubscriptionExpiredException();
     }
 
     public Plan getPlan(Long id) throws PlanNotFoundException {
@@ -41,5 +38,9 @@ public class PlanService {
         if (planRepository.existsById(plan.getId())) {
             return planRepository.save(plan);
         } else throw new PlanNotFoundException();
+    }
+
+    public List<Plan> getAllPlansByTrainerId(Long trainerId) {
+        return planRepository.findAllByTrainerId(trainerId);
     }
 }

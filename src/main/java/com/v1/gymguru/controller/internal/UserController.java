@@ -1,20 +1,23 @@
 package com.v1.gymguru.controller.internal;
 
-import com.v1.gymguru.adapter.AccountAdapter;
-import com.v1.gymguru.adapter.TrainerAccountDto;
-import com.v1.gymguru.adapter.UserAccountDto;
+import com.v1.gymguru.adapter.account.AccountAdapter;
+import com.v1.gymguru.adapter.account.UserAccountDto;
 import com.v1.gymguru.controller.exception.single.CredentialNotFoundException;
 import com.v1.gymguru.controller.exception.single.EmailAlreadyExistException;
+import com.v1.gymguru.controller.exception.single.InvalidCredentialException;
 import com.v1.gymguru.controller.exception.single.UserNotFoundException;
 import com.v1.gymguru.domain.Credential;
 import com.v1.gymguru.domain.User;
 import com.v1.gymguru.domain.dto.UserDto;
 import com.v1.gymguru.mapper.UserMapper;
+import com.v1.gymguru.security.PasswordChanger;
 import com.v1.gymguru.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/gymguru/users")
@@ -25,9 +28,19 @@ public class UserController {
     private final UserMapper userMapper;
     private final AccountAdapter accountAdapter;
 
-    @GetMapping(value = "{id}")
-    public ResponseEntity<UserDto> createUser(@PathVariable Long id) throws UserNotFoundException {
+    @GetMapping(value = "id/{id}")
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) throws UserNotFoundException {
         return ResponseEntity.ok(userMapper.mapTotUseDto(userService.getUserById(id)));
+    }
+
+    @GetMapping(value = "email/{email}")
+    public ResponseEntity<UserDto> getUserByEmail(@PathVariable String email) throws UserNotFoundException, CredentialNotFoundException {
+        return ResponseEntity.ok(userMapper.mapTotUseDto(userService.getUserByEmail(email)));
+    }
+
+    @GetMapping(value = "emails")
+    public ResponseEntity<List<String>> getUserByEmail() {
+        return ResponseEntity.ok(userService.getAllEmails());
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -38,9 +51,9 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> updateUser(@RequestBody UserDto userDto) throws UserNotFoundException, CredentialNotFoundException {
-        User user = userMapper.mapToUser(userDto);
-        return ResponseEntity.ok(userService.updateUser(user));
+    @PostMapping(value = "/password")
+    public ResponseEntity<Void> changePassword(@RequestBody PasswordChanger passwordChanger) throws CredentialNotFoundException, EmailAlreadyExistException, InvalidCredentialException {
+        userService.changePassword(passwordChanger);
+        return ResponseEntity.ok().build();
     }
 }

@@ -1,11 +1,12 @@
 package com.v1.gymguru.controller.internal;
 
-import com.v1.gymguru.adapter.AccountAdapter;
-import com.v1.gymguru.adapter.TrainerAccountDto;
+import com.v1.gymguru.adapter.account.AccountAdapter;
+import com.v1.gymguru.adapter.account.TrainerAccountDto;
 import com.v1.gymguru.controller.exception.single.CredentialNotFoundException;
 import com.v1.gymguru.controller.exception.single.EmailAlreadyExistException;
 import com.v1.gymguru.controller.exception.single.TrainerNotFoundException;
 import com.v1.gymguru.domain.Credential;
+import com.v1.gymguru.domain.Specialization;
 import com.v1.gymguru.domain.Trainer;
 import com.v1.gymguru.domain.dto.TrainerDto;
 import com.v1.gymguru.mapper.TrainerMapper;
@@ -29,6 +30,12 @@ public class TrainerController {
     @GetMapping
     public ResponseEntity<List<TrainerDto>> getAllTrainers() {
         List<Trainer> trainers = trainerService.getAllTrainers();
+        return ResponseEntity.ok(trainerMapper.mapToExistTrainerDtoList(trainers));
+    }
+
+    @GetMapping("/specialization/{specialization}")
+    public ResponseEntity<List<TrainerDto>> getAllTrainersBySpecialization(@PathVariable Specialization specialization) {
+        List<Trainer> trainers = trainerService.getAllBySpecialization(specialization);
         return ResponseEntity.ok(trainerMapper.mapToExistTrainerDtoList(trainers));
     }
 

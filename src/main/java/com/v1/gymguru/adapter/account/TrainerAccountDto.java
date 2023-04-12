@@ -1,8 +1,11 @@
-package com.v1.gymguru.adapter;
+package com.v1.gymguru.adapter.account;
 
 import com.v1.gymguru.domain.CredentialType;
+import com.v1.gymguru.domain.Specialization;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
+import java.math.BigDecimal;
 
 @Getter
 @AllArgsConstructor
@@ -13,4 +16,6 @@ public class TrainerAccountDto {
     private String education;
     private String email;
     private String password;
+    private BigDecimal monthPrice;
+    private Specialization specialization;
 }

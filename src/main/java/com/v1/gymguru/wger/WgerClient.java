@@ -37,7 +37,6 @@ public class WgerClient {
                 .build()
                 .encode()
                 .toUri();
-
         WgerCategoryBoardDto mainResponse = restTemplate.getForObject(url, WgerCategoryBoardDto.class);
 
         return mapToWgerCategoryDtos(mainResponse);

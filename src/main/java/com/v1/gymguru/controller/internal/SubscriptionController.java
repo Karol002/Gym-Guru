@@ -29,14 +29,25 @@ public class SubscriptionController {
         return ResponseEntity.ok(subscriptionMapper.mapToExistSubscriptionDtoList(subscriptions));
     }
 
+    @GetMapping(value = "without/plan/{trainerId}")
+    public ResponseEntity<List<SubscriptionDto>> getSubscriptionsWithoutPlan(@PathVariable Long trainerId) {
+        List<Subscription> subscriptions = subscriptionService.getSubscriptionsWithoutPlanByTrainerId(trainerId);
+        return ResponseEntity.ok(subscriptionMapper.mapToExistSubscriptionDtoList(subscriptions));
+    }
+
     @GetMapping(value = "user/{userId}")
     public ResponseEntity<SubscriptionDto> getSubscription(@PathVariable Long userId) throws SubscriptionNotFoundException {
         Subscription subscription = subscriptionService.getSubscriptionByUserId(userId);
         return ResponseEntity.ok(subscriptionMapper.mapToExistSubscriptionDto(subscription));
     }
 
+    @GetMapping(value = "active/{userId}")
+    public ResponseEntity<Boolean> checkSubscriptionStatus(@PathVariable Long userId) throws SubscriptionNotFoundException {
+        return ResponseEntity.ok(subscriptionService.isSubscriptionActive(userId));
+    }
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createSubscription(@RequestBody SaveSubscriptionDto saveSubscriptionDto) throws UserNotFoundException, TrainerNotFoundException {
+    public ResponseEntity<Void> createSubscription(@RequestBody SaveSubscriptionDto saveSubscriptionDto) throws UserNotFoundException, TrainerNotFoundException, SubscriptionNotFoundException {
         Subscription subscription = subscriptionMapper.mapToSubscription(saveSubscriptionDto);
         subscriptionService.saveSubscription(subscription);
         return ResponseEntity.ok().build();
@@ -46,5 +57,5 @@ public class SubscriptionController {
     public ResponseEntity<Subscription> extendSubscription(@RequestBody SubscriptionDto subscriptionDto) throws UserNotFoundException, TrainerNotFoundException, SubscriptionNotFoundException {
         Subscription subscription = subscriptionMapper.mapToSubscription(subscriptionDto);
         return ResponseEntity.ok(subscriptionService.updateSubscription(subscription));
-    }//Should be ReNew
+    }
 }

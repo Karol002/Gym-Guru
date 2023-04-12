@@ -1,4 +1,4 @@
-package com.v1.gymguru.adapter;
+package com.v1.gymguru.adapter.account;
 
 import com.v1.gymguru.domain.Credential;
 import com.v1.gymguru.domain.CredentialType;
@@ -19,6 +19,8 @@ public class AccountAdapter {
                 trainerAccountDto.getLastName(),
                 trainerAccountDto.getDescription(),
                 trainerAccountDto.getEducation(),
+                trainerAccountDto.getMonthPrice(),
+                trainerAccountDto.getSpecialization(),
                 toCredential(trainerAccountDto)
         );
     }
@@ -39,11 +41,11 @@ public class AccountAdapter {
         );
     }
 
-    public User toUser(final UserAccountDto trainerAccountDto) {
+    public User toUser(final UserAccountDto userAccountDto) {
         return new User(
-                trainerAccountDto.getFirstName(),
-                trainerAccountDto.getLastName(),
-                toCredential(trainerAccountDto)
+                userAccountDto.getFirstName(),
+                userAccountDto.getLastName(),
+                toCredential(userAccountDto)
         );
     }
 }

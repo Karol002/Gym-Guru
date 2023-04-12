@@ -13,6 +13,6 @@ import java.util.Optional;
 public interface PlanRepository extends CrudRepository<Plan, Long> {
 
     Optional<Plan> findByUserId(Long userId);
-
+    List<Plan> findAllByTrainerId(Long trainerId);
     Plan save(Plan plan);
 }

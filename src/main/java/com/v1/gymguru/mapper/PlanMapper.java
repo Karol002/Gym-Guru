@@ -19,18 +19,11 @@ public class PlanMapper {
     private final UserService userService;
     private final TrainerService trainerService;
 
-    public Plan mapToPlan(final SavePlanDto savePlanDto) throws UserNotFoundException, TrainerNotFoundException {
-        return new Plan(
-                savePlanDto.getDescription(),
-                userService.getUserById(savePlanDto.getUserId()),
-                trainerService.getTrainerById(savePlanDto.getTrainerId())
-        );
-    }
-
     public Plan mapToPlan(final PlanDto planDto) throws UserNotFoundException, TrainerNotFoundException {
         return new Plan(
                 planDto.getId(),
-                planDto.getDescription(),
+                planDto.getDietDescription(),
+                planDto.getExerciseDescription(),
                 userService.getUserById(planDto.getId()),
                 trainerService.getTrainerById(planDto.getTrainerId())
         );
@@ -39,7 +32,8 @@ public class PlanMapper {
     public PlanDto mapToExistPlanDto(final Plan plan) {
         return new PlanDto(
                 plan.getId(),
-                plan.getDescription(),
+                plan.getDietDescription(),
+                plan.getExerciseDescription(),
                 plan.getUser().getId(),
                 plan.getTrainer().getId()
         );

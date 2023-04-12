@@ -71,4 +71,9 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleEmailAlreadyExistException(EmailAlreadyExistException exception) {
         return new ResponseEntity<>("Email Already Exist ", HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(InvalidCredentialException.class)
+    public ResponseEntity<Object> handleInvalidCredentialException(InvalidCredentialException exception) {
+        return new ResponseEntity<>("Bad password ", HttpStatus.UNAUTHORIZED);
+    }
 }

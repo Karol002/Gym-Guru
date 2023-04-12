@@ -1,4 +1,4 @@
-package com.v1.gymguru.adapter;
+package com.v1.gymguru.adapter.account;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

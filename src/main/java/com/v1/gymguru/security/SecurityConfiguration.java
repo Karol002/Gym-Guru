@@ -43,8 +43,8 @@ public class SecurityConfiguration {
                                 .antMatchers("/v1/gymguru/openai/**").permitAll()
                                 .antMatchers("/v1/gymguru/trainers/**").permitAll()
                                 .antMatchers("/v1/gymguru/users/**").permitAll()
-                                .antMatchers("/v1/gymguru/wger/exercises/**").hasRole("TRAINER")
-                                .antMatchers("/v1/gymguru/wger/categories/**").hasRole("TRAINER")
+                                //.antMatchers("/v1/gymguru/wger/exercises/**").hasRole("TRAINER")
+                                //.antMatchers("/v1/gymguru/wger/categories/**").hasRole("TRAINER")
                                 .anyRequest().authenticated() // pozostałe wymagają autoryzacji
                                 .and()
                                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

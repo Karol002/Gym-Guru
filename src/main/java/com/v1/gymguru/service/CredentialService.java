@@ -1,13 +1,15 @@
 package com.v1.gymguru.service;
 
 import com.v1.gymguru.controller.exception.single.CredentialNotFoundException;
-import com.v1.gymguru.controller.exception.single.EmailAlreadyExistException;
-import com.v1.gymguru.controller.exception.single.InvalidEmailException;
+import com.v1.gymguru.controller.exception.single.InvalidCredentialException;
 import com.v1.gymguru.domain.Credential;
 import com.v1.gymguru.repository.CredentialRepository;
+import com.v1.gymguru.security.PasswordChanger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -23,10 +25,26 @@ public class CredentialService {
         return credentialRepository.findById(id).orElseThrow(CredentialNotFoundException::new);
     }
 
-    public Credential saveCredential(Credential credential) throws EmailAlreadyExistException {
-        if (!credentialRepository.existsByEmail(credential.getEmail())) {
-            return credentialRepository.save(new Credential(credential.getEmail(), passwordEncoder.encode(credential.getPassword()), credential.getRole()));
-        } else throw new EmailAlreadyExistException();
+    private void saveCredential(Credential credential) {
+        credentialRepository.save(credential);
+    }
+
+    public void changePassword(PasswordChanger passwordChanger) throws CredentialNotFoundException, InvalidCredentialException {
+        Credential credential = getByEmail(passwordChanger.getEmail());
+        if(passwordEncoder.matches(passwordChanger.getOldPassword(), credential.getPassword())) {
+            credential.setPassword(passwordEncoder.encode(passwordChanger.getNewPassword()));
+            saveCredential(credential);
+
+        } else throw new InvalidCredentialException();
+    }
+
+    public Long getCredentialIdByEmail(String email) throws CredentialNotFoundException {
+        return getByEmail(email).getId();
+
+    }
+
+    public List<Credential> getAll() {
+        return credentialRepository.findAll();
     }
 
     public boolean isEmailAvailable(String email) {

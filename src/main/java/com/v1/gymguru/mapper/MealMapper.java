@@ -15,15 +15,6 @@ import java.util.List;
 public class MealMapper {
     private final PlanService planService;
 
-
-    public Meal mapToMeal(final SaveMealDto saveMealDto) throws PlanNotFoundException {
-        return new Meal(
-                saveMealDto.getName(),
-                saveMealDto.getCookInstruction(),
-                planService.getPlan(saveMealDto.getPlanId())
-        );
-    }
-
     public Meal mapToMeal(final MealDto mealDto) throws PlanNotFoundException {
         return new Meal(
                 mealDto.getId(),

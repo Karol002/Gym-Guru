@@ -8,5 +8,4 @@ import lombok.Getter;
 public class SaveMealDto {
     private String name;
     private String cookInstruction;
-    private Long planId;
 }

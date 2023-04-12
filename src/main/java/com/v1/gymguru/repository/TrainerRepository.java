@@ -1,5 +1,7 @@
 package com.v1.gymguru.repository;
 
+import com.v1.gymguru.domain.Specialization;
+import com.v1.gymguru.domain.Subscription;
 import com.v1.gymguru.domain.Trainer;
 import com.v1.gymguru.domain.User;
 import org.springframework.data.repository.CrudRepository;
@@ -14,5 +16,8 @@ import java.util.Optional;
 public interface TrainerRepository extends CrudRepository<Trainer, Long> {
 
     List<Trainer> findAll();
+    List<Trainer> findAllBySpecialization(Specialization specialization);
     Trainer save(Trainer trainer);
+
+    Optional<Trainer> findByCredentialId(Long credentialId);
 }

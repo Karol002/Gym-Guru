@@ -15,16 +15,6 @@ import java.util.List;
 public class ExerciseMapper {
     private final PlanService planService;
 
-    public Exercise mapToExercise(final SaveExerciseDto saveExerciseDto) throws PlanNotFoundException {
-        return new Exercise(
-                saveExerciseDto.getName(),
-                saveExerciseDto.getDescription(),
-                saveExerciseDto.getSeriesQuantity(),
-                saveExerciseDto.getRepetitionsQuantity(),
-                planService.getPlan(saveExerciseDto.getPlanId())
-        );
-    }
-
     public  Exercise mapToExercise(final ExerciseDto exerciseDto) throws PlanNotFoundException {
         return  new Exercise(
                 exerciseDto.getId(),

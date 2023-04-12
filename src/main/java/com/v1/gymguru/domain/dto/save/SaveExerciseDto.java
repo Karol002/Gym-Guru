@@ -10,5 +10,4 @@ public class SaveExerciseDto {
     private String description;
     private int seriesQuantity;
     private int repetitionsQuantity;
-    private Long planId;
 }

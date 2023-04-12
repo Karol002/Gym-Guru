@@ -9,14 +9,6 @@ import java.util.List;
 
 public class CredentialMapper {
 
-    public Credential mapToCredential(final SaveCredentialDto saveCredentialDto) throws PlanNotFoundException {
-        return new Credential(
-                saveCredentialDto.getEmail(),
-                saveCredentialDto.getPassword(),
-                saveCredentialDto.getCredentialType()
-        );
-    }
-
     public Credential mapToMeal(final CredentialDto credentialDto) throws PlanNotFoundException {
         return new Credential(
                 credentialDto.getId(),
