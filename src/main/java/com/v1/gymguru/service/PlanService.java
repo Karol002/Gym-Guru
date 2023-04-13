@@ -16,7 +16,7 @@ import java.util.List;
 public class PlanService {
     private final PlanRepository planRepository;
 
-    public Plan getPlanByUserId(Long userId) throws SubscriptionNotFoundException, SubscriptionExpiredException, PlanForUserIdNotFoundException {
+    public Plan getPlanByUserId(Long userId) throws PlanForUserIdNotFoundException {
             return planRepository.findByUserId(userId).orElseThrow(PlanForUserIdNotFoundException::new);
     }
 

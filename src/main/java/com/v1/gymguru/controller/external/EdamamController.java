@@ -1,8 +1,7 @@
 package com.v1.gymguru.controller.external;
 
-import com.v1.gymguru.edamam.EdamamMeal;
-import com.v1.gymguru.edamam.EdamamMealDto;
-import com.v1.gymguru.edamam.EdamamClient;
+import com.v1.gymguru.external.api.edamam.EdamamMeal;
+import com.v1.gymguru.external.api.edamam.EdamamClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,8 +1,7 @@
-package com.v1.gymguru.openai.dto;
+package com.v1.gymguru.external.api.openai;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.v1.gymguru.openai.OpenAiMessage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +10,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class OpenAiResponseDto {
-    @JsonProperty("message")
-    private OpenAiMessage message;
+public class OpenAiMessage {
+    @JsonProperty("content")
+    private String content;
 }

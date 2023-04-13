@@ -1,4 +1,4 @@
-package com.v1.gymguru.edamam;
+package com.v1.gymguru.external.api.edamam;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;

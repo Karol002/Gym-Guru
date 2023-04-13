@@ -1,8 +1,8 @@
 package com.v1.gymguru.controller.external;
 
-import com.v1.gymguru.wger.WgerCategoryDto;
-import com.v1.gymguru.wger.WgerExerciseDto;
-import com.v1.gymguru.wger.WgerClient;
+import com.v1.gymguru.external.api.wger.WgerCategoryDto;
+import com.v1.gymguru.external.api.wger.WgerExerciseDto;
+import com.v1.gymguru.external.api.wger.WgerClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

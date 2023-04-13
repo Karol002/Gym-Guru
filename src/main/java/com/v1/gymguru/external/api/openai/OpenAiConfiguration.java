@@ -1,4 +1,4 @@
-package com.v1.gymguru.openai;
+package com.v1.gymguru.external.api.openai;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;

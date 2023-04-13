@@ -1,7 +1,7 @@
 package com.v1.gymguru.controller.external;
 
-import com.v1.gymguru.openai.*;
-import com.v1.gymguru.openai.facade.OpenAiFacade;
+import com.v1.gymguru.external.api.openai.OpenAiMessage;
+import com.v1.gymguru.external.api.facade.OpenAiFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

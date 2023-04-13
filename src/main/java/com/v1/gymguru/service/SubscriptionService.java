@@ -12,12 +12,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class SubscriptionService {
     private final SubscriptionRepository subscriptionRepository;
     private final PlanService planService;
+
+    public List<Subscription> getAllSubscriptions() {
+        return subscriptionRepository.findAll();
+    }
 
     public List<Subscription> getSubscriptionsByTrainerId(Long trainerId) {
         return subscriptionRepository.findAllByTrainerId(trainerId);
@@ -33,15 +38,18 @@ public class SubscriptionService {
         } else throw new RuntimeException();
     }
 
-    public Subscription updateSubscription(final Subscription subscription) throws SubscriptionNotFoundException {
-        if (subscriptionRepository.existsById(subscription.getId())) {
-            return subscriptionRepository.save(subscription);
-        } else throw new SubscriptionNotFoundException();
+    public void deleteSubscriptionById(Long id) {
+        subscriptionRepository.deleteById(id);
+    }
+
+    public boolean isSubscriptionActive(Subscription subscription) {
+        return subscription.getEndDate().isAfter(LocalDate.now()) || subscription.getEndDate().isEqual(LocalDate.now());
     }
 
     public boolean isSubscriptionActive(Long userId) throws SubscriptionNotFoundException {
         Optional<Subscription> subscription = subscriptionRepository.findByUserId(userId);
-        return subscription.filter(value -> !value.getEndDate().isBefore(LocalDate.now())).isPresent();
+        return subscription.filter(value -> value.getEndDate().isAfter(LocalDate.now()) || value.getEndDate().isEqual(LocalDate.now())).isPresent();
+        //subscription.filter(value -> !value.getEndDate().isBefore(LocalDate.now())).isPresent();
     }
 
     public List<Subscription> getSubscriptionsWithoutPlanByTrainerId(Long trainerId) {
@@ -60,4 +68,10 @@ public class SubscriptionService {
 
         return subscriptionsWithoutPlan;
     }
+
+ /*   public Subscription extendSubscription(final Subscription subscription) throws SubscriptionNotFoundException {
+        if (subscriptionRepository.existsById(subscription.getId())) {
+            return subscriptionRepository.save(subscription);
+        } else throw new SubscriptionNotFoundException();
+    }*/
 }

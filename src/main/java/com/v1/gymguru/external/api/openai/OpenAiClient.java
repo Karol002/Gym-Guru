@@ -1,6 +1,6 @@
-package com.v1.gymguru.openai;
+package com.v1.gymguru.external.api.openai;
 
-import com.v1.gymguru.openai.dto.OpenAiObjectDto;
+import com.v1.gymguru.external.api.openai.dto.OpenAiObjectDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;

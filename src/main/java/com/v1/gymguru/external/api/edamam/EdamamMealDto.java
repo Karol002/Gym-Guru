@@ -1,4 +1,4 @@
-package com.v1.gymguru.wger;
+package com.v1.gymguru.external.api.edamam;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,7 +8,9 @@ import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WgerCategoryBoardDto {
-    @JsonProperty("results")
-    private List<WgerCategoryDto> wgerCategoryDtos;
+public class EdamamMealDto {
+    @JsonProperty("label")
+    private String label;
+    @JsonProperty("ingredientLines")
+    private List<String> ingredientLines;
 }

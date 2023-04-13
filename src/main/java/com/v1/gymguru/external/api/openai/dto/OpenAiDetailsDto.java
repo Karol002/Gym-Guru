@@ -1,4 +1,4 @@
-package com.v1.gymguru.openai.dto;
+package com.v1.gymguru.external.api.openai.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

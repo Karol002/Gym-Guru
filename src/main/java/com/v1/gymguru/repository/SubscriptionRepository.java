@@ -13,6 +13,7 @@ import java.util.Optional;
 public interface SubscriptionRepository extends CrudRepository<Subscription, Long> {
 
     List<Subscription> findAllByTrainerId(Long trainerId);
+    List<Subscription> findAll();
 
     Optional<Subscription> findByUserId(Long userId);
 

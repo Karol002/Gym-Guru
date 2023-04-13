@@ -1,4 +1,4 @@
-package com.v1.gymguru.wger;
+package com.v1.gymguru.external.api.wger;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
