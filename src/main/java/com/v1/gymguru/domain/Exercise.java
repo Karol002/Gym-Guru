@@ -25,7 +25,7 @@ public class Exercise {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "DESCRIPTION")
+    @Column(name = "DESCRIPTION", length = 500)
     private String description;
 
     @Column(name = "SERIES_QUANTITY")

@@ -24,7 +24,7 @@ public class Meal {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "COOK_INSTRUCTION")
+    @Column(name = "COOK_INSTRUCTION", length = 500)
     private String cookInstruction;
 
     @ManyToOne

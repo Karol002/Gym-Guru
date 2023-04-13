@@ -1,5 +1,6 @@
 package com.v1.gymguru.controller.external;
 
+import com.v1.gymguru.edamam.EdamamMeal;
 import com.v1.gymguru.edamam.EdamamMealDto;
 import com.v1.gymguru.edamam.EdamamClient;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ public class EdamamController {
     private final EdamamClient edamamClient;
 
     @GetMapping(value = "/meals/{mealName}")
-    public ResponseEntity<List<EdamamMealDto>> getEdamamMeals(@PathVariable String mealName) {
+    public ResponseEntity<List<EdamamMeal>> getEdamamMeals(@PathVariable String mealName) {
         return ResponseEntity.ok(edamamClient.getEdamamMeals(mealName));
     }
 }

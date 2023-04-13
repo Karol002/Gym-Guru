@@ -26,11 +26,4 @@ public class MealController {
         List<Meal> exercises = mealService.getMealsByPlanId(planId);
         return ResponseEntity.ok(mealMapper.mapToExistMealDtoList(exercises));
     }
-/*
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addMeal(@RequestBody SaveMealDto saveMealDto) throws PlanNotFoundException {
-        Meal meal = mealMapper.mapToMeal(saveMealDto);
-        mealService.saveMeal(meal);
-        return ResponseEntity.ok().build();
-    }*/
 }

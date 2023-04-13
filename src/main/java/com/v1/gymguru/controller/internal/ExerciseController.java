@@ -27,10 +27,4 @@ public class ExerciseController {
         return ResponseEntity.ok(exerciseMapper.mapToExistExerciseDtoList(exercises));
     }
 
-/*    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addExercise(@RequestBody SaveExerciseDto saveExerciseDto) throws PlanNotFoundException {
-        Exercise exercise = exerciseMapper.mapToExercise(saveExerciseDto);
-        exerciseService.saveExercise(exercise);
-        return ResponseEntity.ok().build();
-    }*/
 }

@@ -22,10 +22,10 @@ public class Plan {
     @Column(name = "ID", unique = true)
     private Long id;
 
-    @Column(name = "DIET_DESCRIPTION")
+    @Column(name = "DIET_DESCRIPTION", length = 500)
     private String dietDescription;
 
-    @Column(name = "TRAINING_DESCRIPTION")
+    @Column(name = "TRAINING_DESCRIPTION", length = 500)
     private String exerciseDescription;
 
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
@@ -38,14 +38,14 @@ public class Plan {
 
     @OneToMany(targetEntity = Exercise.class,
                mappedBy = "plan",
-               cascade = CascadeType.REMOVE,
+               cascade = CascadeType.ALL,
                fetch = FetchType.LAZY
     )
     private List<Exercise> exercises;
 
     @OneToMany(targetEntity = Meal.class,
             mappedBy = "plan",
-            cascade = CascadeType.REMOVE,
+            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     private List<Meal> meals;

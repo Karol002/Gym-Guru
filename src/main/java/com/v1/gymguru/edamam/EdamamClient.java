@@ -6,6 +6,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -16,7 +17,7 @@ public class EdamamClient {
     private final RestTemplate restTemplate;
     private final EdamamConfig edamamConfig;
 
-    public List<EdamamMealDto> getEdamamMeals(String mealName) {
+    public List<EdamamMeal> getEdamamMeals(String mealName) {
         URI url = UriComponentsBuilder.fromHttpUrl(edamamConfig.getEdamamApiEndpoint() + "/search?")
                 .queryParam("q", mealName)
                 .queryParam("app_id", edamamConfig.getEdamamAppId())
@@ -27,7 +28,7 @@ public class EdamamClient {
 
         EdamamHitDto mainResponse = restTemplate.getForObject(url, EdamamHitDto.class);
 
-        return mapToEdamamMealDtos(mainResponse);
+        return mapToEdamamMeal(mainResponse);
     }
 
     private List<EdamamMealDto> mapToEdamamMealDtos(EdamamHitDto edamamHitDto) {
@@ -36,6 +37,14 @@ public class EdamamClient {
                 .stream()
                 .flatMap(List::stream)
                 .map(EdamamRecipeDto::getEdamamMealDto)
+                .collect(Collectors.toList());
+    }
+
+    private List<EdamamMeal> mapToEdamamMeal(EdamamHitDto edamamHitDto) {
+        List<EdamamMealDto> edamamMealDtos = mapToEdamamMealDtos(edamamHitDto);
+        return edamamMealDtos.stream()
+                .map(edamamMealDto -> new EdamamMeal(edamamMealDto.getLabel(),
+                        String.join(", ", edamamMealDto.getIngredientLines())))
                 .collect(Collectors.toList());
     }
 }
