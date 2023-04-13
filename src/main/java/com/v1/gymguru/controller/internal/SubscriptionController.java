@@ -53,9 +53,9 @@ public class SubscriptionController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    /*@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Subscription> extendSubscription(@RequestBody SubscriptionDto subscriptionDto) throws UserNotFoundException, TrainerNotFoundException, SubscriptionNotFoundException {
         Subscription subscription = subscriptionMapper.mapToSubscription(subscriptionDto);
         return ResponseEntity.ok(subscriptionService.updateSubscription(subscription));
-    }
+    }*/
 }

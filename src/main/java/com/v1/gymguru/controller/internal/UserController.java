@@ -33,11 +33,6 @@ public class UserController {
         return ResponseEntity.ok(userMapper.mapTotUseDto(userService.getUserById(id)));
     }
 
-    @GetMapping(value = "email/{email}")
-    public ResponseEntity<UserDto> getUserByEmail(@PathVariable String email) throws UserNotFoundException, CredentialNotFoundException {
-        return ResponseEntity.ok(userMapper.mapTotUseDto(userService.getUserByEmail(email)));
-    }
-
     @GetMapping(value = "emails")
     public ResponseEntity<List<String>> getUserByEmail() {
         return ResponseEntity.ok(userService.getAllEmails());
@@ -51,7 +46,7 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(value = "/password")
+    @PutMapping(value = "/password")
     public ResponseEntity<Void> changePassword(@RequestBody PasswordChanger passwordChanger) throws CredentialNotFoundException, EmailAlreadyExistException, InvalidCredentialException {
         userService.changePassword(passwordChanger);
         return ResponseEntity.ok().build();

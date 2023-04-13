@@ -40,12 +40,37 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((auth) -> {
                     try {
                         auth
+                                //////////////////// FOR ALL /////////////////
                                 .antMatchers("/v1/gymguru/openai/**").permitAll()
-                                .antMatchers("/v1/gymguru/trainers/**").permitAll()
-                                .antMatchers("/v1/gymguru/users/**").permitAll()
-                                //.antMatchers("/v1/gymguru/wger/exercises/**").hasRole("TRAINER")
-                                //.antMatchers("/v1/gymguru/wger/categories/**").hasRole("TRAINER")
-                                .anyRequest().authenticated() // pozostałe wymagają autoryzacji
+                                ///////////////////////// CHANGE PASSWORD /////////////////
+                                .antMatchers(HttpMethod.POST, "/v1/gymguru/users/password").hasAnyRole("TRAINER", "USER")
+                                /////////////////////// EXTERNAL ////////////////////////////////////
+                                .antMatchers(HttpMethod.GET,"/v1/gymguru/wger/exercises/**").hasRole("TRAINER")
+                                .antMatchers(HttpMethod.GET,"/v1/gymguru/wger/categories/**").hasRole("TRAINER")
+                                .antMatchers(HttpMethod.GET,"/v1/gymguru/edamam/**").hasRole("TRAINER")
+                                ///////////////////////// PLAN ////////////////////////////
+                                .antMatchers(HttpMethod.GET,"/v1/gymguru/plans/**").hasAnyRole("TRAINER", "USER")
+                                .antMatchers(HttpMethod.POST,"/v1/gymguru/plans/**").hasRole("TRAINER")
+                                ///////////////////////// MEAL / EXERCISE ////////////////////////////
+                                .antMatchers(HttpMethod.GET,"/v1/gymguru/meals/plan/**").hasRole("USER")
+                                .antMatchers(HttpMethod.GET,"/v1/gymguru//exercises/plan/**").hasRole("USER")
+                                ///////////////////////// SUBSCRIPTION ////////////////////////////
+                                .antMatchers(HttpMethod.GET,"/v1/gymguru/subscriptions/trainer/**").hasRole("TRAINER")
+                                .antMatchers(HttpMethod.GET,"/v1/gymguru/subscriptions/without/plan/**").hasRole("TRAINER")
+                                .antMatchers(HttpMethod.GET,"/v1/gymguru/subscriptions/user/**").hasRole("USER")
+                                .antMatchers(HttpMethod.GET,"/v1/gymguru/subscriptions/active/**").hasRole("USER")
+                                .antMatchers(HttpMethod.POST,"/v1/gymguru/subscriptions").hasRole("USER")
+                                ///////////////////////// TRAINERS ////////////////////////////
+                                .antMatchers(HttpMethod.POST,"/v1/gymguru/trainers").permitAll()
+                                .antMatchers(HttpMethod.GET,"/v1/gymguru/trainers").permitAll()
+                                .antMatchers(HttpMethod.GET,"/v1/gymguru/trainers/specialization/**").hasRole("USER")
+                                .antMatchers(HttpMethod.GET,"/v1/gymguru/trainers/single/**").hasRole("TRAINER")
+                                ///////////////////////// TRAINERS ////////////////////////////
+                                .antMatchers(HttpMethod.GET,"/v1/gymguru/users/id/**").hasRole("USER")
+                                .antMatchers(HttpMethod.POST,"/v1/gymguru/users/emails").permitAll()
+                                .antMatchers(HttpMethod.POST,"/v1/gymguru/users").permitAll()
+                                ////////////////////////// END ///////////////////////////////
+                                .anyRequest().authenticated()
                                 .and()
                                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                                 .and()

@@ -39,7 +39,7 @@ public class TrainerController {
         return ResponseEntity.ok(trainerMapper.mapToExistTrainerDtoList(trainers));
     }
 
-    @GetMapping(value = "{id}")
+    @GetMapping(value = "single/{id}")
     public ResponseEntity<TrainerDto> getTrainer(@PathVariable Long id) throws TrainerNotFoundException {
         Trainer trainer = trainerService.getTrainerById(id);
         return ResponseEntity.ok(trainerMapper.mapToTrainerDto(trainer));
@@ -53,9 +53,9 @@ public class TrainerController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+/*    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Trainer> updateTrainer(@RequestBody TrainerDto trainerDto) throws TrainerNotFoundException, CredentialNotFoundException {
         Trainer trainer = trainerMapper.mapToTrainer(trainerDto);
         return ResponseEntity.ok(trainerService.updateTrainer(trainer));
-    }
+    }*/
 }
