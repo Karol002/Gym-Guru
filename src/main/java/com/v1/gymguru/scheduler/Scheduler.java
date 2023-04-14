@@ -21,8 +21,7 @@ public class Scheduler {
     private final SimpleEmailService simpleEmailService;
     private final CredentialService credentialService;
 
-    //@Scheduled(cron = "0 0 10 * * *")
-    @Scheduled(fixedDelay = 10000)
+    @Scheduled(cron = "0 0 10 * * *")
     public void checkSubscriptions() throws CredentialNotFoundException {
         List<Subscription> subscriptions = subscriptionService.getAllSubscriptions();
         for (Subscription subscription : subscriptions) {
