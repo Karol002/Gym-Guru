@@ -17,12 +17,16 @@ public class CredentialService {
     private final CredentialRepository credentialRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public Credential getByEmail(String email) throws CredentialNotFoundException {
-        return credentialRepository.findByEmail(email).orElseThrow(CredentialNotFoundException::new);
+    public List<Credential> getAll() {
+        return credentialRepository.findAll();
     }
 
     public Credential getById(Long id) throws CredentialNotFoundException {
         return credentialRepository.findById(id).orElseThrow(CredentialNotFoundException::new);
+    }
+
+    public Credential getByEmail(String email) throws CredentialNotFoundException {
+        return credentialRepository.findByEmail(email).orElseThrow(CredentialNotFoundException::new);
     }
 
     private void saveCredential(Credential credential) {
@@ -41,10 +45,6 @@ public class CredentialService {
     public Long getCredentialIdByEmail(String email) throws CredentialNotFoundException {
         return getByEmail(email).getId();
 
-    }
-
-    public List<Credential> getAll() {
-        return credentialRepository.findAll();
     }
 
     public boolean isEmailAvailable(String email) {

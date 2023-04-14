@@ -65,8 +65,8 @@ public class SecurityConfiguration {
                                 .antMatchers(HttpMethod.GET,"/v1/gymguru/trainers").permitAll()
                                 .antMatchers(HttpMethod.GET,"/v1/gymguru/trainers/specialization/**").hasRole("USER")
                                 .antMatchers(HttpMethod.GET,"/v1/gymguru/trainers/single/**").hasRole("TRAINER")
-                                ///////////////////////// TRAINERS ////////////////////////////
-                                .antMatchers(HttpMethod.GET,"/v1/gymguru/users/id/**").hasRole("USER")
+                                ///////////////////////// USERS ////////////////////////////
+                                .antMatchers(HttpMethod.GET,"/v1/gymguru/users/id/**").hasAnyRole("USER", "TRAINER")
                                 .antMatchers(HttpMethod.POST,"/v1/gymguru/users/emails").permitAll()
                                 .antMatchers(HttpMethod.POST,"/v1/gymguru/users").permitAll()
                                 ////////////////////////// END ///////////////////////////////

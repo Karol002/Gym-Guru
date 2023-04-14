@@ -34,7 +34,6 @@ public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final String secret;
     private final UserService userService;
     private final TrainerService trainerService;
-    //private final ObjectMapper objectMapper = new ObjectMapper();
     private final CredentialService credentialService;
 
     public AuthSuccessHandler(@Value("${jwt.expiration}") int expTime, @Value("${jwt.secret}") String secret, UserService userService, TrainerService trainerService, CredentialService credentialService) {

@@ -35,16 +35,16 @@ public class TrainerService {
         return trainerRepository.findById(id).orElseThrow(TrainerNotFoundException::new);
     }
 
+    public Trainer getTrainerByEmail(String email) throws CredentialNotFoundException, UserNotFoundException, TrainerNotFoundException {
+        Long credentialId = credentialService.getCredentialIdByEmail(email);
+        return trainerRepository.findByCredentialId(credentialId).orElseThrow(TrainerNotFoundException::new);
+    }
+
     @Transactional
     public void saveTrainer(final Trainer trainer, Credential credential) throws EmailAlreadyExistException {
         if (credentialService.isEmailAvailable(credential.getEmail())) {
             trainerRepository.save(trainer);
         } else  throw new EmailAlreadyExistException();
-    }
-
-    public Trainer getTrainerByEmail(String email) throws CredentialNotFoundException, UserNotFoundException, TrainerNotFoundException {
-        Long credentialId = credentialService.getCredentialIdByEmail(email);
-        return trainerRepository.findByCredentialId(credentialId).orElseThrow(TrainerNotFoundException::new);
     }
 
     public Trainer updateTrainer(final Trainer trainer) throws TrainerNotFoundException {

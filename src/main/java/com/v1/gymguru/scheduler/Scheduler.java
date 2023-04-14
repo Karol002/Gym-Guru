@@ -1,6 +1,5 @@
 package com.v1.gymguru.scheduler;
 
-import com.v1.gymguru.config.EmailConfig;
 import com.v1.gymguru.controller.exception.single.CredentialNotFoundException;
 import com.v1.gymguru.domain.Mail;
 import com.v1.gymguru.domain.Subscription;

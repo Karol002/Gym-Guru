@@ -1,4 +1,4 @@
-package com.v1.gymguru.controller.internal;
+package com.v1.gymguru.controller;
 
 import com.v1.gymguru.adapter.account.AccountAdapter;
 import com.v1.gymguru.adapter.account.TrainerAccountDto;

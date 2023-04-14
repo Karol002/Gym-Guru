@@ -37,13 +37,13 @@ public class PlanAdapter {
         return plan;
     }
 
-    public List<Exercise> toExercises(List<SaveExerciseDto> exerciseDtos, Plan plan) {
+    private List<Exercise> toExercises(List<SaveExerciseDto> exerciseDtos, Plan plan) {
         return exerciseDtos.stream()
                 .map(dto -> toExercise(dto, plan))
                 .collect(Collectors.toList());
     }
 
-    public Exercise toExercise(SaveExerciseDto saveExerciseDto, Plan plan) {
+    private Exercise toExercise(SaveExerciseDto saveExerciseDto, Plan plan) {
         return new Exercise(
                 saveExerciseDto.getName(),
                 saveExerciseDto.getDescription(),
@@ -52,14 +52,14 @@ public class PlanAdapter {
                 plan
         );
     }
-    public List<Meal> toMeals(List<SaveMealDto> mealDtos, Plan plan) {
+    private List<Meal> toMeals(List<SaveMealDto> mealDtos, Plan plan) {
         return mealDtos.stream()
                 .map(dto -> toMeal(dto, plan))
                 .collect(Collectors.toList());
     }
 
 
-    public Meal toMeal(SaveMealDto saveMealDto, Plan plan) {
+    private Meal toMeal(SaveMealDto saveMealDto, Plan plan) {
         return new Meal(
                 saveMealDto.getName(),
                 saveMealDto.getCookInstruction(),

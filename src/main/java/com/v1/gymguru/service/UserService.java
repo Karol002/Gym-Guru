@@ -21,15 +21,15 @@ public class UserService {
     private final UserRepository userRepository;
     private final CredentialService credentialService;
 
-    public User getUserById(Long id) throws UserNotFoundException {
-        return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+    public List<String> getAllEmails() {
+        List<Credential> allCredential = credentialService.getAll();
+        return allCredential.stream()
+                .map(Credential::getEmail)
+                .collect(Collectors.toList());
     }
 
-    @Transactional
-    public void saveUser(final User user, Credential credential) throws EmailAlreadyExistException {
-        if (credentialService.isEmailAvailable(credential.getEmail())) {
-            userRepository.save(user);
-        } else  throw new EmailAlreadyExistException();
+    public User getUserById(Long id) throws UserNotFoundException {
+        return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 
     public User getUserByEmail(String email) throws CredentialNotFoundException, UserNotFoundException {
@@ -37,11 +37,11 @@ public class UserService {
         return userRepository.findByCredentialId(credentialId).orElseThrow(UserNotFoundException::new);
     }
 
-    public List<String> getAllEmails() {
-        List<Credential> allCredential = credentialService.getAll();
-        return allCredential.stream()
-                .map(Credential::getEmail)
-                .collect(Collectors.toList());
+    @Transactional
+    public void saveUser(final User user, Credential credential) throws EmailAlreadyExistException {
+        if (credentialService.isEmailAvailable(credential.getEmail())) {
+            userRepository.save(user);
+        } else  throw new EmailAlreadyExistException();
     }
 
     public void changePassword(PasswordChanger passwordChanger) throws InvalidCredentialException, CredentialNotFoundException {

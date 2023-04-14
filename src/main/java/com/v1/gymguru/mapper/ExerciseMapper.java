@@ -3,7 +3,6 @@ package com.v1.gymguru.mapper;
 import com.v1.gymguru.controller.exception.single.PlanNotFoundException;
 import com.v1.gymguru.domain.Exercise;
 import com.v1.gymguru.domain.dto.ExerciseDto;
-import com.v1.gymguru.domain.dto.save.SaveExerciseDto;
 import com.v1.gymguru.service.PlanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,7 @@ public class ExerciseMapper {
                 exerciseDto.getDescription(),
                 exerciseDto.getSeriesQuantity(),
                 exerciseDto.getRepetitionsQuantity(),
-                planService.getPlan(exerciseDto.getPlanId())
+                planService.getPlanById(exerciseDto.getPlanId())
         );
     }
 

@@ -1,4 +1,4 @@
-package com.v1.gymguru.controller.internal;
+package com.v1.gymguru.controller;
 
 import com.v1.gymguru.adapter.plan.CompletePlanDto;
 import com.v1.gymguru.adapter.plan.PlanAdapter;

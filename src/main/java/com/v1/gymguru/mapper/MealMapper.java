@@ -3,7 +3,6 @@ package com.v1.gymguru.mapper;
 import com.v1.gymguru.controller.exception.single.PlanNotFoundException;
 import com.v1.gymguru.domain.Meal;
 import com.v1.gymguru.domain.dto.MealDto;
-import com.v1.gymguru.domain.dto.save.SaveMealDto;
 import com.v1.gymguru.service.PlanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ public class MealMapper {
                 mealDto.getId(),
                 mealDto.getName(),
                 mealDto.getCookInstruction(),
-                planService.getPlan(mealDto.getPlanId())
+                planService.getPlanById(mealDto.getPlanId())
         );
     }
 

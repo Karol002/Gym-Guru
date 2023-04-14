@@ -6,9 +6,9 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WgerExerciseDto {
+public class WgerCategory {
+    @JsonProperty("id")
+    private Long id;
     @JsonProperty("name")
     private String name;
-    @JsonProperty("description")
-    private String description;
 }

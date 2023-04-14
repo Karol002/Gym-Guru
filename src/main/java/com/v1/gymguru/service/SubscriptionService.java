@@ -28,30 +28,6 @@ public class SubscriptionService {
         return subscriptionRepository.findAllByTrainerId(trainerId);
     }
 
-    public Subscription getSubscriptionByUserId(Long userId) throws SubscriptionNotFoundException {
-        return subscriptionRepository.findByUserId(userId).orElseThrow(SubscriptionNotFoundException::new);
-    }
-
-    public Subscription saveSubscription(final Subscription subscription) throws SubscriptionNotFoundException {
-        if (!isSubscriptionActive(subscription.getUser().getId())) {
-            return subscriptionRepository.save(subscription);
-        } else throw new RuntimeException();
-    }
-
-    public void deleteSubscriptionById(Long id) {
-        subscriptionRepository.deleteById(id);
-    }
-
-    public boolean isSubscriptionActive(Subscription subscription) {
-        return subscription.getEndDate().isAfter(LocalDate.now()) || subscription.getEndDate().isEqual(LocalDate.now());
-    }
-
-    public boolean isSubscriptionActive(Long userId) throws SubscriptionNotFoundException {
-        Optional<Subscription> subscription = subscriptionRepository.findByUserId(userId);
-        return subscription.filter(value -> value.getEndDate().isAfter(LocalDate.now()) || value.getEndDate().isEqual(LocalDate.now())).isPresent();
-        //subscription.filter(value -> !value.getEndDate().isBefore(LocalDate.now())).isPresent();
-    }
-
     public List<Subscription> getSubscriptionsWithoutPlanByTrainerId(Long trainerId) {
         List<Subscription> subscriptions = subscriptionRepository.findAllByTrainerId(trainerId);
         List<Plan> plans = planService.getAllPlansByTrainerId(trainerId);
@@ -69,9 +45,28 @@ public class SubscriptionService {
         return subscriptionsWithoutPlan;
     }
 
- /*   public Subscription extendSubscription(final Subscription subscription) throws SubscriptionNotFoundException {
-        if (subscriptionRepository.existsById(subscription.getId())) {
+    public Subscription getSubscriptionByUserId(Long userId) throws SubscriptionNotFoundException {
+        return subscriptionRepository.findByUserId(userId).orElseThrow(SubscriptionNotFoundException::new);
+    }
+
+    public Subscription saveSubscription(final Subscription subscription) {
+        if (!isSubscriptionActive(subscription.getUser().getId())) {
             return subscriptionRepository.save(subscription);
-        } else throw new SubscriptionNotFoundException();
-    }*/
+        } else throw new RuntimeException();
+    }
+
+    public void deleteSubscriptionById(Long id) {
+        subscriptionRepository.deleteById(id);
+    }
+
+    public boolean isSubscriptionActive(Subscription subscription) {
+        return subscription.getEndDate().isAfter(LocalDate.now())
+                || subscription.getEndDate().isEqual(LocalDate.now());
+    }
+
+    public boolean isSubscriptionActive(Long userId) {
+        Optional<Subscription> subscription = subscriptionRepository.findByUserId(userId);
+        return subscription.filter(value -> value.getEndDate().isAfter(LocalDate.now())
+                || value.getEndDate().isEqual(LocalDate.now())).isPresent();
+    }
 }
