@@ -3,7 +3,6 @@ package com.v1.gymguru.service;
 import com.v1.gymguru.controller.exception.single.SubscriptionNotFoundException;
 import com.v1.gymguru.domain.Plan;
 import com.v1.gymguru.domain.Subscription;
-import com.v1.gymguru.domain.User;
 import com.v1.gymguru.repository.SubscriptionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,7 +11,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -33,7 +31,6 @@ public class SubscriptionService {
         List<Plan> plans = planService.getAllPlansByTrainerId(trainerId);
 
         List<Subscription> subscriptionsWithoutPlan = new ArrayList<>(subscriptions);
-
         for (Plan plan : plans) {
             for (Subscription subscription : subscriptions) {
                 if (subscription.getUser().equals(plan.getUser())) {
@@ -45,14 +42,36 @@ public class SubscriptionService {
         return subscriptionsWithoutPlan;
     }
 
+    public List<Subscription> getSubscriptionsWithPlanByTrainerId(Long trainerId) {
+        List<Subscription> subscriptions = subscriptionRepository.findAllByTrainerId(trainerId);
+        List<Plan> plans = planService.getAllPlansByTrainerId(trainerId);
+
+        List<Subscription> subscriptionsWithPlan = new ArrayList<>();
+        for (Plan plan : plans) {
+            for (Subscription subscription : subscriptions) {
+                if (subscription.getUser().equals(plan.getUser())) {
+                    subscriptionsWithPlan.add(subscription);
+                }
+            }
+        }
+
+        return subscriptionsWithPlan;
+    }
+
     public Subscription getSubscriptionByUserId(Long userId) throws SubscriptionNotFoundException {
         return subscriptionRepository.findByUserId(userId).orElseThrow(SubscriptionNotFoundException::new);
     }
 
-    public Subscription saveSubscription(final Subscription subscription) {
+    public Subscription createSubscription(final Subscription subscription) {
         if (!isSubscriptionActive(subscription.getUser().getId())) {
             return subscriptionRepository.save(subscription);
         } else throw new RuntimeException();
+    }
+
+    public void extendSubscription(Long userId, Long monthQuantity) throws SubscriptionNotFoundException {
+        Subscription subscription = subscriptionRepository.findByUserId(userId).orElseThrow(SubscriptionNotFoundException::new);
+        subscription.setEndDate(subscription.getEndDate().plusMonths(monthQuantity));
+        subscriptionRepository.save(subscription);
     }
 
     public void deleteSubscriptionById(Long id) {

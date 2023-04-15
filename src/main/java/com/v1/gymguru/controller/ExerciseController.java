@@ -1,5 +1,6 @@
 package com.v1.gymguru.controller;
 
+import com.v1.gymguru.controller.exception.single.ExerciseNotFoundException;
 import com.v1.gymguru.controller.exception.single.PlanNotFoundException;
 import com.v1.gymguru.domain.Exercise;
 import com.v1.gymguru.domain.dto.ExerciseDto;
@@ -25,6 +26,13 @@ public class ExerciseController {
     public ResponseEntity<List<ExerciseDto>> getExercisesByPlanId(@PathVariable Long planId) {
         List<Exercise> exercises = exerciseService.getExercisesByPlanId(planId);
         return ResponseEntity.ok(exerciseMapper.mapToExistExerciseDtoList(exercises));
+    }
+
+    @PutMapping()
+    public ResponseEntity<Void> updateExercise(@RequestBody ExerciseDto exerciseDto) throws PlanNotFoundException, ExerciseNotFoundException {
+        Exercise exercise = exerciseMapper.mapToExercise(exerciseDto);
+        exerciseService.updateExercise(exercise);
+        return ResponseEntity.ok().build();
     }
 
 }

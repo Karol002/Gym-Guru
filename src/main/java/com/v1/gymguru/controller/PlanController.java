@@ -35,16 +35,10 @@ public class PlanController {
         return ResponseEntity.ok().build();
     }
 
-    /*@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> updatePlan(@RequestBody PlanDto planDtoDto) throws UserNotFoundException, PlanNotFoundException, TrainerNotFoundException {
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updatePlan(@RequestBody PlanDto planDtoDto) throws UserNotFoundException, TrainerNotFoundException, PlanNotFoundException {
         Plan plan = planMapper.mapToPlan(planDtoDto);
         planService.updatePlan(plan);
         return ResponseEntity.ok().build();
     }
-
-    @DeleteMapping(value = "{id}")
-    public ResponseEntity<Void> deletePlan(@PathVariable Long id) throws PlanNotFoundException {
-        planService.deletePlan(id);
-        return ResponseEntity.ok().build();
-    }*/
 }

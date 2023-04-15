@@ -51,23 +51,30 @@ public class SecurityConfiguration {
                                 ///////////////////////// PLAN ////////////////////////////
                                 .antMatchers(HttpMethod.GET,"/v1/gymguru/plans/**").hasAnyRole("TRAINER", "USER")
                                 .antMatchers(HttpMethod.POST,"/v1/gymguru/plans/**").hasRole("TRAINER")
+                                .antMatchers(HttpMethod.PUT,"/v1/gymguru/plans/").hasRole("TRAINER")
                                 ///////////////////////// MEAL / EXERCISE ////////////////////////////
-                                .antMatchers(HttpMethod.GET,"/v1/gymguru/meals/plan/**").hasRole("USER")
-                                .antMatchers(HttpMethod.GET,"/v1/gymguru//exercises/plan/**").hasRole("USER")
+                                .antMatchers(HttpMethod.GET,"/v1/gymguru/meals/plan/**").hasAnyRole("USER", "TRAINER")
+                                .antMatchers(HttpMethod.GET,"/v1/gymguru/exercises/plan/**").hasAnyRole("USER", "TRAINER")
+                                .antMatchers(HttpMethod.PUT,"/v1/gymguru/exercises").hasAnyRole( "TRAINER")
+                                .antMatchers(HttpMethod.PUT,"/v1/gymguru/meals").hasAnyRole( "TRAINER")
                                 ///////////////////////// SUBSCRIPTION ////////////////////////////
                                 .antMatchers(HttpMethod.GET,"/v1/gymguru/subscriptions/trainer/**").hasRole("TRAINER")
                                 .antMatchers(HttpMethod.GET,"/v1/gymguru/subscriptions/without/plan/**").hasRole("TRAINER")
+                                .antMatchers(HttpMethod.GET,"/v1/gymguru/subscriptions/with/plan/**").hasRole("TRAINER")
                                 .antMatchers(HttpMethod.GET,"/v1/gymguru/subscriptions/user/**").hasRole("USER")
                                 .antMatchers(HttpMethod.GET,"/v1/gymguru/subscriptions/active/**").hasRole("USER")
                                 .antMatchers(HttpMethod.POST,"/v1/gymguru/subscriptions").hasRole("USER")
+                                .antMatchers(HttpMethod.PUT,"/v1/gymguru/subscriptions/extend/**").hasRole("USER")
                                 ///////////////////////// TRAINERS ////////////////////////////
                                 .antMatchers(HttpMethod.POST,"/v1/gymguru/trainers").permitAll()
                                 .antMatchers(HttpMethod.GET,"/v1/gymguru/trainers").permitAll()
+                                .antMatchers(HttpMethod.PUT,"/v1/gymguru/trainers").hasRole("TRAINER")
                                 .antMatchers(HttpMethod.GET,"/v1/gymguru/trainers/specialization/**").hasRole("USER")
                                 .antMatchers(HttpMethod.GET,"/v1/gymguru/trainers/single/**").hasRole("TRAINER")
                                 ///////////////////////// USERS ////////////////////////////
                                 .antMatchers(HttpMethod.GET,"/v1/gymguru/users/id/**").hasAnyRole("USER", "TRAINER")
                                 .antMatchers(HttpMethod.POST,"/v1/gymguru/users/emails").permitAll()
+                                .antMatchers(HttpMethod.PUT,"/v1/gymguru/users").hasRole("USER")
                                 .antMatchers(HttpMethod.POST,"/v1/gymguru/users").permitAll()
                                 ////////////////////////// END ///////////////////////////////
                                 .anyRequest().authenticated()

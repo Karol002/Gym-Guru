@@ -29,4 +29,13 @@ public class PlanService {
     public Plan savePlan(final Plan plan) {
         return planRepository.save(plan);
     }
+
+    public void updatePlan(Plan plan) throws PlanNotFoundException {
+        if (planRepository.existsById(plan.getId())) {
+            Plan existPlan = getPlanById(plan.getId());
+            existPlan.setDietDescription(plan.getDietDescription());
+            existPlan.setExerciseDescription(plan.getExerciseDescription());
+            planRepository.save(existPlan);
+        }
+    }
 }

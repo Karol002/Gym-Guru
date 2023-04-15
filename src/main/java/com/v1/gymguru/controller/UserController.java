@@ -51,4 +51,11 @@ public class UserController {
         userService.changePassword(passwordChanger);
         return ResponseEntity.ok().build();
     }
+
+    @PutMapping()
+    public ResponseEntity<Void> changePassword(@RequestBody UserDto userDto) throws CredentialNotFoundException, UserNotFoundException {
+        User user = userMapper.mapToUser(userDto);
+        userService.updateUser(user);
+        return ResponseEntity.ok().build();
+    }
 }

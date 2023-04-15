@@ -44,6 +44,12 @@ public class UserService {
         } else  throw new EmailAlreadyExistException();
     }
 
+    public void updateUser(User user) throws UserNotFoundException {
+        if (userRepository.existsById(user.getId())) {
+            userRepository.save(user);
+        } else throw new UserNotFoundException();
+    }
+
     public void changePassword(PasswordChanger passwordChanger) throws InvalidCredentialException, CredentialNotFoundException {
         credentialService.changePassword(passwordChanger);
     }

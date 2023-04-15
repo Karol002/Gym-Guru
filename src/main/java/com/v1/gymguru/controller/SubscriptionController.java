@@ -35,6 +35,12 @@ public class SubscriptionController {
         return ResponseEntity.ok(subscriptionMapper.mapToExistSubscriptionDtoList(subscriptions));
     }
 
+    @GetMapping(value = "with/plan/{trainerId}")
+    public ResponseEntity<List<SubscriptionDto>> getSubscriptionsWithPlan(@PathVariable Long trainerId) {
+        List<Subscription> subscriptions = subscriptionService.getSubscriptionsWithPlanByTrainerId(trainerId);
+        return ResponseEntity.ok(subscriptionMapper.mapToExistSubscriptionDtoList(subscriptions));
+    }
+
     @GetMapping(value = "user/{userId}")
     public ResponseEntity<SubscriptionDto> getSubscription(@PathVariable Long userId) throws SubscriptionNotFoundException {
         Subscription subscription = subscriptionService.getSubscriptionByUserId(userId);
@@ -49,13 +55,13 @@ public class SubscriptionController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createSubscription(@RequestBody SaveSubscriptionDto saveSubscriptionDto) throws UserNotFoundException, TrainerNotFoundException, SubscriptionNotFoundException {
         Subscription subscription = subscriptionMapper.mapToSubscription(saveSubscriptionDto);
-        subscriptionService.saveSubscription(subscription);
+        subscriptionService.createSubscription(subscription);
         return ResponseEntity.ok().build();
     }
 
-    /*@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Subscription> extendSubscription(@RequestBody SubscriptionDto subscriptionDto) throws UserNotFoundException, TrainerNotFoundException, SubscriptionNotFoundException {
-        Subscription subscription = subscriptionMapper.mapToSubscription(subscriptionDto);
-        return ResponseEntity.ok(subscriptionService.updateSubscription(subscription));
-    }*/
+    @PutMapping(value = "/extend/{userId}/{monthQuantity}")
+    public ResponseEntity<Void> extendSubscription(@PathVariable Long userId, @PathVariable Long monthQuantity) throws SubscriptionNotFoundException {
+        subscriptionService.extendSubscription(userId, monthQuantity);
+        return ResponseEntity.ok().build();
+    }
 }

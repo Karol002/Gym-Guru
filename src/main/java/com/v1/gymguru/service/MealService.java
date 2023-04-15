@@ -17,7 +17,9 @@ public class MealService {
         return mealRepository.findAllByPlanId(planId);
     }
 
-    public Meal saveMeal(final Meal meal) {
-        return mealRepository.save(meal);
+    public Meal updateMeal(final Meal meal) throws MealNotFoundException {
+        if (mealRepository.existsById(meal.getId())) {
+            return mealRepository.save(meal);
+        } else throw new MealNotFoundException();
     }
 }
