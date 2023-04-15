@@ -40,9 +40,4 @@ public class PlanService {
             planRepository.save(existPlan);
         }
     }
-    /*public void updatePlan(Plan plan) throws PlanNotFoundException {
-        if (planRepository.existsById(plan.getId())) {
-            planRepository.save(plan);
-        } else throw new PlanNotFoundException();
-    }*/
 }
