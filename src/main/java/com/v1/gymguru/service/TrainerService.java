@@ -5,17 +5,14 @@ import com.v1.gymguru.controller.exception.single.EmailAlreadyExistException;
 import com.v1.gymguru.controller.exception.single.TrainerNotFoundException;
 import com.v1.gymguru.controller.exception.single.UserNotFoundException;
 import com.v1.gymguru.domain.Credential;
-import com.v1.gymguru.domain.Specialization;
+import com.v1.gymguru.domain.enums.Specialization;
 import com.v1.gymguru.domain.Trainer;
-import com.v1.gymguru.domain.User;
 import com.v1.gymguru.repository.TrainerRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -47,6 +44,7 @@ public class TrainerService {
         } else  throw new EmailAlreadyExistException();
     }
 
+    @Transactional
     public Trainer updateTrainer(final Trainer trainer) throws TrainerNotFoundException {
         if (trainerRepository.existsById(trainer.getId())) {
             return trainerRepository.save(trainer);

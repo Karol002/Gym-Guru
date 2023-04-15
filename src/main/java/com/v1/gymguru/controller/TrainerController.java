@@ -6,7 +6,7 @@ import com.v1.gymguru.controller.exception.single.CredentialNotFoundException;
 import com.v1.gymguru.controller.exception.single.EmailAlreadyExistException;
 import com.v1.gymguru.controller.exception.single.TrainerNotFoundException;
 import com.v1.gymguru.domain.Credential;
-import com.v1.gymguru.domain.Specialization;
+import com.v1.gymguru.domain.enums.Specialization;
 import com.v1.gymguru.domain.Trainer;
 import com.v1.gymguru.domain.dto.TrainerDto;
 import com.v1.gymguru.mapper.TrainerMapper;

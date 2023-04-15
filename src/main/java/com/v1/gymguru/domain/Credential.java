@@ -2,6 +2,7 @@ package com.v1.gymguru.domain;
 
 
 import com.sun.istack.NotNull;
+import com.v1.gymguru.domain.enums.CredentialType;
 import lombok.AllArgsConstructor;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -19,8 +20,9 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name = "CREDENTIALS")
 public class Credential implements UserDetails {
+
     @Id
     @NotNull
     @GeneratedValue(generator="increment")
@@ -29,14 +31,15 @@ public class Credential implements UserDetails {
     private Long id;
 
     @NotNull
-    @Column(unique = true)
+    @Column(name = "EMAIL",unique = true)
     private String email;
 
     @NotNull
-    @Column
+    @Column(name = "PASSWORD")
     private String password;
 
-    @Column
+    @NotNull
+    @Column(name = "ROLE")
     @Enumerated(EnumType.STRING)
     private CredentialType role;
 

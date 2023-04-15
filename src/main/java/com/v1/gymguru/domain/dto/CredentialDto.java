@@ -1,6 +1,6 @@
 package com.v1.gymguru.domain.dto;
 
-import com.v1.gymguru.domain.CredentialType;
+import com.v1.gymguru.domain.enums.CredentialType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

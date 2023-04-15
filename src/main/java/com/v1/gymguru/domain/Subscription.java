@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "SUBSCRIPTIONS")
 public class Subscription {
 
     @Id
@@ -23,19 +23,24 @@ public class Subscription {
     @Column(name = "ID", unique = true)
     private Long id;
 
+    @NotNull
     @Column(name = "PRICE")
     private BigDecimal price;
 
+    @NotNull
     @Column(name = "START_DATE")
     private LocalDate startDate;
 
+    @NotNull
     @Column(name = "END_DATE")
     private LocalDate endDate;
 
-    @OneToOne
+    @NotNull
+    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "TRAINER_ID")
     private Trainer trainer;

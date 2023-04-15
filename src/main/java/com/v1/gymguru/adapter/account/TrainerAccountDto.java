@@ -1,7 +1,6 @@
 package com.v1.gymguru.adapter.account;
 
-import com.v1.gymguru.domain.CredentialType;
-import com.v1.gymguru.domain.Specialization;
+import com.v1.gymguru.domain.enums.Specialization;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

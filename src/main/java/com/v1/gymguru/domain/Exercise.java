@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "EXERCISES")
 public class Exercise {
 
     @Id
@@ -22,15 +22,19 @@ public class Exercise {
     @Column(name = "ID", unique = true)
     private Long id;
 
+    @NotNull
     @Column(name = "NAME")
     private String name;
 
+    @NotNull
     @Column(name = "DESCRIPTION", length = 500)
     private String description;
 
+    @NotNull
     @Column(name = "SERIES_QUANTITY")
     private int seriesQuantity;
 
+    @NotNull
     @Column(name = "REPETITIONS_QUANTITY")
     private int repetitionsQuantity;
 

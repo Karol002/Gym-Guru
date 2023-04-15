@@ -7,7 +7,7 @@ import com.v1.gymguru.controller.exception.single.CredentialNotFoundException;
 import com.v1.gymguru.controller.exception.single.TrainerNotFoundException;
 import com.v1.gymguru.controller.exception.single.UserNotFoundException;
 import com.v1.gymguru.domain.Credential;
-import com.v1.gymguru.domain.CredentialType;
+import com.v1.gymguru.domain.enums.CredentialType;
 import com.v1.gymguru.service.CredentialService;
 import com.v1.gymguru.service.TrainerService;
 import com.v1.gymguru.service.UserService;

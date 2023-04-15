@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "USERS")
 public class User {
 
     @Id
@@ -21,14 +21,17 @@ public class User {
     @Column(name = "ID", unique = true)
     private Long id;
 
+    @NotNull
     @Column(name = "FIRST_NAME")
     private String firstName;
 
+    @NotNull
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    @JoinColumn
-    @OneToOne(cascade = CascadeType.ALL)
+    @NotNull
+    @JoinColumn(name = "CREDENTIAL_ID")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Credential credential;
 
     public User(String firstName, String lastName, Credential credential) {

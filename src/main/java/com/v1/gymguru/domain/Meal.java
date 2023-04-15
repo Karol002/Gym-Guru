@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "MEALS")
 public class Meal {
 
     @Id
@@ -21,9 +21,11 @@ public class Meal {
     @Column(name = "ID", unique = true)
     private Long id;
 
+    @NotNull
     @Column(name = "NAME")
     private String name;
 
+    @NotNull
     @Column(name = "COOK_INSTRUCTION", length = 500)
     private String cookInstruction;
 
