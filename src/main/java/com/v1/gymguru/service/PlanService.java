@@ -7,6 +7,7 @@ import com.v1.gymguru.repository.PlanRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -30,6 +31,7 @@ public class PlanService {
         return planRepository.save(plan);
     }
 
+    @Transactional
     public void updatePlan(Plan plan) throws PlanNotFoundException {
         if (planRepository.existsById(plan.getId())) {
             Plan existPlan = getPlanById(plan.getId());
@@ -38,4 +40,9 @@ public class PlanService {
             planRepository.save(existPlan);
         }
     }
+    /*public void updatePlan(Plan plan) throws PlanNotFoundException {
+        if (planRepository.existsById(plan.getId())) {
+            planRepository.save(plan);
+        } else throw new PlanNotFoundException();
+    }*/
 }
