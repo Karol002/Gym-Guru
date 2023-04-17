@@ -20,7 +20,6 @@ public class SubscriptionMapper {
 
     public Subscription mapToSubscription(final SaveSubscriptionDto saveSubscriptionDto) throws UserNotFoundException, TrainerNotFoundException {
         return new Subscription(
-                saveSubscriptionDto.getPrice(),
                 saveSubscriptionDto.getStartDate(),
                 saveSubscriptionDto.getEndDate(),
                 userService.getUserById(saveSubscriptionDto.getUserId()),
@@ -28,7 +27,7 @@ public class SubscriptionMapper {
         );
     }
 
-    public SubscriptionDto mapToExistSubscriptionDto(final Subscription subscription) {
+    public SubscriptionDto mapToSubscriptionDto(final Subscription subscription) {
         return new SubscriptionDto(
                 subscription.getId(),
                 subscription.getPrice(),
@@ -41,7 +40,7 @@ public class SubscriptionMapper {
 
     public List<SubscriptionDto> mapToExistSubscriptionDtoList(List<Subscription> subscriptions) {
         return subscriptions.stream()
-                .map(this::mapToExistSubscriptionDto)
+                .map(this::mapToSubscriptionDto)
                 .toList();
     }
 }

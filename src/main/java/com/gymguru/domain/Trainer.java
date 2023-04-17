@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "TRAINERS")
 public class Trainer {
 
     @Id
@@ -56,14 +56,14 @@ public class Trainer {
 
     @OneToMany(targetEntity = Subscription.class,
                mappedBy = "trainer",
-               cascade = CascadeType.PERSIST,
+               cascade = CascadeType.ALL,
                fetch = FetchType.LAZY
     )
     private List<Subscription> subscriptions = new ArrayList<>();
 
     @OneToMany(targetEntity = Plan.class,
             mappedBy = "trainer",
-            cascade = CascadeType.PERSIST,
+            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     private List<Plan> plans = new ArrayList<>();

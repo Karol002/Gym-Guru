@@ -1,5 +1,6 @@
 package com.gymguru.controller;
 
+import com.gymguru.controller.exception.single.InCorrectSubscriptionDataException;
 import com.gymguru.controller.exception.single.SubscriptionNotFoundException;
 import com.gymguru.controller.exception.single.TrainerNotFoundException;
 import com.gymguru.controller.exception.single.UserNotFoundException;
@@ -44,23 +45,23 @@ public class SubscriptionController {
     @GetMapping(value = "user/{userId}")
     public ResponseEntity<SubscriptionDto> getSubscription(@PathVariable Long userId) throws SubscriptionNotFoundException {
         Subscription subscription = subscriptionService.getSubscriptionByUserId(userId);
-        return ResponseEntity.ok(subscriptionMapper.mapToExistSubscriptionDto(subscription));
+        return ResponseEntity.ok(subscriptionMapper.mapToSubscriptionDto(subscription));
     }
 
     @GetMapping(value = "active/{userId}")
-    public ResponseEntity<Boolean> checkSubscriptionStatus(@PathVariable Long userId) throws SubscriptionNotFoundException {
+    public ResponseEntity<Boolean> checkSubscriptionStatus(@PathVariable Long userId) {
         return ResponseEntity.ok(subscriptionService.isSubscriptionActive(userId));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createSubscription(@RequestBody SaveSubscriptionDto saveSubscriptionDto) throws UserNotFoundException, TrainerNotFoundException, SubscriptionNotFoundException {
+    public ResponseEntity<Void> createSubscription(@RequestBody SaveSubscriptionDto saveSubscriptionDto) throws UserNotFoundException, TrainerNotFoundException, InCorrectSubscriptionDataException {
         Subscription subscription = subscriptionMapper.mapToSubscription(saveSubscriptionDto);
         subscriptionService.createSubscription(subscription);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping(value = "/extend/{userId}/{monthQuantity}")
-    public ResponseEntity<Void> extendSubscription(@PathVariable Long userId, @PathVariable Long monthQuantity) throws SubscriptionNotFoundException {
+    public ResponseEntity<Void> extendSubscription(@PathVariable Long userId, @PathVariable Long monthQuantity) throws SubscriptionNotFoundException, InCorrectSubscriptionDataException {
         subscriptionService.extendSubscription(userId, monthQuantity);
         return ResponseEntity.ok().build();
     }

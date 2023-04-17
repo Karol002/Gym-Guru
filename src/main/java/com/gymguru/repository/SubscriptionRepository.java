@@ -14,6 +14,7 @@ public interface SubscriptionRepository extends CrudRepository<Subscription, Lon
 
     List<Subscription> findAllByTrainerId(Long trainerId);
     List<Subscription> findAll();
+    Boolean existsByUserId(Long user_id);
 
     Optional<Subscription> findByUserId(Long userId);
 

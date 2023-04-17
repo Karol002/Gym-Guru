@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -36,8 +38,9 @@ public class Subscription {
     private LocalDate endDate;
 
     @NotNull
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     @NotNull
@@ -45,8 +48,7 @@ public class Subscription {
     @JoinColumn(name = "TRAINER_ID")
     private Trainer trainer;
 
-    public Subscription(BigDecimal price, LocalDate startDate, LocalDate endDate, User user, Trainer trainer) {
-        this.price = price;
+    public Subscription(LocalDate startDate, LocalDate endDate, User user, Trainer trainer) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.user = user;

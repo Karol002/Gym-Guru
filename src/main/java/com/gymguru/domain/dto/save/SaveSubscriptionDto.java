@@ -9,7 +9,6 @@ import java.time.LocalDate;
 @Getter
 @AllArgsConstructor
 public class SaveSubscriptionDto {
-    private BigDecimal price;
     private LocalDate startDate;
     private LocalDate endDate;
     private Long userId;

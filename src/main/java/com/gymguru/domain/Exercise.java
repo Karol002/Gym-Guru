@@ -27,7 +27,7 @@ public class Exercise {
     private String name;
 
     @NotNull
-    @Column(name = "DESCRIPTION", length = 2000)
+    @Column(name = "DESCRIPTION", length = 1000)
     private String description;
 
     @NotNull

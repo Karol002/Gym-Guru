@@ -76,4 +76,14 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleInvalidCredentialException(InvalidCredentialException exception) {
         return new ResponseEntity<>("Bad password ", HttpStatus.UNAUTHORIZED);
     }
+
+    @ExceptionHandler(InCorrectSubscriptionDataException.class)
+    public ResponseEntity<Object> handleInCorrectSubscriptionDataException(InCorrectSubscriptionDataException exception) {
+        return new ResponseEntity<>("Incorrect subscription data ", HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @ExceptionHandler(TrainerPriceInCorrectException.class)
+    public ResponseEntity<Object> handleTrainerPriceInCorrectException(TrainerPriceInCorrectException exception) {
+        return new ResponseEntity<>("Trainer price is incorrect", HttpStatus.NOT_ACCEPTABLE);
+    }
 }

@@ -1,5 +1,6 @@
 package com.gymguru.service;
 
+import com.gymguru.controller.exception.single.InCorrectSubscriptionDataException;
 import com.gymguru.controller.exception.single.SubscriptionNotFoundException;
 import com.gymguru.domain.Plan;
 import com.gymguru.domain.Subscription;
@@ -7,7 +8,10 @@ import com.gymguru.repository.SubscriptionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +30,7 @@ public class SubscriptionService {
         return subscriptionRepository.findAllByTrainerId(trainerId);
     }
 
+    @Transactional
     public List<Subscription> getSubscriptionsWithoutPlanByTrainerId(Long trainerId) {
         List<Subscription> subscriptions = subscriptionRepository.findAllByTrainerId(trainerId);
         List<Plan> plans = planService.getAllPlansByTrainerId(trainerId);
@@ -42,6 +47,7 @@ public class SubscriptionService {
         return subscriptionsWithoutPlan;
     }
 
+    @Transactional
     public List<Subscription> getSubscriptionsWithPlanByTrainerId(Long trainerId) {
         List<Subscription> subscriptions = subscriptionRepository.findAllByTrainerId(trainerId);
         List<Plan> plans = planService.getAllPlansByTrainerId(trainerId);
@@ -62,16 +68,40 @@ public class SubscriptionService {
         return subscriptionRepository.findByUserId(userId).orElseThrow(SubscriptionNotFoundException::new);
     }
 
-    public Subscription createSubscription(final Subscription subscription) {
-        if (!isSubscriptionActive(subscription.getUser().getId())) {
+    public Subscription createSubscription(Subscription subscription) throws InCorrectSubscriptionDataException {
+        if (checkSubscriptionData(subscription)) {
+            subscription.setPrice(calculatePrice(subscription.getStartDate(), subscription.getEndDate(), subscription.getTrainer().getMonthPrice()));
             return subscriptionRepository.save(subscription);
-        } else throw new RuntimeException();
+        } else throw new InCorrectSubscriptionDataException();
     }
 
-    public void extendSubscription(Long userId, Long monthQuantity) throws SubscriptionNotFoundException {
+    public boolean checkSubscriptionData(Subscription subscription) {
+        return (!subscriptionRepository.existsByUserId(subscription.getUser().getId())
+                && checkIsCorrectLong(subscription.getStartDate(), subscription.getEndDate()));
+    }
+
+    public BigDecimal calculatePrice(LocalDate startDate, LocalDate endDate, BigDecimal monthPrice) {
+        long monthsBetween = ChronoUnit.MONTHS.between(startDate, endDate);
+        return new BigDecimal(monthPrice.longValue() * monthsBetween);
+    }
+
+    public boolean checkIsCorrectLong(LocalDate startDate, LocalDate endDate) {
+        long monthsBetween = ChronoUnit.MONTHS.between(startDate, endDate);
+        return (monthsBetween > 0 && monthsBetween <= 6);
+    }
+
+    @Transactional
+    public void extendSubscription(Long userId, Long monthQuantity) throws SubscriptionNotFoundException, InCorrectSubscriptionDataException {
         Subscription subscription = subscriptionRepository.findByUserId(userId).orElseThrow(SubscriptionNotFoundException::new);
-        subscription.setEndDate(subscription.getEndDate().plusMonths(monthQuantity));
-        subscriptionRepository.save(subscription);
+        if (checkIsCorrectLong(subscription.getStartDate(), subscription.getStartDate().plusMonths(monthQuantity))) {
+
+            BigDecimal extendPrice = calculatePrice(subscription.getStartDate(), subscription.getStartDate().plusMonths(monthQuantity),
+                    subscription.getTrainer().getMonthPrice());
+            subscription.setPrice(extendPrice);
+            subscription.setEndDate(subscription.getEndDate().plusMonths(monthQuantity));
+
+            subscriptionRepository.save(subscription);
+        } else throw new InCorrectSubscriptionDataException();
     }
 
     public void deleteSubscriptionById(Long id) {

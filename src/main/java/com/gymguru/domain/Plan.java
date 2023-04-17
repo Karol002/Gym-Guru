@@ -5,8 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -31,11 +34,12 @@ public class Plan {
     private String exerciseDescription;
 
     @NotNull
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "USER_ID")
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID", unique = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "TRAINER_ID")
     private Trainer trainer;
 
@@ -44,23 +48,14 @@ public class Plan {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private List<Exercise> exercises;
+    private List<Exercise> exercises = new ArrayList<>();
 
     @OneToMany(targetEntity = Meal.class,
             mappedBy = "plan",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private List<Meal> meals;
-
-    public Plan(String dietDescription, String exerciseDescription, User user, Trainer trainer, List<Exercise> exercises, List<Meal> meals) {
-        this.dietDescription = dietDescription;
-        this.exerciseDescription = exerciseDescription;
-        this.user = user;
-        this.trainer = trainer;
-        this.exercises = exercises;
-        this.meals = meals;
-    }
+    private List<Meal> meals = new ArrayList<>();
 
     public Plan(String dietDescription, String exerciseDescription, User user, Trainer trainer) {
         this.dietDescription = dietDescription;

@@ -1,13 +1,8 @@
 package com.gymguru.service;
 
 import com.gymguru.config.Deleter;
-import com.gymguru.controller.exception.single.CredentialNotFoundException;
-import com.gymguru.controller.exception.single.EmailAlreadyExistException;
-import com.gymguru.controller.exception.single.TrainerNotFoundException;
-import com.gymguru.controller.exception.single.UserNotFoundException;
-import com.gymguru.domain.Credential;
-import com.gymguru.domain.Trainer;
-import com.gymguru.domain.User;
+import com.gymguru.controller.exception.single.*;
+import com.gymguru.domain.*;
 import com.gymguru.domain.enums.CredentialType;
 import com.gymguru.domain.enums.Specialization;
 import org.junit.jupiter.api.AfterEach;
@@ -17,14 +12,25 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class TrainerServiceTests {
+
     @Autowired
     private TrainerService trainerService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private SubscriptionService subscriptionService;
+
+    @Autowired
+    private PlanService planService;
 
     @Autowired
     private Deleter deleter;
@@ -35,7 +41,7 @@ public class TrainerServiceTests {
     }
 
     @Test
-    void testGetAllTrainers() throws EmailAlreadyExistException {
+    void testGetAllTrainers() throws EmailAlreadyExistException, TrainerPriceInCorrectException {
         //Given
         Credential credential1 = new Credential("test1@example.com", "password1", CredentialType.ROLE_TRAINER);
         Credential credential2 = new Credential("test2@example.com", "password2", CredentialType.ROLE_TRAINER);
@@ -56,7 +62,7 @@ public class TrainerServiceTests {
     }
 
     @Test
-    void testGetAllBySpecialization() throws EmailAlreadyExistException {
+    void testGetAllBySpecialization() throws EmailAlreadyExistException, TrainerPriceInCorrectException {
         //Given
         Credential credential1 = new Credential("test1@example.com", "password1", CredentialType.ROLE_TRAINER);
         Credential credential2 = new Credential("test2@example.com", "password2", CredentialType.ROLE_TRAINER);
@@ -82,7 +88,7 @@ public class TrainerServiceTests {
     }
 
     @Test
-    void testGetTrainerById() throws EmailAlreadyExistException, TrainerNotFoundException {
+    void testGetTrainerById() throws EmailAlreadyExistException, TrainerNotFoundException, TrainerPriceInCorrectException {
         //Given
         Credential credential = new Credential("test1@example.com", "password1", CredentialType.ROLE_TRAINER);
         Trainer trainer = new Trainer("John", "Smith", "California School",
@@ -99,7 +105,7 @@ public class TrainerServiceTests {
     }
 
     @Test
-    void testGetTrainerByEmail() throws EmailAlreadyExistException, TrainerNotFoundException, UserNotFoundException, CredentialNotFoundException {
+    void testGetTrainerByEmail() throws EmailAlreadyExistException, TrainerNotFoundException, CredentialNotFoundException, TrainerPriceInCorrectException {
         //Given
         Credential credential = new Credential("test1@example.com", "password1", CredentialType.ROLE_TRAINER);
         Trainer trainer = new Trainer("John", "Smith", "California School",
@@ -116,7 +122,7 @@ public class TrainerServiceTests {
     }
 
     @Test
-    void testSaveTrainer() throws EmailAlreadyExistException, TrainerNotFoundException {
+    void testSaveTrainer() throws EmailAlreadyExistException, TrainerNotFoundException, TrainerPriceInCorrectException {
         //Given
         Credential credential = new Credential("test1@example.com", "password1", CredentialType.ROLE_TRAINER);
         Trainer trainer = new Trainer("John", "Smith", "California School",
@@ -132,7 +138,7 @@ public class TrainerServiceTests {
     }
 
     @Test
-    void testUpdateTrainer() throws EmailAlreadyExistException, TrainerNotFoundException {
+    void testUpdateTrainer() throws EmailAlreadyExistException, TrainerNotFoundException, TrainerPriceInCorrectException {
         //Given
         Credential credential = new Credential("test1@example.com", "password1", CredentialType.ROLE_TRAINER);
         Trainer trainer = new Trainer("John", "Smith", "California School",
@@ -141,15 +147,15 @@ public class TrainerServiceTests {
         trainerService.saveTrainer(trainer);
 
         //When
-        trainer.setFirstName("micheal");
-        trainerService.saveTrainer(trainer);
+        trainer.setFirstName("michael");
+        trainerService.updateTrainer(trainer);
 
         //Then
-        assertEquals("michel", trainerService.getTrainerById(trainer.getId()).getFirstName());
+        assertEquals("michael", trainerService.getTrainerById(trainer.getId()).getFirstName());
     }
 
     @Test
-    void testSaveTrainerWithExistingEmail() throws EmailAlreadyExistException {
+    void testSaveTrainerWithExistingEmail() throws EmailAlreadyExistException, TrainerPriceInCorrectException {
         //Given
         Credential credential1 = new Credential("test1@example.com", "password1", CredentialType.ROLE_TRAINER);
         Credential credential2 = new Credential("test1@example.com", "password2", CredentialType.ROLE_TRAINER);
@@ -166,7 +172,7 @@ public class TrainerServiceTests {
     }
 
     @Test
-    void testCascadeDeleteCredential() throws EmailAlreadyExistException {
+    void testCascadeWhenDeleteCredential() throws EmailAlreadyExistException, TrainerPriceInCorrectException {
         //Given
         Credential credential = new Credential("test1@example.com", "password1", CredentialType.ROLE_TRAINER);
         Trainer trainer = new Trainer("John", "Smith", "California School",
@@ -177,6 +183,68 @@ public class TrainerServiceTests {
         //When
         int sizeBeforeDelete = trainerService.getAllTrainers().size();
         assertThrows(DataIntegrityViolationException.class, () -> deleter.deleteFromCredentials());
+        int sizeAfterDelete = trainerService.getAllTrainers().size();
+
+        //Then
+        assertEquals(1, sizeBeforeDelete);
+        assertEquals(1, sizeAfterDelete);
+    }
+
+    @Test
+    void testCascadeWhenDeleteSubscription() throws EmailAlreadyExistException, TrainerPriceInCorrectException, InCorrectSubscriptionDataException {
+        //Given
+        Credential user1Credential = new Credential("user1@example.com", "password1", CredentialType.ROLE_USER);
+        Credential user2Credential = new Credential("user2@example.com", "password1", CredentialType.ROLE_USER);
+        Credential trainerCredential = new Credential("trainer@example.com", "password2", CredentialType.ROLE_TRAINER);
+
+        User user1 = new User("Mike", "Johnson", user1Credential);
+        User user2 = new User("Jake", "Gustavo", user2Credential);
+        Trainer trainer = new Trainer("John", "Smith", "California School",
+                "I am trainer for 5 years", new BigDecimal("100"), Specialization.Health, trainerCredential);
+
+        Subscription subscription1 = new Subscription(LocalDate.now(), LocalDate.now().plusMonths(3), user1, trainer);
+        Subscription subscription2 = new Subscription(LocalDate.now(), LocalDate.now().plusMonths(5), user2, trainer);
+
+        userService.saveUser(user1);
+        userService.saveUser(user2);
+        trainerService.saveTrainer(trainer);
+        subscriptionService.createSubscription(subscription1);
+        subscriptionService.createSubscription(subscription2);
+
+        //When
+        int sizeBeforeDelete = trainerService.getAllTrainers().size();
+        deleter.deleteFromSubscriptions();
+        int sizeAfterDelete = trainerService.getAllTrainers().size();
+
+        //Then
+        assertEquals(1, sizeBeforeDelete);
+        assertEquals(1, sizeAfterDelete);
+    }
+
+    @Test
+    void testCascadeWhenDeletePlan() throws EmailAlreadyExistException, TrainerPriceInCorrectException {
+        //Given
+        Credential user1Credential = new Credential("user1@example.com", "password1", CredentialType.ROLE_USER);
+        Credential user2Credential = new Credential("user2@example.com", "password1", CredentialType.ROLE_USER);
+        Credential trainerCredential = new Credential("trainer@example.com", "password2", CredentialType.ROLE_TRAINER);
+
+        User user1 = new User("Mike", "Johnson", user1Credential);
+        User user2 = new User("Jake", "Gustavo", user2Credential);
+        Trainer trainer = new Trainer("John", "Smith", "California School",
+                "I am trainer for 5 years", new BigDecimal("100"), Specialization.Health, trainerCredential);
+
+        Plan plan1 = new Plan("Test diet description 1", "Test plan training description 1", user1, trainer);
+        Plan plan2 = new Plan("Test diet description 2", "Test plan training description 2", user2, trainer);
+
+        userService.saveUser(user1);
+        userService.saveUser(user2);
+        trainerService.saveTrainer(trainer);
+        planService.savePlan(plan1);
+        planService.savePlan(plan2);
+
+        //When
+        int sizeBeforeDelete = trainerService.getAllTrainers().size();
+        deleter.deleteFromSubscriptions();
         int sizeAfterDelete = trainerService.getAllTrainers().size();
 
         //Then

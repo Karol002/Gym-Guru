@@ -5,6 +5,7 @@ import com.gymguru.adapter.account.TrainerAccountDto;
 import com.gymguru.controller.exception.single.TrainerNotFoundException;
 import com.gymguru.controller.exception.single.CredentialNotFoundException;
 import com.gymguru.controller.exception.single.EmailAlreadyExistException;
+import com.gymguru.controller.exception.single.TrainerPriceInCorrectException;
 import com.gymguru.domain.Credential;
 import com.gymguru.domain.enums.Specialization;
 import com.gymguru.domain.Trainer;
@@ -46,14 +47,14 @@ public class TrainerController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createTrainer(@RequestBody TrainerAccountDto trainerAccountDto) throws CredentialNotFoundException, EmailAlreadyExistException {
+    public ResponseEntity<Void> createTrainer(@RequestBody TrainerAccountDto trainerAccountDto) throws EmailAlreadyExistException, TrainerPriceInCorrectException {
         Trainer trainer = accountAdapter.toTrainer(trainerAccountDto);
         trainerService.saveTrainer(trainer);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Trainer> updateTrainer(@RequestBody TrainerDto trainerDto) throws TrainerNotFoundException, CredentialNotFoundException {
+    public ResponseEntity<Trainer> updateTrainer(@RequestBody TrainerDto trainerDto) throws TrainerNotFoundException, CredentialNotFoundException, TrainerPriceInCorrectException {
         Trainer trainer = trainerMapper.mapToTrainer(trainerDto);
         return ResponseEntity.ok(trainerService.updateTrainer(trainer));
     }

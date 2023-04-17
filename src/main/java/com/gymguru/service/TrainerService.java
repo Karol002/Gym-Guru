@@ -1,9 +1,6 @@
 package com.gymguru.service;
 
-import com.gymguru.controller.exception.single.CredentialNotFoundException;
-import com.gymguru.controller.exception.single.EmailAlreadyExistException;
-import com.gymguru.controller.exception.single.TrainerNotFoundException;
-import com.gymguru.controller.exception.single.UserNotFoundException;
+import com.gymguru.controller.exception.single.*;
 import com.gymguru.domain.Credential;
 import com.gymguru.domain.enums.Specialization;
 import com.gymguru.domain.Trainer;
@@ -38,17 +35,23 @@ public class TrainerService {
     }
 
     @Transactional
-    public void saveTrainer(Trainer trainer) throws EmailAlreadyExistException {
-        if (credentialService.isEmailAvailable(trainer.getCredential().getEmail())) {
+    public void saveTrainer(Trainer trainer) throws EmailAlreadyExistException, TrainerPriceInCorrectException {
+        if (credentialService.isEmailAvailable(trainer.getCredential().getEmail()) && isTrainerPriceCorrect(trainer)) {
             credentialService.encodePassword(trainer.getCredential());
             trainerRepository.save(trainer);
         } else  throw new EmailAlreadyExistException();
     }
 
     @Transactional
-    public Trainer updateTrainer(final Trainer trainer) throws TrainerNotFoundException {
-        if (trainerRepository.existsById(trainer.getId())) {
+    public Trainer updateTrainer(final Trainer trainer) throws TrainerNotFoundException, TrainerPriceInCorrectException {
+        if (trainerRepository.existsById(trainer.getId()) && isTrainerPriceCorrect(trainer)) {
             return trainerRepository.save(trainer);
         } else throw new TrainerNotFoundException();
+    }
+
+    public boolean isTrainerPriceCorrect(Trainer trainer) throws TrainerPriceInCorrectException {
+        if (trainer.getMonthPrice().doubleValue() >= 20
+                && trainer.getMonthPrice().doubleValue() <= 100) return true;
+        else throw new TrainerPriceInCorrectException();
     }
 }

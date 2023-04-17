@@ -3,7 +3,6 @@ package com.gymguru.mapper;
 import com.gymguru.controller.exception.single.CredentialNotFoundException;
 import com.gymguru.domain.User;
 import com.gymguru.domain.dto.UserDto;
-import com.gymguru.domain.dto.save.SaveUserDto;
 import com.gymguru.service.CredentialService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
