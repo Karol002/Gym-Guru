@@ -1,6 +1,6 @@
 package com.gymguru.config;
 
-import com.v1.gymguru.repository.*;
+import com.gymguru.repository.*;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -51,5 +51,15 @@ public class Deleter {
 
     public void deleteFromSubscriptions() {
         subscriptionRepository.deleteAll();
+    }
+
+    public void deleteAllFromEachEntity() {
+        mealRepository.deleteAll();
+        planRepository.deleteAll();
+        subscriptionRepository.deleteAll();
+        exerciseRepository.deleteAll();
+        userRepository.deleteAll();
+        trainerRepository.deleteAll();
+        credentialRepository.deleteAll();
     }
 }
