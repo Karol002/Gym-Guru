@@ -12,32 +12,32 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ExerciseNotFoundException.class)
     public ResponseEntity<Object> handleExerciseNotFoundException(ExerciseNotFoundException exception) {
-        return new ResponseEntity<>("Exercise with given id doesn't exist", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Exercise not found", HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(MealNotFoundException.class)
     public ResponseEntity<Object> handleMealNotFoundException(MealNotFoundException exception) {
-        return new ResponseEntity<>("Meal with given id doesn't exist", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Meal not found", HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(PlanNotFoundException.class)
     public ResponseEntity<Object> handlePlanNotFoundException(PlanNotFoundException exception) {
-        return new ResponseEntity<>("Plan with given id doesn't exist", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Plan not found", HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(SubscriptionNotFoundException.class)
     public ResponseEntity<Object> handleSubscriptionNotFoundException(SubscriptionNotFoundException exception) {
-        return new ResponseEntity<>("Subscription for given user id doesn't exist", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Subscription not found", HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(TrainerNotFoundException.class)
     public ResponseEntity<Object> handleTrainerNotFoundException(TrainerNotFoundException exception) {
-        return new ResponseEntity<>("Trainer with given id doesn't exist", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Trainer not found", HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException exception) {
-        return new ResponseEntity<>("User with given id doesn't exist", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(CredentialNotFoundException.class)
@@ -47,12 +47,7 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(SubscriptionExpiredException.class)
     public ResponseEntity<Object> handleSubscriptionExpiredException(SubscriptionExpiredException exception) {
-        return new ResponseEntity<>("Subscription is expired if you want to get plan renew subscription", HttpStatus.CONFLICT);
-    }
-
-    @ExceptionHandler(PlanForUserIdNotFoundException.class)
-    public ResponseEntity<Object> handlePlanUserIdNotFoundException(PlanForUserIdNotFoundException exception) {
-        return new ResponseEntity<>("Plan for given user id doesn't exist", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Subscription is expired", HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(InvalidTokenException.class)
@@ -67,17 +62,17 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(EmailAlreadyExistException.class)
     public ResponseEntity<Object> handleEmailAlreadyExistException(EmailAlreadyExistException exception) {
-        return new ResponseEntity<>("Email Already Exist ", HttpStatus.CONFLICT);
+        return new ResponseEntity<>("Email Already Exist", HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(InvalidCredentialException.class)
     public ResponseEntity<Object> handleInvalidCredentialException(InvalidCredentialException exception) {
-        return new ResponseEntity<>("Bad password ", HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>("Bad password", HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(InCorrectSubscriptionDataException.class)
     public ResponseEntity<Object> handleInCorrectSubscriptionDataException(InCorrectSubscriptionDataException exception) {
-        return new ResponseEntity<>("Incorrect subscription data ", HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<>("Incorrect subscription data", HttpStatus.NOT_ACCEPTABLE);
     }
 
     @ExceptionHandler(TrainerPriceInCorrectException.class)

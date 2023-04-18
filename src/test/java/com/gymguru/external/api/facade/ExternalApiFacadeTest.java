@@ -62,7 +62,7 @@ public class ExternalApiFacadeTest {
 
     @Test
     void testGetEdamamMeals() {
-        // Given
+        //Given
         String mealName = "chicken";
         EdamamHitDto edamamHitDto = new EdamamHitDto();
         List<EdamamMealDto> edamamMealDtos = new ArrayList<>();
@@ -70,16 +70,16 @@ public class ExternalApiFacadeTest {
         edamamMealDtos.add(new EdamamMealDto("Meal 2", List.of("Ingredient 2.1", "Ingredient 2.2")));
         edamamHitDto.setEdamamRecipeDto(Collections.singletonList(new EdamamRecipeDto(new EdamamMealDto())));
         when(edamamClient.getEdamamMeals(mealName)).thenReturn(edamamHitDto);
-        when(edamamMapper.mapToEdamamMeal(edamamHitDto)).thenReturn(
+        when(edamamMapper.mapToEdamamMealList(edamamHitDto)).thenReturn(
                 edamamMealDtos.stream()
                         .map(edamamMealDto -> new EdamamMeal(edamamMealDto.getLabel(),
                                 String.join(", ", edamamMealDto.getIngredientLines())))
                         .collect(Collectors.toList()));
 
-        // When
+        //When
         List<EdamamMeal> edamamMeals = externalApiFacade.getEdamamMeals(mealName);
 
-        // Then
+        //Then
         assertNotNull(edamamMeals);
         assertEquals(2, edamamMeals.size());
         assertEquals("Meal 1", edamamMeals.get(0).getLabel());
@@ -87,12 +87,12 @@ public class ExternalApiFacadeTest {
         assertEquals("Meal 2", edamamMeals.get(1).getLabel());
         assertEquals("Ingredient 2.1, Ingredient 2.2", edamamMeals.get(1).getIngredientLines());
         verify(edamamClient, times(1)).getEdamamMeals(mealName);
-        verify(edamamMapper, times(1)).mapToEdamamMeal(edamamHitDto);
+        verify(edamamMapper, times(1)).mapToEdamamMealList(edamamHitDto);
     }
 
     @Test
-    void givenCategoryId_whenGetWgerExercisesByCategory_thenReturnList() {
-        // Given
+    void testGetWgerExercisesByCategoy() {
+        //Given
         Long categoryId = 1L;
         List<WgerExercise> wgerExerciseList = new ArrayList<>();
         wgerExerciseList.add(new WgerExercise("Exercise 1", "Description 1"));
@@ -101,16 +101,15 @@ public class ExternalApiFacadeTest {
         WgerExerciseBoardDto wgerExerciseBoardDto = new WgerExerciseBoardDto();
         wgerExerciseBoardDto.setWgerExercises(wgerExerciseList);
 
-        when(wgerClient.getWgerExercisesByCategoy(categoryId)).thenReturn(wgerExerciseBoardDto);
-
         List<WgerExercise> mappedWgerExercises = new ArrayList<>();
         mappedWgerExercises.add(new WgerExercise("Exercise 1", "Description 1"));
         mappedWgerExercises.add(new WgerExercise("Exercise 2", "Description 2"));
 
-        when(wgerMapper.mapToWgerExerciseDtos(wgerExerciseBoardDto)).thenReturn(mappedWgerExercises);
+        when(wgerClient.getWgerExercisesByCategoy(categoryId)).thenReturn(wgerExerciseBoardDto);
+        when(wgerMapper.mapToWgerExerciseDtoList(wgerExerciseBoardDto)).thenReturn(mappedWgerExercises);
 
-        // When
-        List<WgerExercise> result = externalApiFacade.getWgerExercisesByCategoy(categoryId);
+        //When
+        List<WgerExercise> result = externalApiFacade.getWgerExercisesByCategory(categoryId);
 
         // Then
         assertThat(result).isNotNull();
@@ -120,8 +119,8 @@ public class ExternalApiFacadeTest {
     }
 
     @Test
-    void whenGetWgerCategories_thenReturnList() {
-        // Given
+    void testGetWgerCategories() {
+        //Given
         List<WgerCategory> wgerCategoryList = new ArrayList<>();
         wgerCategoryList.add(new WgerCategory(1L, "Category 1"));
         wgerCategoryList.add(new WgerCategory(2L, "Category 2"));
@@ -129,18 +128,17 @@ public class ExternalApiFacadeTest {
         WgerCategoryBoardDto wgerCategoryBoardDto = new WgerCategoryBoardDto();
         wgerCategoryBoardDto.setWgerCategories(wgerCategoryList);
 
-        when(wgerClient.getWgerCategories()).thenReturn(wgerCategoryBoardDto);
-
         List<WgerCategory> mappedWgerCategories = new ArrayList<>();
         mappedWgerCategories.add(new WgerCategory(1L, "Category 1"));
         mappedWgerCategories.add(new WgerCategory(2L, "Category 2"));
 
-        when(wgerMapper.mapToWgerCategoryDtos(wgerCategoryBoardDto)).thenReturn(mappedWgerCategories);
+        when(wgerClient.getWgerCategories()).thenReturn(wgerCategoryBoardDto);
+        when(wgerMapper.mapToWgerCategoryDtoList(wgerCategoryBoardDto)).thenReturn(mappedWgerCategories);
 
-        // When
+        //When
         List<WgerCategory> result = externalApiFacade.getWgerCategories();
 
-        // Then
+        //Then
         assertThat(result).isNotNull();
         assertThat(result.size()).isEqualTo(2);
         assertThat(result.get(0).getId()).isEqualTo(1L);
@@ -149,7 +147,7 @@ public class ExternalApiFacadeTest {
 
     @Test
     public void testGetOpenAiResponse() {
-        // Given
+        //Given
         String content = "Hello, how are you?";
         OpenAiMessage openAiMessage = new OpenAiMessage(content);
         List<OpenAiDetailsDto> messages = new ArrayList<>();
@@ -165,10 +163,10 @@ public class ExternalApiFacadeTest {
         when(openAiClient.getOpenAiRequest(openAIRequest)).thenReturn(openAiObjectDto);
         when(openAiMapper.mapToOpenAiMessageDto(openAiObjectDto)).thenReturn(openAiMessage);
 
-        // When
+        //When
         OpenAiMessage response = externalApiFacade.getOpenAiResponse(openAiMessage);
 
-        // Then
+        //Then
         assertEquals(content, response.getContent());
     }
 }

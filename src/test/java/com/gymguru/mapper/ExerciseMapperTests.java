@@ -46,7 +46,7 @@ public class ExerciseMapperTests {
     }
 
     @Test
-    void mapToExercise_ShouldReturnExercise() throws PlanNotFoundException, EmailAlreadyExistException, TrainerPriceInCorrectException {
+    void testMapToExercise() throws PlanNotFoundException, EmailAlreadyExistException, TrainerPriceInCorrectException {
         //Given
         Credential user1Credential = new Credential("user1@example.com", "password1", CredentialType.ROLE_USER);
         Credential trainerCredential = new Credential("trainer@example.com", "password2", CredentialType.ROLE_TRAINER);
@@ -76,7 +76,7 @@ public class ExerciseMapperTests {
     }
 
     @Test
-    void mapToExerciseDto_ShouldReturnExerciseDto() throws EmailAlreadyExistException, TrainerPriceInCorrectException {
+    void testMapToExerciseDto() throws EmailAlreadyExistException, TrainerPriceInCorrectException {
         //Given
         Credential user1Credential = new Credential("user1@example.com", "password1", CredentialType.ROLE_USER);
         Credential trainerCredential = new Credential("trainer@example.com", "password2", CredentialType.ROLE_TRAINER);
@@ -108,7 +108,7 @@ public class ExerciseMapperTests {
     }
 
     @Test
-    void mapToExerciseDtoList_ShouldReturnExerciseDtoList() throws TrainerPriceInCorrectException, EmailAlreadyExistException {
+    void testMapToExerciseDtoList() throws TrainerPriceInCorrectException, EmailAlreadyExistException {
         //Given
         Credential user1Credential = new Credential("user1@example.com", "password1", CredentialType.ROLE_USER);
         Credential trainerCredential = new Credential("trainer@example.com", "password2", CredentialType.ROLE_TRAINER);

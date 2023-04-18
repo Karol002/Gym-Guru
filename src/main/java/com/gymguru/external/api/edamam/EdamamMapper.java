@@ -20,7 +20,7 @@ public class EdamamMapper {
                 .collect(Collectors.toList());
     }
 
-    public List<EdamamMeal> mapToEdamamMeal(EdamamHitDto edamamHitDto) {
+    public List<EdamamMeal> mapToEdamamMealList(EdamamHitDto edamamHitDto) {
         List<EdamamMealDto> edamamMealDtos = mapToEdamamMealDtos(edamamHitDto);
         return edamamMealDtos.stream()
                 .map(edamamMealDto -> new EdamamMeal(edamamMealDto.getLabel(),

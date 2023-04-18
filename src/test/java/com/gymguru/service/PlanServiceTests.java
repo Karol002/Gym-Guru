@@ -2,7 +2,6 @@ package com.gymguru.service;
 
 import com.gymguru.config.Deleter;
 import com.gymguru.controller.exception.single.EmailAlreadyExistException;
-import com.gymguru.controller.exception.single.PlanForUserIdNotFoundException;
 import com.gymguru.controller.exception.single.PlanNotFoundException;
 import com.gymguru.controller.exception.single.TrainerPriceInCorrectException;
 import com.gymguru.domain.*;
@@ -69,7 +68,7 @@ public class PlanServiceTests {
     }
 
     @Test
-    void testGetPlanByUserId() throws EmailAlreadyExistException, TrainerPriceInCorrectException, PlanForUserIdNotFoundException {
+    void testGetPlanByUserId() throws EmailAlreadyExistException, TrainerPriceInCorrectException, PlanNotFoundException {
         //Given
         Credential user1Credential = new Credential("user1@example.com", "password1", CredentialType.ROLE_USER);
         Credential user2Credential = new Credential("user2@example.com", "password1", CredentialType.ROLE_USER);

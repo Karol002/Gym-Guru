@@ -27,7 +27,7 @@ public class OpenAiMapperTests {
     private OpenAiConfiguration openAiConfiguration;
 
     @Test
-    public void shouldMapToOpenAiRequest() {
+    public void testMapToOpenAiRequest() {
         //Given
         OpenAiMessage openAiMessage = new OpenAiMessage("content");
 
@@ -44,7 +44,7 @@ public class OpenAiMapperTests {
     }
 
     @Test
-    public void shouldMapToOpenAiDetailsDtoList() {
+    public void testMapToOpenAiDetailsDtoList() {
         //Given
         OpenAiMessage openAiMessage = new OpenAiMessage("content");
 
@@ -58,7 +58,7 @@ public class OpenAiMapperTests {
     }
 
     @Test
-    public void shouldMapToOpenAiMessageDto() {
+    public void testMapToOpenAiMessageDto() {
         //Given
         OpenAiResponseDto openAiResponseDto = new OpenAiResponseDto(new OpenAiMessage("content"));
         OpenAiObjectDto openAiObjectDto = new OpenAiObjectDto(Collections.singletonList(openAiResponseDto));
@@ -71,7 +71,7 @@ public class OpenAiMapperTests {
     }
 
     @Test
-    public void shouldMapToOpenAiMessageDtoWhenChoicesListIsEmpty() {
+    public void testMapToOpenAiMessageDtoWhenChoicesListIsEmpty() {
         //Given
         OpenAiObjectDto openAiObjectDto = new OpenAiObjectDto(Collections.emptyList());
 

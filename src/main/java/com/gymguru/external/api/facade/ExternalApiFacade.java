@@ -33,15 +33,15 @@ public class ExternalApiFacade {
         return openAiMapper.mapToOpenAiMessageDto(objectDto);
     }
 
-    public List<WgerExercise> getWgerExercisesByCategoy(Long id) {
-        return wgerMapper.mapToWgerExerciseDtos(wgerClient.getWgerExercisesByCategoy(id));
+    public List<WgerExercise> getWgerExercisesByCategory(Long id) {
+        return wgerMapper.mapToWgerExerciseDtoList(wgerClient.getWgerExercisesByCategoy(id));
     }
 
     public List<WgerCategory> getWgerCategories() {
-        return wgerMapper.mapToWgerCategoryDtos(wgerClient.getWgerCategories());
+        return wgerMapper.mapToWgerCategoryDtoList(wgerClient.getWgerCategories());
     }
 
     public List<EdamamMeal> getEdamamMeals(String mealName) {
-        return edamamMapper.mapToEdamamMeal(edamamClient.getEdamamMeals(mealName));
+        return edamamMapper.mapToEdamamMealList(edamamClient.getEdamamMeals(mealName));
     }
 }

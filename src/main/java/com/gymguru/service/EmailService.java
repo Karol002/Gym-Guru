@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class SimpleEmailService {
+public class EmailService {
     public final static String SUBJECT = "GYM-GURU";
     public final static String SUBSCRIPTION_EXPIRED = "The validity of your subscription has expired";
     public final static String SUBSCRIPTION_ACTIVE = "Thank you for choosing GYM-GURU";

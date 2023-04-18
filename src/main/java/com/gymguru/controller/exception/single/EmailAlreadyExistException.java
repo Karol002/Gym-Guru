@@ -1,4 +1,4 @@
 package com.gymguru.controller.exception.single;
 
-public class EmailAlreadyExistException extends Exception{
+public class EmailAlreadyExistException extends Exception {
 }

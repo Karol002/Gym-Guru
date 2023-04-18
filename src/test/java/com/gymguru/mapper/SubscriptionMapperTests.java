@@ -46,7 +46,7 @@ public class SubscriptionMapperTests {
     }
 
     @Test
-    void mapToSubscriptionDto_ShouldReturnSubscriptionDto() {
+    void testMapToSubscriptionDto() {
         //Given
         Credential user1Credential = new Credential("user1@example.com", "password1", CredentialType.ROLE_USER);
         Credential trainerCredential = new Credential("trainer@example.com", "password2", CredentialType.ROLE_TRAINER);
@@ -71,7 +71,7 @@ public class SubscriptionMapperTests {
     }
 
     @Test
-    void mapToSubscriptionDtoList_ShouldReturnSubscriptionDtoList() {
+    void testMapToSubscriptionDtoList() {
         //Given
         Credential user1Credential = new Credential("user1@example.com", "password1", CredentialType.ROLE_USER);
         Credential trainerCredential = new Credential("trainer@example.com", "password2", CredentialType.ROLE_TRAINER);
@@ -98,7 +98,7 @@ public class SubscriptionMapperTests {
     }
 
     @Test
-    void mapToSubscription_ShouldReturnSubscription() throws EmailAlreadyExistException, TrainerPriceInCorrectException, InCorrectSubscriptionDataException, UserNotFoundException, TrainerNotFoundException {
+    void testMapToSubscription() throws EmailAlreadyExistException, TrainerPriceInCorrectException, InCorrectSubscriptionDataException, UserNotFoundException, TrainerNotFoundException {
         //Given
         Credential user1Credential = new Credential("user1@example.com", "password1", CredentialType.ROLE_USER);
         Credential trainerCredential = new Credential("trainer@example.com", "password2", CredentialType.ROLE_TRAINER);

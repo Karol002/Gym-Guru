@@ -24,7 +24,7 @@ public class AccountAdapterTests {
     AccountAdapter accountAdapter;
 
     @Test
-    void toTrainer_ShouldReturnTrainer_WithCorrectFields() {
+    void testToTrainer() {
         //Given
         TrainerAccountDto trainerDto = new TrainerAccountDto(
                 "John",
@@ -54,7 +54,7 @@ public class AccountAdapterTests {
     }
 
     @Test
-    void toUser_ShouldReturnUser_WithCorrectFields() {
+    void testToUser() {
         //Given
         UserAccountDto userDto = new UserAccountDto(
                 "Jane",
@@ -64,10 +64,10 @@ public class AccountAdapterTests {
         );
         AccountAdapter adapter = new AccountAdapter();
 
-        // when
+        //When
         User user = adapter.toUser(userDto);
 
-        // then
+        //Then
         assertEquals("Jane", user.getFirstName());
         assertEquals("Doe", user.getLastName());
         assertNotNull(user.getCredential());

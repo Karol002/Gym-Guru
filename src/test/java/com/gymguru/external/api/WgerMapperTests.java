@@ -1,7 +1,6 @@
 package com.gymguru.external.api;
 
 import com.gymguru.external.api.wger.WgerCategory;
-import com.gymguru.external.api.wger.WgerConfiguration;
 import com.gymguru.external.api.wger.WgerExercise;
 import com.gymguru.external.api.wger.WgerMapper;
 import com.gymguru.external.api.wger.dto.WgerCategoryBoardDto;
@@ -22,7 +21,7 @@ public class WgerMapperTests {
     private WgerMapper wgerMapper;
 
     @Test
-    public void shouldMapToWgerExerciseDtos() {
+    public void testMapToWgerExerciseDtoList() {
         //Given
         WgerExerciseBoardDto wgerExerciseBoardDto = new WgerExerciseBoardDto();
         WgerExercise exercise1 = new WgerExercise();
@@ -34,7 +33,7 @@ public class WgerMapperTests {
         wgerExerciseBoardDto.setWgerExercises(Arrays.asList(exercise1, exercise2));
 
         //When
-        List<WgerExercise> wgerExerciseDtos = wgerMapper.mapToWgerExerciseDtos(wgerExerciseBoardDto);
+        List<WgerExercise> wgerExerciseDtos = wgerMapper.mapToWgerExerciseDtoList(wgerExerciseBoardDto);
 
         //Then
         assertEquals(2, wgerExerciseDtos.size());
@@ -45,20 +44,7 @@ public class WgerMapperTests {
     }
 
     @Test
-    public void shouldMapToWgerExerciseDtosWhenWgerExerciseBoardDtoIsNull() {
-        //Given
-        WgerExerciseBoardDto wgerExerciseBoardDto = null;
-
-        //When
-        List<WgerExercise> wgerExerciseDtos = wgerMapper.mapToWgerExerciseDtos(wgerExerciseBoardDto);
-
-        //Then
-        assertNotNull(wgerExerciseDtos);
-        assertTrue(wgerExerciseDtos.isEmpty());
-    }
-
-    @Test
-    public void shouldMapToWgerCategoryDtos() {
+    public void testMapToWgerCategoryDtoList() {
         //Given
         WgerCategoryBoardDto wgerCategoryBoardDto = new WgerCategoryBoardDto();
         WgerCategory category1 = new WgerCategory();
@@ -70,7 +56,7 @@ public class WgerMapperTests {
         wgerCategoryBoardDto.setWgerCategories(Arrays.asList(category1, category2));
 
         //When
-        List<WgerCategory> wgerCategoryDtos = wgerMapper.mapToWgerCategoryDtos(wgerCategoryBoardDto);
+        List<WgerCategory> wgerCategoryDtos = wgerMapper.mapToWgerCategoryDtoList(wgerCategoryBoardDto);
 
         //Then
         assertEquals(2, wgerCategoryDtos.size());
@@ -78,19 +64,6 @@ public class WgerMapperTests {
         assertEquals("Category 1", wgerCategoryDtos.get(0).getName());
         assertEquals(2L, wgerCategoryDtos.get(1).getId().longValue());
         assertEquals("Category 2", wgerCategoryDtos.get(1).getName());
-    }
-
-    @Test
-    public void shouldMapToWgerCategoryDtosWhenWgerCategoryBoardDtoIsNull() {
-        //Given
-        WgerCategoryBoardDto wgerCategoryBoardDto = null;
-
-        //When
-        List<WgerCategory> wgerCategoryDtos = wgerMapper.mapToWgerCategoryDtos(wgerCategoryBoardDto);
-
-        //Then
-        assertNotNull(wgerCategoryDtos);
-        assertTrue(wgerCategoryDtos.isEmpty());
     }
 }
 

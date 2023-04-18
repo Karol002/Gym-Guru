@@ -49,7 +49,7 @@ public class PlanMapperTests {
     }
 
     @Test
-    void mapToPlan_ShouldReturnPlan() throws UserNotFoundException, TrainerNotFoundException, EmailAlreadyExistException, TrainerPriceInCorrectException {
+    void testMapToPlan() throws UserNotFoundException, TrainerNotFoundException, EmailAlreadyExistException, TrainerPriceInCorrectException {
         //Given
         Credential user1Credential = new Credential("user1@example.com", "password1", CredentialType.ROLE_USER);
         Credential trainerCredential = new Credential("trainer@example.com", "password2", CredentialType.ROLE_TRAINER);
@@ -78,7 +78,7 @@ public class PlanMapperTests {
     }
 
     @Test
-    void mapToPlanDto_ShouldReturnPlanDto() {
+    void testMapToPlanDto() {
         //Given
         Credential user1Credential = new Credential("user1@example.com", "password1", CredentialType.ROLE_USER);
         Credential trainerCredential = new Credential("trainer@example.com", "password2", CredentialType.ROLE_TRAINER);

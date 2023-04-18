@@ -7,10 +7,11 @@ import com.gymguru.domain.dto.PlanDto;
 import com.gymguru.service.TrainerService;
 import com.gymguru.service.UserService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@AllArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class PlanMapper {
     private final UserService userService;
     private final TrainerService trainerService;

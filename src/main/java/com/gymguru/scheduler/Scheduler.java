@@ -4,7 +4,7 @@ import com.gymguru.controller.exception.single.CredentialNotFoundException;
 import com.gymguru.domain.Mail;
 import com.gymguru.domain.Subscription;
 import com.gymguru.service.CredentialService;
-import com.gymguru.service.SimpleEmailService;
+import com.gymguru.service.EmailService;
 import com.gymguru.service.SubscriptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class Scheduler {
     private final SubscriptionService subscriptionService;
-    private final SimpleEmailService simpleEmailService;
+    private final EmailService emailService;
     private final CredentialService credentialService;
 
     @Scheduled(cron = "0 0 10 * * *")
@@ -29,18 +29,18 @@ public class Scheduler {
     }
 
     private void thankForSubscription(Subscription subscription) throws CredentialNotFoundException {
-        simpleEmailService.send(new Mail(
+        emailService.send(new Mail(
                 credentialService.getById(subscription.getUser().getCredential().getId()).getEmail(),
-                SimpleEmailService.SUBJECT,
-                SimpleEmailService.SUBSCRIPTION_ACTIVE
+                EmailService.SUBJECT,
+                EmailService.SUBSCRIPTION_ACTIVE
         ));
     }
 
     private void deleteSubscription(Subscription subscription) throws CredentialNotFoundException {
-        simpleEmailService.send(new Mail(
+        emailService.send(new Mail(
                 credentialService.getById(subscription.getUser().getCredential().getId()).getEmail(),
-                SimpleEmailService.SUBJECT,
-                SimpleEmailService.SUBSCRIPTION_EXPIRED
+                EmailService.SUBJECT,
+                EmailService.SUBSCRIPTION_EXPIRED
         ));
         subscriptionService.deleteSubscriptionById(subscription.getId());
     }

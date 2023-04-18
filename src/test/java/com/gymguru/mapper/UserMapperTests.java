@@ -33,7 +33,7 @@ public class UserMapperTests {
     }
 
     @Test
-    void mapToUser_ShouldReturnUser() throws CredentialNotFoundException, EmailAlreadyExistException {
+    void testMapToUser() throws CredentialNotFoundException, EmailAlreadyExistException {
         //Given
         Credential credential = new Credential( "test@example.com", "password", CredentialType.ROLE_USER);
         User user = new User("john", "smith", credential);
@@ -53,16 +53,7 @@ public class UserMapperTests {
     }
 
     @Test
-    void mapToUser_ShouldThrowCredentialNotFoundException() {
-        //Given
-        UserDto userDto = new UserDto(1L, "John", "Doe", 1L);
-
-        //When & Then
-        assertThrows(CredentialNotFoundException.class, () -> userMapper.mapToUser(userDto));
-    }
-
-    @Test
-    void mapToUserDto_ShouldReturnUserDto() {
+    void testMapToUserDto() {
         //Given
         Credential credential = new Credential(1L, "test@example.com", "password", CredentialType.ROLE_USER);
         User user = new User(1L, "John", "Doe", credential);

@@ -15,8 +15,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
     private final CredentialService credentialService;
@@ -49,9 +49,9 @@ public class UserService {
         } else  throw new EmailAlreadyExistException();
     }
 
-    public void updateUser(User user) throws UserNotFoundException {
+    public User updateUser(User user) throws UserNotFoundException {
         if (userRepository.existsById(user.getId())) {
-            userRepository.save(user);
+            return userRepository.save(user);
         } else throw new UserNotFoundException();
     }
 

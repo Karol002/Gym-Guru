@@ -26,7 +26,7 @@ public class ExerciseController {
         return ResponseEntity.ok(exerciseMapper.mapToExerciseDtoList(exercises));
     }
 
-    @PutMapping()
+    @PutMapping
     public ResponseEntity<ExerciseDto> updateExercise(@RequestBody ExerciseDto exerciseDto) throws PlanNotFoundException, ExerciseNotFoundException {
         Exercise exercise = exerciseMapper.mapToExercise(exerciseDto);
         Exercise updatedExercise = exerciseService.updateExercise(exercise);

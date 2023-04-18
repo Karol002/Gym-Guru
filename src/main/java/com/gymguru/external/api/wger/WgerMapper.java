@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class WgerMapper {
-    public List<WgerExercise> mapToWgerExerciseDtos(WgerExerciseBoardDto wgerExerciseBoardDto) {
+    public List<WgerExercise> mapToWgerExerciseDtoList(WgerExerciseBoardDto wgerExerciseBoardDto) {
         return new ArrayList<>(Optional.ofNullable(wgerExerciseBoardDto)
                 .map(WgerExerciseBoardDto::getWgerExercises)
                 .orElse(Collections.emptyList()))
@@ -22,7 +22,7 @@ public class WgerMapper {
                 .collect(Collectors.toList());
     }
 
-    public List<WgerCategory> mapToWgerCategoryDtos(WgerCategoryBoardDto wgerCategoryBoardDto) {
+    public List<WgerCategory> mapToWgerCategoryDtoList(WgerCategoryBoardDto wgerCategoryBoardDto) {
         return new ArrayList<>(Optional.ofNullable(wgerCategoryBoardDto)
                 .map(WgerCategoryBoardDto::getWgerCategories)
                 .orElse(Collections.emptyList()));

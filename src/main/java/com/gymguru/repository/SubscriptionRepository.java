@@ -8,8 +8,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
 @Repository
+@Transactional
 public interface SubscriptionRepository extends CrudRepository<Subscription, Long> {
 
     List<Subscription> findAllByTrainerId(Long trainerId);

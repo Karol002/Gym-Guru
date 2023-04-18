@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class SubscriptionService {
     private final SubscriptionRepository subscriptionRepository;
     private final PlanService planService;
@@ -91,16 +91,16 @@ public class SubscriptionService {
     }
 
     @Transactional
-    public void extendSubscription(Long userId, Long monthQuantity) throws SubscriptionNotFoundException, InCorrectSubscriptionDataException {
+    public Subscription extendSubscription(Long userId, Long monthQuantity) throws SubscriptionNotFoundException, InCorrectSubscriptionDataException {
         Subscription subscription = subscriptionRepository.findByUserId(userId).orElseThrow(SubscriptionNotFoundException::new);
         if (checkIsCorrectLong(subscription.getStartDate(), subscription.getStartDate().plusMonths(monthQuantity))) {
 
-            BigDecimal extendPrice = calculatePrice(subscription.getStartDate(), subscription.getStartDate().plusMonths(monthQuantity),
+            BigDecimal extendPrice = calculatePrice(subscription.getStartDate(), subscription.getEndDate().plusMonths(monthQuantity),
                     subscription.getTrainer().getMonthPrice());
             subscription.setPrice(extendPrice);
             subscription.setEndDate(subscription.getEndDate().plusMonths(monthQuantity));
 
-            subscriptionRepository.save(subscription);
+            return subscriptionRepository.save(subscription);
         } else throw new InCorrectSubscriptionDataException();
     }
 

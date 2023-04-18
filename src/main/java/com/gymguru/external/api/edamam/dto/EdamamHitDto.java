@@ -13,7 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EdamamHitDto {
-
     @JsonProperty("hits")
     private List<EdamamRecipeDto> edamamRecipeDto;
 }

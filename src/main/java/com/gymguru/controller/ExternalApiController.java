@@ -31,7 +31,7 @@ public class ExternalApiController {
 
     @GetMapping(value = "/wger/exercises/{categoryId}")
     public ResponseEntity<List<WgerExercise>> getWgerExercisesByCategoryId(@PathVariable Long categoryId) {
-        return ResponseEntity.ok(externalApiFacade.getWgerExercisesByCategoy(categoryId));
+        return ResponseEntity.ok(externalApiFacade.getWgerExercisesByCategory(categoryId));
     }
 
     @GetMapping(value = "/wger/categories")

@@ -13,24 +13,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class SimpleEmailServiceTests {
+public class EmailServiceTests {
 
     private JavaMailSender javaMailSender;
-    private SimpleEmailService simpleEmailService;
+    private EmailService emailService;
 
     @BeforeEach
     public void setUp() {
         javaMailSender = mock(JavaMailSender.class);
-        simpleEmailService = new SimpleEmailService(javaMailSender);
+        emailService = new EmailService(javaMailSender);
     }
 
     @Test
-    public void sendEmail_shouldSendEmail() {
+    public void testSendEmail() {
         //Given
         Mail mail = new Mail("test@example.com", "Test email", "This is a test email");
 
         //When
-        simpleEmailService.send(mail);
+        emailService.send(mail);
 
         //Then
         ArgumentCaptor<SimpleMailMessage> argumentCaptor = ArgumentCaptor.forClass(SimpleMailMessage.class);

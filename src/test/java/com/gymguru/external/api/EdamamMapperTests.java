@@ -9,10 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -22,8 +20,8 @@ public class EdamamMapperTests {
     private EdamamMapper edamamMapper;
 
     @Test
-    void mapToEdamamMeal_ShouldReturnMappedEdamamMeals() {
-        // given
+    void testMapToEdamamMealList() {
+        //Given
         EdamamMealDto edamamMealDto1 = new EdamamMealDto("Label 1", List.of("Ingredient 1.1", "Ingredient 1.2"));
         EdamamMealDto edamamMealDto2 = new EdamamMealDto("Label 2", List.of("Ingredient 2.1", "Ingredient 2.2"));
         EdamamRecipeDto edamamRecipeDto1 = new EdamamRecipeDto(edamamMealDto1);
@@ -31,10 +29,10 @@ public class EdamamMapperTests {
         List<EdamamRecipeDto> edamamRecipeDtos = List.of(edamamRecipeDto1, edamamRecipeDto2);
         EdamamHitDto edamamHitDto = new EdamamHitDto(edamamRecipeDtos);
 
-        // when
-        List<EdamamMeal> edamamMeals = edamamMapper.mapToEdamamMeal(edamamHitDto);
+        //When
+        List<EdamamMeal> edamamMeals = edamamMapper.mapToEdamamMealList(edamamHitDto);
 
-        // then
+        //Then
         assertEquals(2, edamamMeals.size());
         assertEquals("Label 1", edamamMeals.get(0).getLabel());
         assertEquals("Ingredient 1.1, Ingredient 1.2", edamamMeals.get(0).getIngredientLines());

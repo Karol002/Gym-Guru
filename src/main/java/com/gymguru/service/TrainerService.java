@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class TrainerService {
     private final TrainerRepository trainerRepository;
     private final CredentialService credentialService;

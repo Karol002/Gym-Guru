@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Transactional
 @Repository
+@Transactional
 public interface ExerciseRepository extends CrudRepository<Exercise, Long> {
 
     List<Exercise> findAll();

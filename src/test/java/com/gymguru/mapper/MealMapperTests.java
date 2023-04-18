@@ -47,7 +47,7 @@ public class MealMapperTests {
     }
 
     @Test
-    void mapToMeal_ShouldReturnMeal() throws PlanNotFoundException, EmailAlreadyExistException, TrainerPriceInCorrectException {
+    void testMapToMeal() throws PlanNotFoundException, EmailAlreadyExistException, TrainerPriceInCorrectException {
         //Given
         Credential user1Credential = new Credential("user1@example.com", "password1", CredentialType.ROLE_USER);
         Credential trainerCredential = new Credential("trainer@example.com", "password2", CredentialType.ROLE_TRAINER);
@@ -75,7 +75,7 @@ public class MealMapperTests {
     }
 
     @Test
-    void mapToMealDto_ShouldReturnMealDto() throws EmailAlreadyExistException, TrainerPriceInCorrectException {
+    void testMapToMealDto() throws EmailAlreadyExistException, TrainerPriceInCorrectException {
         //Given
         Credential user1Credential = new Credential("user1@example.com", "password1", CredentialType.ROLE_USER);
         Credential trainerCredential = new Credential("trainer@example.com", "password2", CredentialType.ROLE_TRAINER);
@@ -105,7 +105,7 @@ public class MealMapperTests {
     }
 
     @Test
-    void mapToMealDtoList_ShouldReturnMealDtoList() throws TrainerPriceInCorrectException, EmailAlreadyExistException {
+    void testMapToMealDtoList() throws TrainerPriceInCorrectException, EmailAlreadyExistException {
         //Given
         Credential user1Credential = new Credential("user1@example.com", "password1", CredentialType.ROLE_USER);
         Credential trainerCredential = new Credential("trainer@example.com", "password2", CredentialType.ROLE_TRAINER);

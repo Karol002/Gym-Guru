@@ -3,6 +3,7 @@ package com.gymguru.external.api.openai;
 import com.gymguru.external.api.openai.dto.OpenAiDetailsDto;
 import com.gymguru.external.api.openai.dto.OpenAiObjectDto;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class OpenAiMapper {
     private final OpenAiConfiguration openAiConfiguration;
 

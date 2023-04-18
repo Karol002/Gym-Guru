@@ -52,9 +52,10 @@ public class TrainerController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Trainer> updateTrainer(@RequestBody TrainerDto trainerDto) throws TrainerNotFoundException, CredentialNotFoundException, TrainerPriceInCorrectException {
+    @PutMapping
+    public ResponseEntity<TrainerDto> updateTrainer(@RequestBody TrainerDto trainerDto) throws TrainerNotFoundException, CredentialNotFoundException, TrainerPriceInCorrectException {
         Trainer trainer = trainerMapper.mapToTrainer(trainerDto);
-        return ResponseEntity.ok(trainerService.updateTrainer(trainer));
+        Trainer updatedTrainer = trainerService.updateTrainer(trainer);
+        return ResponseEntity.ok(trainerMapper.mapToTrainerDto(updatedTrainer));
     }
 }

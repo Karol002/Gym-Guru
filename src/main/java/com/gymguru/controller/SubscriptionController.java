@@ -61,8 +61,8 @@ public class SubscriptionController {
     }
 
     @PutMapping(value = "/extend/{userId}/{monthQuantity}")
-    public ResponseEntity<Void> extendSubscription(@PathVariable Long userId, @PathVariable Long monthQuantity) throws SubscriptionNotFoundException, InCorrectSubscriptionDataException {
-        subscriptionService.extendSubscription(userId, monthQuantity);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<SubscriptionDto> extendSubscription(@PathVariable Long userId, @PathVariable Long monthQuantity) throws SubscriptionNotFoundException, InCorrectSubscriptionDataException {
+        Subscription updatedSubscription = subscriptionService.extendSubscription(userId, monthQuantity);
+        return ResponseEntity.ok(subscriptionMapper.mapToSubscriptionDto(updatedSubscription));
     }
 }

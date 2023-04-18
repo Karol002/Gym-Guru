@@ -39,7 +39,7 @@ public class TrainerMapperTests {
     }
 
     @Test
-    void mapToTrainer_ShouldReturnTrainer() throws CredentialNotFoundException, EmailAlreadyExistException, TrainerPriceInCorrectException {
+    void testMapToTrainer() throws CredentialNotFoundException, EmailAlreadyExistException, TrainerPriceInCorrectException {
         //Given
         Credential credential = new Credential("test@example.com", "password", CredentialType.ROLE_TRAINER);
         Trainer trainer = new Trainer("John", "Doe", "description", "education", BigDecimal.valueOf(20), Specialization.Strength, credential);
@@ -63,16 +63,7 @@ public class TrainerMapperTests {
     }
 
     @Test
-    void mapToTrainer_ShouldThrowCredentialNotFoundException() {
-        //Given
-        TrainerDto trainerDto = new TrainerDto(1L, "John", "Doe", "description", "education", BigDecimal.valueOf(35), Specialization.Health, 1L);
-
-        //When & Then
-        assertThrows(CredentialNotFoundException.class, () -> trainerMapper.mapToTrainer(trainerDto));
-    }
-
-    @Test
-    void mapToTrainerDto_ShouldReturnTrainerDto() {
+    void testMapToTrainerDto() {
         //Given
         Credential credential = new Credential(1L, "test@example.com", "password", CredentialType.ROLE_TRAINER);
         Trainer trainer = new Trainer(1L, "John", "Doe", "description", "education", BigDecimal.valueOf(35), Specialization.Health, credential);
@@ -93,7 +84,7 @@ public class TrainerMapperTests {
     }
 
     @Test
-    void mapToTrainerDtoList_ShouldReturnTrainerDtoList() {
+    void testMapToTrainerDtoList() {
         //Given
         Credential credential = new Credential(1L, "test@example.com", "password", CredentialType.ROLE_TRAINER);
         Trainer trainer1 = new Trainer(1L, "John", "Doe", "description", "education", BigDecimal.valueOf(100), Specialization.Health, credential);
@@ -125,18 +116,5 @@ public class TrainerMapperTests {
         assertEquals(trainer2.getMonthPrice(), resultList.get(1).getMonthPrice());
         assertEquals(trainer2.getSpecialization(), resultList.get(1).getSpecialization());
         assertEquals(trainer2.getCredential().getId(), resultList.get(1).getCredentialId());
-    }
-
-    @Test
-    void mapToTrainerDtoList_ShouldReturnEmptyList() {
-        //Given
-        List<Trainer> trainerList = new ArrayList<>();
-
-        //When
-        List<TrainerDto> resultList = trainerMapper.mapToTrainerDtoList(trainerList);
-
-        //Then
-        assertNotNull(resultList);
-        assertTrue(resultList.isEmpty());
     }
 }

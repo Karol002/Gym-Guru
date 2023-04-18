@@ -42,7 +42,7 @@ public class UserServiceTests {
 
     @Test
     void testGetUsersEmails() throws EmailAlreadyExistException, UserNotFoundException {
-        //Given
+        // Given
         Credential credential1 = new Credential("test1@example.com", "password1", CredentialType.ROLE_USER);
         Credential credential2 = new Credential("test2@example.com", "password2", CredentialType.ROLE_USER);
         User user1 = new User("john", "smith", credential1);
@@ -51,7 +51,7 @@ public class UserServiceTests {
         userService.saveUser(user1);
         userService.saveUser(user2);
 
-        //When
+        // When
         List<User> users = userService.getAllUsers();
 
         //Then
@@ -60,7 +60,7 @@ public class UserServiceTests {
 
     @Test
     void testGetAllEmails() throws EmailAlreadyExistException {
-        //Given
+        // Given
         Credential credential1 = new Credential("test1@example.com", "password1", CredentialType.ROLE_USER);
         Credential credential2 = new Credential("test2@example.com", "password2", CredentialType.ROLE_USER);
         User user1 = new User("john", "smith", credential1);
@@ -72,7 +72,7 @@ public class UserServiceTests {
         //When
         List<String> emails = userService.getAllEmails();
 
-        //Then
+        // Then
         assertEquals(2, emails.size());
         assertTrue(emails.contains("test1@example.com"));
         assertTrue(emails.contains("test2@example.com"));
@@ -156,7 +156,7 @@ public class UserServiceTests {
 
     @Test
     void testCascadeDeleteCredential() throws EmailAlreadyExistException {
-        ///Given
+        //Given
         Credential credential = new Credential("test@example.com", "password", CredentialType.ROLE_USER);
         User user = new User("john", "smith", credential);
 

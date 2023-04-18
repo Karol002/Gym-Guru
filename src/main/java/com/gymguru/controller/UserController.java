@@ -38,22 +38,22 @@ public class UserController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createUser(@RequestBody UserAccountDto trainerAccountDto) throws CredentialNotFoundException, EmailAlreadyExistException {
+    public ResponseEntity<Void> createUser(@RequestBody UserAccountDto trainerAccountDto) throws  EmailAlreadyExistException {
         User user = accountAdapter.toUser(trainerAccountDto);
         userService.saveUser(user);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(value = "/password")
-    public ResponseEntity<Void> changePassword(@RequestBody PasswordChanger passwordChanger) throws CredentialNotFoundException, EmailAlreadyExistException, InvalidCredentialException {
-        userService.changePassword(passwordChanger);
-        return ResponseEntity.ok().build();
+    @PutMapping
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) throws CredentialNotFoundException, UserNotFoundException {
+        User user = userMapper.mapToUser(userDto);
+        User updatedUser = userService.updateUser(user);
+        return ResponseEntity.ok(userMapper.mapTotUseDto(updatedUser));
     }
 
-    @PutMapping()
-    public ResponseEntity<Void> changePassword(@RequestBody UserDto userDto) throws CredentialNotFoundException, UserNotFoundException {
-        User user = userMapper.mapToUser(userDto);
-        userService.updateUser(user);
+    @PutMapping(value = "/password")
+    public ResponseEntity<Void> changePassword(@RequestBody PasswordChanger passwordChanger) throws CredentialNotFoundException, InvalidCredentialException {
+        userService.changePassword(passwordChanger);
         return ResponseEntity.ok().build();
     }
 }

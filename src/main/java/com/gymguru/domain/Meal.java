@@ -26,7 +26,7 @@ public class Meal {
     private String name;
 
     @NotNull
-    @Column(name = "COOK_INSTRUCTION", length = 500)
+    @Column(name = "COOK_INSTRUCTION", length = 1000)
     private String cookInstruction;
 
     @ManyToOne

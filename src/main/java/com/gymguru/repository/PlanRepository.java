@@ -8,8 +8,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
 @Repository
+@Transactional
 public interface PlanRepository extends CrudRepository<Plan, Long> {
 
     Optional<Plan> findByUserId(Long userId);
