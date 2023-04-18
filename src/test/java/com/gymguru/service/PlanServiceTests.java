@@ -1,7 +1,10 @@
 package com.gymguru.service;
 
 import com.gymguru.config.Deleter;
-import com.gymguru.controller.exception.single.*;
+import com.gymguru.controller.exception.single.EmailAlreadyExistException;
+import com.gymguru.controller.exception.single.PlanForUserIdNotFoundException;
+import com.gymguru.controller.exception.single.PlanNotFoundException;
+import com.gymguru.controller.exception.single.TrainerPriceInCorrectException;
 import com.gymguru.domain.*;
 import com.gymguru.domain.enums.CredentialType;
 import com.gymguru.domain.enums.Specialization;
@@ -11,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,8 +1,8 @@
 package com.gymguru.controller;
 
 import com.gymguru.external.api.edamam.EdamamMeal;
-import com.gymguru.external.api.openai.OpenAiMessage;
 import com.gymguru.external.api.facade.ExternalApiFacade;
+import com.gymguru.external.api.openai.OpenAiMessage;
 import com.gymguru.external.api.wger.WgerCategory;
 import com.gymguru.external.api.wger.WgerExercise;
 import lombok.RequiredArgsConstructor;

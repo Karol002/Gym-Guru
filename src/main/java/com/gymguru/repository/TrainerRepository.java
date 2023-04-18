@@ -1,7 +1,7 @@
 package com.gymguru.repository;
 
-import com.gymguru.domain.enums.Specialization;
 import com.gymguru.domain.Trainer;
+import com.gymguru.domain.enums.Specialization;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

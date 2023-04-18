@@ -3,8 +3,8 @@ package com.gymguru.controller;
 import com.gymguru.adapter.plan.CompletePlanDto;
 import com.gymguru.adapter.plan.PlanAdapter;
 import com.gymguru.controller.exception.single.*;
-import com.gymguru.domain.dto.PlanDto;
 import com.gymguru.domain.Plan;
+import com.gymguru.domain.dto.PlanDto;
 import com.gymguru.mapper.PlanMapper;
 import com.gymguru.service.PlanService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ public class PlanController {
     @GetMapping(value = "{userId}")
     public ResponseEntity<PlanDto> getPlanByUserId(@PathVariable Long userId) throws SubscriptionNotFoundException, SubscriptionExpiredException, PlanForUserIdNotFoundException {
         Plan plan = planService.getPlanByUserId(userId);
-        return ResponseEntity.ok(planMapper.mapToExistPlanDto(plan));
+        return ResponseEntity.ok(planMapper.mapToPlanDto(plan));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

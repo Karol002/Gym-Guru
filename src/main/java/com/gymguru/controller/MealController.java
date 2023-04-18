@@ -2,8 +2,8 @@ package com.gymguru.controller;
 
 import com.gymguru.controller.exception.single.MealNotFoundException;
 import com.gymguru.controller.exception.single.PlanNotFoundException;
-import com.gymguru.domain.dto.MealDto;
 import com.gymguru.domain.Meal;
+import com.gymguru.domain.dto.MealDto;
 import com.gymguru.mapper.MealMapper;
 import com.gymguru.service.MealService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class MealController {
     @GetMapping(value = "plan/{planId}")
     public ResponseEntity<List<MealDto>> getMealsByPlanId(@PathVariable Long planId) {
         List<Meal> exercises = mealService.getMealsByPlanId(planId);
-        return ResponseEntity.ok(mealMapper.mapToExistMealDtoList(exercises));
+        return ResponseEntity.ok(mealMapper.mapToMealDtoList(exercises));
     }
 
     @PutMapping

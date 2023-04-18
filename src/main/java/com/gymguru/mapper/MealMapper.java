@@ -23,7 +23,7 @@ public class MealMapper {
         );
     }
 
-    public MealDto mapToExistMealDto(final Meal meal) {
+    public MealDto mapToMealDto(final Meal meal) {
         return new MealDto(
                 meal.getId(),
                 meal.getName(),
@@ -32,9 +32,9 @@ public class MealMapper {
         );
     }
 
-    public List<MealDto> mapToExistMealDtoList(List<Meal> meals) {
+    public List<MealDto> mapToMealDtoList(List<Meal> meals) {
         return meals.stream()
-                .map(this::mapToExistMealDto)
+                .map(this::mapToMealDto)
                 .toList();
     }
 }

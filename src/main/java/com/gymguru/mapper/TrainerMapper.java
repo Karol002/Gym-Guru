@@ -4,8 +4,6 @@ import com.gymguru.controller.exception.single.CredentialNotFoundException;
 import com.gymguru.domain.Trainer;
 import com.gymguru.domain.dto.TrainerDto;
 import com.gymguru.service.CredentialService;
-import com.gymguru.service.PlanService;
-import com.gymguru.service.SubscriptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +13,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TrainerMapper {
     private final CredentialService credentialService;
-    private final SubscriptionService subscriptionService;
-    private final PlanService planService;
 
     public Trainer mapToTrainer(final TrainerDto trainerDto) throws CredentialNotFoundException {
         return new Trainer(
@@ -27,9 +23,7 @@ public class TrainerMapper {
                 trainerDto.getEducation(),
                 trainerDto.getMonthPrice(),
                 trainerDto.getSpecialization(),
-                credentialService.getById(trainerDto.getCredentialId()),
-                subscriptionService.getSubscriptionsByTrainerId(trainerDto.getId()),
-                planService.getAllPlansByTrainerId(trainerDto.getId())
+                credentialService.getById(trainerDto.getCredentialId())
         );
     }
 
@@ -46,7 +40,7 @@ public class TrainerMapper {
         );
     }
 
-    public List<TrainerDto> mapToExistTrainerDtoList(final List<Trainer> trainers) {
+    public List<TrainerDto> mapToTrainerDtoList(final List<Trainer> trainers) {
         return trainers.stream()
                 .map(this::mapToTrainerDto)
                 .toList();

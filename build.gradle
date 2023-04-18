@@ -40,6 +40,7 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation 'com.google.code.gson:gson'
     testImplementation 'org.projectlombok:lombok:1.18.22'
+    testImplementation 'org.springframework.security:spring-security-test:5.6.1'
 }
 
 tasks.named('test') {

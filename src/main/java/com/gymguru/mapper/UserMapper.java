@@ -7,8 +7,6 @@ import com.gymguru.service.CredentialService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class UserMapper {

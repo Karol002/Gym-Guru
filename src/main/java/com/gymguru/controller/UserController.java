@@ -2,13 +2,12 @@ package com.gymguru.controller;
 
 import com.gymguru.adapter.account.AccountAdapter;
 import com.gymguru.adapter.account.UserAccountDto;
+import com.gymguru.controller.exception.single.CredentialNotFoundException;
 import com.gymguru.controller.exception.single.EmailAlreadyExistException;
 import com.gymguru.controller.exception.single.InvalidCredentialException;
 import com.gymguru.controller.exception.single.UserNotFoundException;
-import com.gymguru.domain.Credential;
 import com.gymguru.domain.User;
 import com.gymguru.domain.dto.UserDto;
-import com.gymguru.controller.exception.single.CredentialNotFoundException;
 import com.gymguru.mapper.UserMapper;
 import com.gymguru.security.PasswordChanger;
 import com.gymguru.service.UserService;

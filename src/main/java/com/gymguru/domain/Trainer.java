@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "TRAINERS")
+@Entity
 public class Trainer {
 
     @Id
@@ -69,6 +69,17 @@ public class Trainer {
     private List<Plan> plans = new ArrayList<>();
 
     public Trainer(String firstName, String lastName, String description, String education, BigDecimal monthPrice, Specialization specialization, Credential credential) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.description = description;
+        this.education = education;
+        this.monthPrice = monthPrice;
+        this.specialization = specialization;
+        this.credential = credential;
+    }
+
+    public Trainer(Long id, String firstName, String lastName, String description, String education, BigDecimal monthPrice, Specialization specialization, Credential credential) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.description = description;

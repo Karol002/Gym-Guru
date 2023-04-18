@@ -4,9 +4,9 @@ import com.gymguru.controller.exception.single.InCorrectSubscriptionDataExceptio
 import com.gymguru.controller.exception.single.SubscriptionNotFoundException;
 import com.gymguru.controller.exception.single.TrainerNotFoundException;
 import com.gymguru.controller.exception.single.UserNotFoundException;
+import com.gymguru.domain.Subscription;
 import com.gymguru.domain.dto.SubscriptionDto;
 import com.gymguru.domain.dto.save.SaveSubscriptionDto;
-import com.gymguru.domain.Subscription;
 import com.gymguru.mapper.SubscriptionMapper;
 import com.gymguru.service.SubscriptionService;
 import lombok.RequiredArgsConstructor;
@@ -27,19 +27,19 @@ public class SubscriptionController {
     @GetMapping(value = "trainer/{trainerId}")
     public ResponseEntity<List<SubscriptionDto>> getSubscriptions(@PathVariable Long trainerId) {
         List<Subscription> subscriptions = subscriptionService.getSubscriptionsByTrainerId(trainerId);
-        return ResponseEntity.ok(subscriptionMapper.mapToExistSubscriptionDtoList(subscriptions));
+        return ResponseEntity.ok(subscriptionMapper.mapToSubscriptionDtoList(subscriptions));
     }
 
     @GetMapping(value = "without/plan/{trainerId}")
     public ResponseEntity<List<SubscriptionDto>> getSubscriptionsWithoutPlan(@PathVariable Long trainerId) {
         List<Subscription> subscriptions = subscriptionService.getSubscriptionsWithoutPlanByTrainerId(trainerId);
-        return ResponseEntity.ok(subscriptionMapper.mapToExistSubscriptionDtoList(subscriptions));
+        return ResponseEntity.ok(subscriptionMapper.mapToSubscriptionDtoList(subscriptions));
     }
 
     @GetMapping(value = "with/plan/{trainerId}")
     public ResponseEntity<List<SubscriptionDto>> getSubscriptionsWithPlan(@PathVariable Long trainerId) {
         List<Subscription> subscriptions = subscriptionService.getSubscriptionsWithPlanByTrainerId(trainerId);
-        return ResponseEntity.ok(subscriptionMapper.mapToExistSubscriptionDtoList(subscriptions));
+        return ResponseEntity.ok(subscriptionMapper.mapToSubscriptionDtoList(subscriptions));
     }
 
     @GetMapping(value = "user/{userId}")

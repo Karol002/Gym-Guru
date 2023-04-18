@@ -1,5 +1,8 @@
 package com.gymguru.external.api.facade;
 
+import com.gymguru.external.api.edamam.EdamamClient;
+import com.gymguru.external.api.edamam.EdamamMapper;
+import com.gymguru.external.api.edamam.EdamamMeal;
 import com.gymguru.external.api.openai.OpenAIRequest;
 import com.gymguru.external.api.openai.OpenAiClient;
 import com.gymguru.external.api.openai.OpenAiMapper;
@@ -8,9 +11,6 @@ import com.gymguru.external.api.openai.dto.OpenAiObjectDto;
 import com.gymguru.external.api.wger.WgerCategory;
 import com.gymguru.external.api.wger.WgerClient;
 import com.gymguru.external.api.wger.WgerExercise;
-import com.gymguru.external.api.edamam.EdamamClient;
-import com.gymguru.external.api.edamam.EdamamMapper;
-import com.gymguru.external.api.edamam.EdamamMeal;
 import com.gymguru.external.api.wger.WgerMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

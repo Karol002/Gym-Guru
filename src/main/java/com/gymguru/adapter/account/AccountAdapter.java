@@ -1,11 +1,10 @@
 package com.gymguru.adapter.account;
 
 import com.gymguru.domain.Credential;
-import com.gymguru.domain.enums.CredentialType;
 import com.gymguru.domain.Trainer;
 import com.gymguru.domain.User;
+import com.gymguru.domain.enums.CredentialType;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service

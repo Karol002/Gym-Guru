@@ -17,9 +17,9 @@ public class ExerciseService {
         return exerciseRepository.findAllByPlanId(planId);
     }
 
-    public void updateExercise(final Exercise exercise) throws ExerciseNotFoundException {
+    public Exercise updateExercise(final Exercise exercise) throws ExerciseNotFoundException {
         if (exerciseRepository.existsById(exercise.getId())) {
-            exerciseRepository.save(exercise);
+            return exerciseRepository.save(exercise);
         } else throw new ExerciseNotFoundException();
     }
 }

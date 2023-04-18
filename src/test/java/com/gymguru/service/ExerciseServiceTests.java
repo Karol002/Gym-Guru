@@ -1,7 +1,9 @@
 package com.gymguru.service;
 
 import com.gymguru.config.Deleter;
-import com.gymguru.controller.exception.single.*;
+import com.gymguru.controller.exception.single.EmailAlreadyExistException;
+import com.gymguru.controller.exception.single.ExerciseNotFoundException;
+import com.gymguru.controller.exception.single.TrainerPriceInCorrectException;
 import com.gymguru.domain.*;
 import com.gymguru.domain.enums.CredentialType;
 import com.gymguru.domain.enums.Specialization;

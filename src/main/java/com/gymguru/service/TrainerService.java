@@ -1,9 +1,11 @@
 package com.gymguru.service;
 
-import com.gymguru.controller.exception.single.*;
-import com.gymguru.domain.Credential;
-import com.gymguru.domain.enums.Specialization;
+import com.gymguru.controller.exception.single.CredentialNotFoundException;
+import com.gymguru.controller.exception.single.EmailAlreadyExistException;
+import com.gymguru.controller.exception.single.TrainerNotFoundException;
+import com.gymguru.controller.exception.single.TrainerPriceInCorrectException;
 import com.gymguru.domain.Trainer;
+import com.gymguru.domain.enums.Specialization;
 import com.gymguru.repository.TrainerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

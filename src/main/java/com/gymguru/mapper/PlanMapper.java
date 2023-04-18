@@ -9,8 +9,6 @@ import com.gymguru.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @AllArgsConstructor
 @Service
 public class PlanMapper {
@@ -22,12 +20,12 @@ public class PlanMapper {
                 planDto.getId(),
                 planDto.getDietDescription(),
                 planDto.getExerciseDescription(),
-                userService.getUserById(planDto.getId()),
+                userService.getUserById(planDto.getUserId()),
                 trainerService.getTrainerById(planDto.getTrainerId())
         );
     }
 
-    public PlanDto mapToExistPlanDto(final Plan plan) {
+    public PlanDto mapToPlanDto(final Plan plan) {
         return new PlanDto(
                 plan.getId(),
                 plan.getDietDescription(),

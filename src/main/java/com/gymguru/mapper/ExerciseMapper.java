@@ -25,7 +25,7 @@ public class ExerciseMapper {
         );
     }
 
-    public ExerciseDto mapToExistExerciseDto(final Exercise exercise) {
+    public ExerciseDto mapToExerciseDto(final Exercise exercise) {
         return new ExerciseDto(
                 exercise.getId(),
                 exercise.getName(),
@@ -36,9 +36,9 @@ public class ExerciseMapper {
         );
     }
 
-    public List<ExerciseDto> mapToExistExerciseDtoList(List<Exercise> exercises) {
+    public List<ExerciseDto> mapToExerciseDtoList(List<Exercise> exercises) {
         return exercises.stream()
-                .map(this::mapToExistExerciseDto)
+                .map(this::mapToExerciseDto)
                 .toList();
     }
 }
