@@ -281,7 +281,7 @@ Below, after expanding the collapsed section you can find instructions for runni
 
 1. Set the server port to 8080 in application.properties file.
 
-2. Set OpenAi key in application.properties file - openai.api.key=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
+2. Set OpenAi key in application.properties file - openai.api.key=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
 
 3. Create a database according to the data from the application.properties file:
 
@@ -298,7 +298,7 @@ Below, after expanding the collapsed section you can find instructions for runni
 In case of no response from the OpenAI API (OpenAiClient), update the API key in the application.properties file. It will be located in the latest commit of the README.md file.
 
 Current active OpenAi API key:
-* openai.api.key=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
+* openai.api.key=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
 
 ---
 </p>
