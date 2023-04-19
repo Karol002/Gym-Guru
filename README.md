@@ -281,7 +281,7 @@ Below, after expanding the collapsed section you can find instructions for runni
 
 1. Set the server port to 8080 in application.properties file.
 
-2. Set openai.api.key in application.properties file. It is in my CV in the project description
+2. Set openai.api.key in application.properties file. Key below.
 
 3. Create a database according to the data from the application.properties file:
 
@@ -295,6 +295,10 @@ Below, after expanding the collapsed section you can find instructions for runni
 
 6. Go to http://localhost:8081/gymguru/
 
+In case of no response from the OpenAI API (OpenAiClient), update the API key in the application.properties file. It will be located in the latest commit of the README.md file.
+
+Current active OpenAi API key:
+* openai.api.key=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
 
 ---
 </p>
