@@ -6,7 +6,6 @@ import com.gymguru.domain.Plan;
 import com.gymguru.domain.dto.PlanDto;
 import com.gymguru.service.TrainerService;
 import com.gymguru.service.UserService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
