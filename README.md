@@ -273,10 +273,10 @@ CREATE TABLE EXERCISES (
 </p>
 </details>
 
-# RUN INSTRUCTION
-Below, after expanding the collapsed section you can find a Project run instruction:
+# START-UP MANUAL
+Below, after expanding the collapsed section you can find instructions for running the project:
 
-<details><summary>Run insctruction</summary>
+<details><summary>Start up manual</summary>
 <p>
 
 1. Set the server port to 8080 in application.properties file.
@@ -295,8 +295,8 @@ Below, after expanding the collapsed section you can find a Project run instruct
 
 In case of no response from the OpenAI API (OpenAiClient), update the API key in the application.properties file. It will be located in the latest commit of the README.md file.
 
-Current API key:
-* openai.api.key=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
+Current active OpenAi API key:
+* openai.api.key=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
 
 ---
 </p>
@@ -310,7 +310,7 @@ Below, after expanding the collapsed section you can find a Frontend project lin
 
 - Frontend project
 
-    *  https://github.com/Karol002/Gym-Guru-Frontend/blob/e53e62ea421aeec96827e1f6c33f5f27dc9f07c1/README.md
+    *  https://github.com/Karol002/Gym-Guru-Frontend/tree/518b28a9375736843fc205132676cb61f7d28843
 
 ---
 
