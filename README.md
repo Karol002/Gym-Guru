@@ -296,7 +296,7 @@ Below, after expanding the collapsed section you can find a Project run instruct
 In case of no response from the OpenAI API (OpenAiClient), update the API key in the application.properties file. It will be located in the latest commit of the README.md file.
 
 Current API key:
-* openai.api.key=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
+* openai.api.key=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
 
 ---
 </p>
