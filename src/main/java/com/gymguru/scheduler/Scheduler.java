@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
@@ -19,8 +20,9 @@ public class Scheduler {
     private final EmailService emailService;
     private final CredentialService credentialService;
 
+    @Transactional
     @Scheduled(cron = "0 0 10 * * *")
-    public void checkSubscriptions() throws CredentialNotFoundException {
+    public void controlSubscriptions() throws CredentialNotFoundException {
         List<Subscription> subscriptions = subscriptionService.getAllSubscriptions();
         for (Subscription subscription : subscriptions) {
             if (subscriptionService.isSubscriptionActive(subscription)) thankForSubscription(subscription);
