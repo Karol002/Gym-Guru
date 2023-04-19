@@ -3,6 +3,7 @@ package com.gymguru.external.api.edamam;
 import com.gymguru.external.api.edamam.dto.EdamamHitDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -14,7 +15,7 @@ public class EdamamClient {
     private final RestTemplate restTemplate;
     private final EdamamConfig edamamConfig;
 
-    public EdamamHitDto getEdamamMeals(String mealName) {
+    public EdamamHitDto getEdamamMeals(String mealName) throws HttpClientErrorException {
         URI url = UriComponentsBuilder.fromHttpUrl(edamamConfig.getEdamamApiEndpoint() + "/search?")
                 .queryParam("q", mealName)
                 .queryParam("app_id", edamamConfig.getEdamamAppId())

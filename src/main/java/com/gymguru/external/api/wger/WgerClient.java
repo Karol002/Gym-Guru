@@ -4,6 +4,7 @@ import com.gymguru.external.api.wger.dto.WgerCategoryBoardDto;
 import com.gymguru.external.api.wger.dto.WgerExerciseBoardDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -15,7 +16,7 @@ public class WgerClient {
     private final RestTemplate restTemplate;
     private final WgerConfiguration wgerConfiguration;
 
-    public WgerExerciseBoardDto getWgerExercisesByCategoy(Long id) {
+    public WgerExerciseBoardDto getWgerExercisesByCategoy(Long id) throws HttpClientErrorException {
         URI url = UriComponentsBuilder.fromHttpUrl(wgerConfiguration.getWgerApiEndpoint()+ "/exercise?")
                 .queryParam("language", wgerConfiguration.getWgerApiLanguage())
                 .queryParam("category", id)
@@ -26,7 +27,7 @@ public class WgerClient {
         return  restTemplate.getForObject(url, WgerExerciseBoardDto.class);
     }
 
-    public WgerCategoryBoardDto getWgerCategories() {
+    public WgerCategoryBoardDto getWgerCategories() throws HttpClientErrorException {
         URI url = UriComponentsBuilder.fromHttpUrl(wgerConfiguration.getWgerApiEndpoint()+ "/exercisecategory")
                 .build()
                 .encode()

@@ -5,7 +5,7 @@ import com.gymguru.external.api.openai.OpenAiConfiguration;
 import com.gymguru.external.api.openai.OpenAiMapper;
 import com.gymguru.external.api.openai.OpenAiMessage;
 import com.gymguru.external.api.openai.dto.OpenAiDetailsDto;
-import com.gymguru.external.api.openai.dto.OpenAiObjectDto;
+import com.gymguru.external.api.openai.dto.OpenAiBoardDto;
 import com.gymguru.external.api.openai.dto.OpenAiResponseDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,10 +61,10 @@ public class OpenAiMapperTests {
     public void testMapToOpenAiMessageDto() {
         //Given
         OpenAiResponseDto openAiResponseDto = new OpenAiResponseDto(new OpenAiMessage("content"));
-        OpenAiObjectDto openAiObjectDto = new OpenAiObjectDto(Collections.singletonList(openAiResponseDto));
+        OpenAiBoardDto openAiBoardDto = new OpenAiBoardDto(Collections.singletonList(openAiResponseDto));
 
         //When
-        OpenAiMessage openAiMessage = openAiMapper.mapToOpenAiMessageDto(openAiObjectDto);
+        OpenAiMessage openAiMessage = openAiMapper.mapToOpenAiMessageDto(openAiBoardDto);
 
         //Then
         assertEquals("content", openAiMessage.getContent());
@@ -73,10 +73,10 @@ public class OpenAiMapperTests {
     @Test
     public void testMapToOpenAiMessageDtoWhenChoicesListIsEmpty() {
         //Given
-        OpenAiObjectDto openAiObjectDto = new OpenAiObjectDto(Collections.emptyList());
+        OpenAiBoardDto openAiBoardDto = new OpenAiBoardDto(Collections.emptyList());
 
         //When
-        OpenAiMessage openAiMessage = openAiMapper.mapToOpenAiMessageDto(openAiObjectDto);
+        OpenAiMessage openAiMessage = openAiMapper.mapToOpenAiMessageDto(openAiBoardDto);
 
         //Then
         assertNull(openAiMessage);

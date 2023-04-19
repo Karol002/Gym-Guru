@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class OpenAiObjectDto {
+public class OpenAiBoardDto {
     @JsonProperty("choices")
     private List<OpenAiResponseDto> choices;
 }

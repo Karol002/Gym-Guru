@@ -7,12 +7,9 @@ import com.gymguru.external.api.edamam.EdamamMeal;
 import com.gymguru.external.api.edamam.dto.EdamamHitDto;
 import com.gymguru.external.api.edamam.dto.EdamamMealDto;
 import com.gymguru.external.api.edamam.dto.EdamamRecipeDto;
-import com.gymguru.external.api.openai.OpenAIRequest;
-import com.gymguru.external.api.openai.OpenAiClient;
-import com.gymguru.external.api.openai.OpenAiMapper;
-import com.gymguru.external.api.openai.OpenAiMessage;
+import com.gymguru.external.api.openai.*;
 import com.gymguru.external.api.openai.dto.OpenAiDetailsDto;
-import com.gymguru.external.api.openai.dto.OpenAiObjectDto;
+import com.gymguru.external.api.openai.dto.OpenAiBoardDto;
 import com.gymguru.external.api.openai.dto.OpenAiResponseDto;
 import com.gymguru.external.api.wger.WgerCategory;
 import com.gymguru.external.api.wger.WgerClient;
@@ -151,22 +148,25 @@ public class ExternalApiFacadeTest {
         String content = "Hello, how are you?";
         OpenAiMessage openAiMessage = new OpenAiMessage(content);
         List<OpenAiDetailsDto> messages = new ArrayList<>();
-        messages.add(new OpenAiDetailsDto("sender", content));
+        messages.add(new OpenAiDetailsDto("sender", openAiMessage.getContent()));
+
         OpenAIRequest openAIRequest = new OpenAIRequest("model", messages, 0.0, 10L);
-        OpenAiObjectDto openAiObjectDto = new OpenAiObjectDto();
+        OpenAiBoardDto openAiBoardDto = new OpenAiBoardDto();
         OpenAiResponseDto openAiResponseDto = new OpenAiResponseDto(openAiMessage);
+
         List<OpenAiResponseDto> openAiResponseDtos = new ArrayList<>();
         openAiResponseDtos.add(openAiResponseDto);
-        openAiObjectDto.setChoices(openAiResponseDtos);
+        openAiBoardDto.setChoices(openAiResponseDtos);
 
         when(openAiMapper.mapToOpenAiRequest(openAiMessage)).thenReturn(openAIRequest);
-        when(openAiClient.getOpenAiRequest(openAIRequest)).thenReturn(openAiObjectDto);
-        when(openAiMapper.mapToOpenAiMessageDto(openAiObjectDto)).thenReturn(openAiMessage);
+        when(openAiClient.getOpenAiRequest(openAIRequest)).thenReturn(openAiBoardDto);
+        when(openAiMapper.mapToOpenAiMessageDto(openAiBoardDto)).thenReturn(openAiMessage);
 
         //When
+        String expectedResult = OpenAiConfiguration.VIRTUAL_TRAINER_INSTRUCTION + content;
         OpenAiMessage response = externalApiFacade.getOpenAiResponse(openAiMessage);
 
         //Then
-        assertEquals(content, response.getContent());
+        assertEquals(expectedResult, response.getContent());
     }
 }

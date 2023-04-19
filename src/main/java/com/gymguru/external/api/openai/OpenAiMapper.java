@@ -1,8 +1,7 @@
 package com.gymguru.external.api.openai;
 
 import com.gymguru.external.api.openai.dto.OpenAiDetailsDto;
-import com.gymguru.external.api.openai.dto.OpenAiObjectDto;
-import lombok.AllArgsConstructor;
+import com.gymguru.external.api.openai.dto.OpenAiBoardDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +29,7 @@ public class OpenAiMapper {
                 .collect(Collectors.toList());
     }
 
-    public OpenAiMessage mapToOpenAiMessageDto(OpenAiObjectDto objectDto) {
+    public OpenAiMessage mapToOpenAiMessageDto(OpenAiBoardDto objectDto) {
         return objectDto.getChoices().stream()
                 .findFirst()
                 .map(choice -> new OpenAiMessage(choice.getMessage().getContent()))

@@ -65,6 +65,32 @@ public class WgerMapperTests {
         assertEquals(2L, wgerCategoryDtos.get(1).getId().longValue());
         assertEquals("Category 2", wgerCategoryDtos.get(1).getName());
     }
+
+    @Test
+    public void testMapToWgerCategoryDtoListWhenWgerCategoryBoardDtoIsNull() {
+        //Given
+        WgerCategoryBoardDto wgerCategoryBoardDto = null;
+
+        //When
+        List<WgerCategory> wgerCategoryDtos = wgerMapper.mapToWgerCategoryDtoList(wgerCategoryBoardDto);
+
+        //Then
+        assertNotNull(wgerCategoryDtos);
+        assertTrue(wgerCategoryDtos.isEmpty());
+    }
+
+    @Test
+    public void testMapToWgerExerciseDtoListWhenWgerExerciseBoardDtoIsNull() {
+        //Given
+        WgerExerciseBoardDto wgerExerciseBoardDto = null;
+
+        //When
+        List<WgerExercise> wgerExerciseDtos = wgerMapper.mapToWgerExerciseDtoList(wgerExerciseBoardDto);
+
+        //Then
+        assertNotNull(wgerExerciseDtos);
+        assertTrue(wgerExerciseDtos.isEmpty());
+    }
 }
 
 
