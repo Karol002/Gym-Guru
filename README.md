@@ -281,7 +281,7 @@ Below, after expanding the collapsed section you can find instructions for runni
 
 1. Set the server port to 8080 in application.properties file.
 
-2. Set openai.api.key in application.properties file. Key below.
+2. Set openai.api.key in application.properties file. It is in my CV in the project description
 
 3. Create a database according to the data from the application.properties file:
 
